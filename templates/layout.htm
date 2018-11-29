@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--CSS Path-->
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename = 'css/main.css')}}" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>Hello, world!</title>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename = 'main.js')}}"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top p-1" id="navbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-right" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/ecda909" target="_blank">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://s3.amazonaws.com/backup-ucf/resume/Resume_Cloud.pdf" target="_blank">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/in/eder-mazariegos-6a97b757/" target="_blank">LinkedIn</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="toolbox">ToolBox</a>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+</head>
+
+<body class="bgcolor" onload="" id="page-top">
+    <script>
+        $(function() {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+    {%block body%}
+    <div class="container-fluid section-One-Layout" id="hide-section-one" style="display: none;">
+        <div class="row justify-content-center">
+            <h1 id="line-1"><span>Hello</span>,<span> My name is Eder Mazariegos</span>.</h1>
+            <h1 id="line-2" style="display: none;"><span>I am</span>,<span> a Full-Stack web developer</span>.</h1>
+            <h1 id="line-3" style="display: none;"><span>I work with Javascript</span>,<span> Python</span>,<span> AWS</span>, <span>and much more</span>...</h1>
+            <h1 id="line-4" style="display: none;"><span>I hope you enjoy my work</span>!</h1>
+        </div>
+    </div>
+    <div class="container-fluid intro">
+        <div class="row justify-content-center headerOne">
+            <h1><span>"</span>Who <span>I</span> am<span>"</span></h1>
+        </div>
+        <div class="row justify-content-center">
+            [ Scroll down ]
+        </div>
+    </div>
+    <div class="container-fluid section-Two-Layout fade" id="sectionshow-1">
+        <div class="row justify-content-center">
+            <img class="rounded-circle" src="https://s3.amazonaws.com/backup-ucf/images/profile_img.jpg" id="photo1">
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14011.89903936321!2d-81.197726!3d28.600534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x60f4fc8c9d763824!2sUniversity+of+Central+Florida+-+College+of+Engineering+and+Computer+Science!5e0!3m2!1sen!2sus!4v1542152289145"
+                width="100%" height="450" frameborder="0" style="border:0; display: none;" allowfullscreen></iframe>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p>My name is Eder Mazariegos, I am an aspiring cloud architect and web developer. I have recently graduated from the <b><a href="javascript: displaymap();">University of Central Florida</a></b> and have completed a Bachelors of Science with
+                    a major focus in Information Technology. I have always had a strong passion for computers and minimalist design ever since I can remember and I believe my passion for web development later led to my interest in Cloud. I am self-taught
+                    for the most part, but have had a lot of professional guidance from people who work within the industry. My mission today is to change the world through my work in cloud and web development and I hope to do so alongside like minded
+                    individuals.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid intro fade">
+        <div class="row justify-content-center headerTwo">
+            <h1><span>"</span>What <span>I</span> do differently<span>"</span></h1>
+        </div>
+    </div>
+    <div class="container-fluid section-Three-Layout fade">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p>What separates me from every other candidate is the work I do. Not only within my current workplace (University of Central Florida - 2yrs.), but in my own spare time. Throughout my time in college I have completed projects on my own and
+                    have learned web technologies like AWS, CloudFormation, Serverless, IAAS, PAAS, Restful API's, and much more. I have taught myself cloud and have used that knowledge to push the industry in my own area. I try to keep things simple
+                    and clean within every aspect of my life. I work on many things at once, but only on things that compliment one another. If you would like to see more of my work, just scroll down. Also, check out my Github, I post pretty good stuff
+                    on there too. <a href="https://github.com/ecda909" target="_blank">Github</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid intro skills-Height fade">
+        <div class="row justify-content-center headerThree">
+            <h1><span>"</span>What my skills are<span>"</span></h1>
+        </div>
+    </div>
+    <div class="container section-Four-Layout">
+        <div class="row justify-content-center">
+            <p>[ Click a button to display the skills ]</p>
+        </div>
+        <div class="row justify-content-center skillset fade">
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-dark" type="button" aria-haspopup="true" aria-expanded="false" onclick="displaySection(dict.AWS); ">
+                    <b>AWS Cloud <i class="fas fa-cloud" style="color: rgb(255, 138, 29)"></i></b>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-dark " type="button" aria-haspopup="true" aria-expanded="false" onclick="displaySection(dict.Database); ">
+                    <b>Databases <i class="fas fa-database" style="color: rgb(0, 204, 255)"></i></b>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-dark" type="button" aria-haspopup="true" aria-expanded="false" onclick="displaySection(dict.CICD); ">
+                    <b>CI/CD Tech <i class="fas fa-stream" style="color: rgb(255,104,104);"></i></b>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-dark" aria-haspopup="true" aria-expanded="false" onclick="displaySection(dict.Languages); ">
+                    <b>Languages <i class="fas fa-code" style="color: rgb(195, 104, 255);"></i></b>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-dark" type="button" aria-haspopup="true" aria-expanded="false" onclick="displaySection(dict.Linux); ">
+                    <b>Linux OS <i class="fab fa-linux" style="color: rgb(255, 245, 104);"></i></b>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-dark" type="button" aria-haspopup="true" aria-expanded="false" onclick="displaySection(dict.Networking); ">
+                    <b>Networking <i class="fas fa-network-wired" style="color: rgb(122, 255, 104);"></i></b>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container section-Five-Layout" id="skill-Scroll">
+        <div class="row justify-content-center skill-Set-List-AWS" style="display: none;">
+            <div class="col-md-4">
+                <h4>Compute</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have setup, deployed, and created fault tolerant evironments with ec2 instances. I have in depth knowledge of ELB's, EIP's, Auto Scaling, Automation, AMI's, EC2 volumes, SG's and more. All of the web projects I have done have used either EC2 or S3 static hosting and there are deployment templates/scripts listed within the toolbox tab above.">EC2</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have setup Docker containers, tasks, and entire VPC infrastructures within my container. I did all of this with a club called Tech Knights at the University of Central Florida.">ECS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have hosted websites via the serverless framework using Python and have also created API's that do small things and automate some tasks within my infrastructure and websites. Functions code is listed within the toolbox tab above and the websites hosted on Lambda are listed as well.">Lambda</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="With Elastic Beanstalk, I deployed my first fault tolerant environment using EC2, Auto Scaling, and ELB's. I have now moved away from this service and am using CloudFormation.">Elastic Beanstalk</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Storage</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used S3 to hold the data, images, and files stored within websites I make for freelance work. I have also used versioning, Pre-Signed URL's, Standard, SIA, ZIA, Glacier and Static Website Hosting within S3 to provide my clients with the best and least expensive service possible. I have also pitched and successfully implemented the use of S3 within my department at the University of Central Florida.">S3</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have setup multiple EC2 instances and created synchronization between the files they hold using EFS. This has helped in a lot of demonstrations I have given within my department to show the power and ease of AWS.">EFS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have only tested this service and used it in testing to see where my department can possibly save money by using S3 glacier for some of our archiving.">S3 Glacier</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Database</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used RDS in all of my web development environments that require a relational database. I have used MySQL, MariaDB, PstgresSQL, and Amazon Aurora. The two I am most familiar with are MySQL and Amazon Aurora.">RDS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used DynamoDB with all the websites I host via Lambda and for anything that requires Redis for caching. I will normally setup Elasticache along with Dynamo and connect the two to Lambda, that way I am creating a low cost and effective solution for storing and retrieving data.">DynamoDB</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used Elasticache in conjunction with Lambda (Sometimes also EC2) and DynamoDB to save on retrieval times and cost.">Elasticache</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used RedShift for testing purposes and setup a few clusters just to see how things work. I would say I am a novice at this and am learning at the time of this writing.">Amazon Redshift</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-AWS" style="display: none;">
+            <div class="col-md-4">
+                <h4>Migration</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used AWS Migration Hub to explore oppurtunities of moving my departments data and infrastructure to cloud. I have read through the Discovery Agent code and looked into using it to identify what we could move to cloud and further plan on how to go about doing so.">AWS Migration Hub</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="Before I graduate, I will probably order a Snowball and put a PDF of my diploma on it, just for fun. However, I have yet to use this service, but I do understand what it is.">AWS Migration Hub</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Networking</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used Route53 for load balancing, health checks, DNS (Domain name configuration), configuring Aliases and CNAME's, and more for my websites.">Route53</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used CloudFront within Lambda to configure hosting for my websites and have also used it along and in conjunction with Route53.">CloudFront</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used API Gateway with Lambda functions to do tasks and manage automation, some of the examples of this are in the toolbox tab listed above.">API Gateway</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have looked into Direct Connect for my departments migration and shadowed other departments within the University of Central Florida to see how they are planning on using it for a quick and efficient connection to AWS datacenters.">Direct Connect</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have built out VPC's from scratch numerous times and configured NACL's, Subnets, IGW's, NAT Instances, Bastion Hosts, Route Tables, Security Groups, and Load balancers within my VPC's. I have also setup fault tolerant VPC's to hold websites for some of my clients.">AWS Migration Hub</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Developer Tools</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used Cloud9 as a way to work on code simultaneously with my team when developing our web application VIBECOURT. I have also used it with Lambda to code the Lambda functions.">Cloud9</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I understand what this is from a high level">CodeCommit</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I understand what this is from a high level">CodeBuild</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used CodeDeploy to deploy code from my github repositories to EC2 instances within my infrastructure. I have also attached it to auto scaling groups within the infrastrucutre as well.">CodeDeploy</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I understand what this is from a high level">CodePipeline</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-AWS" style="display: none;">
+            <div class="col-md-4">
+                <h4>Management tools</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="">Config</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used Cloud Trail to keep track of any logs within my infrastructure, I have also pitched it for my department as an auditing tool. Another service I have used along with this is Resource Groups which helps me to keep a log of cost within my infrastructure.">CloudTrail</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used CloudWatch to set alarms for budgetting, Lambda function calls, health of instances and more within my infrastructure.">CloudWatch</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have created templates for launching full-fledge fault tolrant, redundant, and readily available infrastructures within AWS. the templates I have used are listed within the toolbox tab above.">CloudFormation</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have looked into this service to help gage where my infrasture can be improved to save on costs and have also studied ways my department can implement this in our future environment.">Trusted Advisor</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used auto scaling groups with EC2 instances to scale out deployment when a health check has failed or CPU load has exceeded a particular threshold.">AWS AutoScaling</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Security, Identity & Compliance</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have setup users, roles, groups, created JSON policies, and have ensured that my infrastructure is secure according to the AWS Security Pillar guidlines.">IAM</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used Macie to bring light of risks within my infrastrucutre and even though it is expensive, I can see it being a very important tool to use in the future.">Amazon Macie</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have setup multiple orginizations and have had branching accounts with restricted access during events like hackathons and projects involving multiple teams.">AWS Organizations</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used KMS with RDS, EBS and other services">Key Management Service</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>AWS Cost Management</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="After spending almost $300 in AWS monthly costs(A lot for a student). I have sense set a budget within AWS budgets to keep costs down to a minimum level.">AWS Budgets</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used cost explorer on numerous occasions to see where my costs are coming from and where I can cut back on certain services or look into using things like Lambda and S3 to save money.">AWS Cost Explorer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-AWS" style="display: none; padding-bottom: 5%;">
+            <div class="col-md-4">
+                <h4>Desktop & App Streaming</h4>
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have looked into Workspaces for my department and seeing where this service can benefit us in the long run with keeping our end users workstations in the cloud. I have also setup multiple Workstations to test effectiveness and efficiency.">WorkSpaces</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-Database" style="display: none">
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item">
+                        <a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used NoSQL DB's like MongoDB and DynamoDB in conjunction with Lambda, Serverless, and EC2. I have also given a presentation on NoSQL DB's which can be found in the Projects tab above.">NoSQL DB's</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item">
+                        <a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used MySQL databases, RDS, Aurora, and PostgresSQL. I have also made relational Schemas, created Relationships, and views.">Relational DB's</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item">
+                        <a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used MySQL workbench to interface with all of my RD's and I am very comfrotable using this software to alter my databses and script SQL in.">MySQL Workbench</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-CICD" style="display: none;">
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used git as my version control system for all of my projects, I am familiar with creating commits, branches, tracing back through previous versions and merging.">Git</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have created my own recipes for automationa and fault tolerance which can be found within the toolbox tab above.">Chef</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have created Docker containers, and expiremented with using Docker Swarm. I am pretty comfortable with using Docker, but not fully yet.">Docker</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I understand what this is from a high level">CodeCommit</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I have used CodeDeploy to deploy code from my github repositories to EC2 instances within my infrastructure. I have also attached it to auto scaling groups within the infrastrucutre as well.">CodeDeploy</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="What I've Done" data-content="I understand what this is from a high level">CodePipeline</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-Languages" style="display: none;">
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">C</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Front-End (Flask): Advanced, Backend: Advanced">Python</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Front-End: Intermidiate, Back-End: Novice">Javascript</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">jQuery</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Expert">HTML5</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Expert">CSS3 (Sass)</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">PHP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">MySQL</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">Node.js</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">JSON</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">YAML</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">AJAX</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-Linux" style="display: none;">
+            <div class="col-md-4">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">Ubuntu</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">MacOS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">UNIX</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">Python Scripting</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">Kalli</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">Shell</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">IIS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermidiate">Apache</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center skill-Set-List-Networking" style="display: none">
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">DNS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">HTTP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">HTTPS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">SSL</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">TCP/IP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Novice">UDP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">FTP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">SFTP</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">VOIP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">ICMP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">DHCP</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">VLAN's</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group list-group">
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">NAT</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Intermediate">DNS</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Advanced">IPv4</a></li>
+                    <li class="list-group-item"><a tabindex="0" class="btn btn-sm btn-outline-light" role="button" data-toggle="popover" data-trigger="focus" title="Knowledge Level" data-content="Novice">IPv6</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid section-Six-Layout">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3 fade justify-content-center">
+            <div class="bg-light col-md-4 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                <div class="my-3 p-3">
+                    <h2 class="display-5">
+                        <a href="#" style="color: black; text-decoration: none;">VIBECOURT</a>
+                    </h2>
+                    <p class="lead">A web based application that allows members to vote on albums and rank them according to the current year they were created in. The application is in a testing stage and will be deployed soon. Expected users 200+ for first release
+                        based on area survey.</p>
+                </div>
+                <div class="box-shadow mx-auto" style="width: 80%; height: 100px; border-radius: 21px 21px 0 0; background-color: rgb(0, 255, 0)"></div>
+            </div>
+            <div class="bg-dark col-md-4 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">
+                        <a href="#" style="color: white; text-decoration: none;">TripRails</a>
+                    </h2>
+                    <p class="lead">A web based application created at Princeton University for a Hackathon tournament. I flew to Princeton and made this base version application that allows supervisors and employees alike the ability to schedule and plan trips around
+                        a given budget.</p>
+                </div>
+                <div class="box-shadow mx-auto" style="width: 80%; height: 100px; border-radius: 21px 21px 0 0; background-color: rgb(42, 127, 255)"></div>
+            </div>
+            <div class="bg-light col-md-4 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                <div class="my-3 p-3">
+                    <h2 class="display-5">
+                        <a href="#" style="color: black; text-decoration: none;">Cloud Migration</a>
+                    </h2>
+                    <p class="lead">At the University of Central Florida, I have worked with a team of industry leaders in cloud and departmental executives to examine areas of cloud we can explore as a university and Research department to move our infrastructure off-premise.
+                    </p>
+                </div>
+                <div class="box-shadow mx-auto" style="width: 80%; height: 100px; border-radius: 21px 21px 0 0; background-color: rgb(255, 174, 0);"></div>
+            </div>
+        </div>
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3 fade justify-content-center">
+            <div class="bg-light col-md-4 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                <div class="my-3 p-3">
+                    <h2 class="display-5">
+                        <a href="#" style="color: black; text-decoration: none;">AWS Freelance WebDev</a>
+                    </h2>
+                    <p class="lead">This project involves a fully fault tolerant, redundant, and readily available infrastructure which spans across multiple A-Z zones. The infrastructure is used to host websites backend and front end applications and provided to clients
+                        as an all-in-one solution.</p>
+                </div>
+                <div class="box-shadow mx-auto" style="width: 80%; height: 100px; border-radius: 21px 21px 0 0; background-color: rgb(255, 174, 0);"></div>
+            </div>
+            <div class="bg-dark col-md-4 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden ">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">
+                        <a href="#" style="color: white; text-decoration: none;">Lambda</a>
+                    </h2>
+                    <p class="lead ">Within Lambda I have created multiple RESTful API's and deployed many web-based applications utilizing the Serverless Framework and Python. I have also programmed specific functions that automate tasks and give simple responses via
+                        SNS, SES, and DynamoDB.</p>
+                </div>
+                <div class=" box-shadow mx-auto " style="width: 80%; height: 100px; border-radius: 21px 21px 0 0; background-color: rgb(255, 174, 0);"></div>
+            </div>
+            <div class="bg-light col-md-4 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden ">
+                <div class="my-3 p-3 ">
+                    <h2 class="display-5">
+                        <a href="#" style="color: black; text-decoration: none;">MS Teams Integration</a>
+                    </h2>
+                    <p class="lead ">This was the first cloud-oriented project I spearheaded at the University of Central Florida and I trained more than 20 professors and faculty alike on Teams and have also given many presentations on using this software with Office365
+                        cloud technologies.</p>
+                </div>
+                <div class="box-shadow mx-auto " style="width: 80%; height: 100px; border-radius: 21px 21px 0 0; background-color: rgb(180, 0, 180)"></div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top" style="display: inline;">
+                <i class="fas fa-3x fa-angle-up"></i>
+            </a>
+        </div>
+    </div>
+    <footer class="container-fluid footer">
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="col footer-Message-One">
+                    <h5 align="center">
+                        <span class="letter-2">Phone</span> :
+                        <a href="tel:352-286-9493">(352)-286-9493</a>
+                    </h5>
+                </div>
+                <div class="col-md-4 footer-Message-Two">
+                    <div class="row justify-content-center">
+                        <h1>T</h1>
+                        <h1>H</h1>
+                        <h1>A</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h1>
+                            <span class="letter-3">N</span>
+                        </h1>
+                        <h1>
+                            <span class="letter-4">K</span>
+                        </h1>
+                        <h1>
+                            <span class="letter-5">Y</span>
+                        </h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h1>O</h1>
+                        <h1>U</h1>
+                        <h1>!</h1>
+                    </div>
+                </div>
+                <div class="col footer-Message-Three">
+                    <h5 align="center">
+                        <span class="letter-1">Email</span> :
+                        <a href="mailto:ecda909@knights.ucf.edu">Ecda909@knights.ucf.edu</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {%endblock%}
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{url_for('static', filename = 'vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <!-- Plugin JavaScript -->
+    <script src="{{url_for('static', filename = 'vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <!--Custom scripts for this template-->
+    <script src="{{url_for('static', filename = 'stylish-portfolio-min.js')}}"></script>
+</body>
+
+</html>

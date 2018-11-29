@@ -1,0 +1,240 @@
+.bgcolor {
+    background-color: white;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    font-family: $font-family-2;
+    .navbar-brand {
+        font-size: 15px;
+        color: white !important;
+    }
+}
+
+.section-One-Layout {
+    margin-top: 25%;
+    div {
+        h1 {
+            color: $red;
+            letter-spacing: 0.5rem;
+            span {
+                color: black;
+            }
+        }
+        p {
+            padding-top: 30px;
+            color: $white;
+        }
+    }
+}
+
+.skills-Height {
+    height: 90vh !important;
+}
+
+.intro {
+    height: 100vh;
+    .headerOne {
+        padding-top: 20%;
+        h1 {
+            font-size: 7rem;
+        }
+        span {
+            color: $red;
+        }
+    }
+    .headerTwo {
+        padding-top: 25%;
+        h1 {
+            font-size: 7rem;
+        }
+        span {
+            color: $red;
+        }
+    }
+    .headerThree {
+        padding-top: 25%;
+        h1 {
+            font-size: 7rem;
+        }
+        span {
+            color: $red;
+        }
+    }
+}
+
+.section-Two-Layout {
+    height: 50vh;
+    font-family: $font-family-2;
+    div {
+        div {
+            p {
+                text-indent: 50px;
+                font-size: 22px;
+                color: #333;
+                b {
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+        color: $red;
+        padding-bottom: 5%;
+        img {
+            border: 0.5rem solid $red;
+            width: 240px;
+            height: 240px;
+        }
+    }
+}
+
+.section-Three-Layout {
+    color: $red;
+    font-family: $font-family-2;
+    p {
+        text-indent: 50px;
+        font-size: 25px;
+        color: #333;
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+.section-Four-Layout {
+    color: $red;
+    font-family: $font-family-2;
+    p {
+        font-size: 18px;
+        color: black
+    }
+    .skillist {
+        padding-top: 3%;
+        color: black
+    }
+}
+
+.section-Five-Layout {
+    .skill-Set-List-AWS {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        div {
+            h4 {
+                color: black;
+            }
+            ul {
+                li {
+                    font-size: 1rem;
+                    background-color: #333;
+                }
+            }
+        }
+    }
+    .skill-Set-List-Database {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        ul {
+            li {
+                font-size: 2rem;
+                color: black;
+                background-color: #333;
+            }
+        }
+    }
+    .skill-Set-List-CICD {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        ul {
+            li {
+                font-size: 2rem;
+                color: black;
+                background-color: #333;
+            }
+        }
+    }
+    .skill-Set-List-Languages {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        ul {
+            li {
+                font-size: 2rem;
+                color: black;
+                background-color: #333;
+            }
+        }
+    }
+    .skill-Set-List-Linux {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        ul {
+            li {
+                font-size: 2rem;
+                color: black;
+                background-color: #333;
+            }
+        }
+    }
+    .skill-Set-List-Networking {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        ul {
+            li {
+                font-size: 2rem;
+                color: black;
+                background-color: #333;
+            }
+        }
+    }
+}
+
+.section-Six-Layout {
+    height: 100vh;
+    padding-top: 5%;
+}
+
+.footer {
+    background-color: #333;
+    margin-top: 25%;
+    padding-bottom: 3%;
+    .footer-Message-One {
+        padding-top: 9%;
+        color: white;
+        h5 {
+            a {
+                color: white;
+            }
+        }
+    }
+    .footer-Message-Two {
+        padding-top: 5%;
+        color: white;
+    }
+    .footer-Message-Three {
+        padding-top: 9%;
+        color: white;
+        h5 {
+            a {
+                color: white;
+            }
+        }
+    }
+    h1 {
+        letter-spacing: 3rem;
+    }
+    .letter-1 {
+        color: $green;
+    }
+    .letter-2 {
+        color: $green;
+    }
+    .letter-3 {
+        color: $blue;
+    }
+    .letter-4 {
+        color: $red;
+    }
+    .letter-5 {
+        color: $orange;
+    }
+}

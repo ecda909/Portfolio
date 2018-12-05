@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "serverless-flask",
+    "service": "Portfolio",
     "serviceObject": {
-      "name": "serverless-flask"
+      "name": "Portfolio"
     },
     "provider": {
       "stage": "dev",
@@ -22,19 +22,7 @@
           "AppLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-flask-dev-app"
-            }
-          },
-          "GetUserLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-flask-dev-getUser"
-            }
-          },
-          "CreateUserLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-flask-dev-createUser"
+              "LogGroupName": "/aws/lambda/Portfolio-dev-app"
             }
           },
           "IamRoleLambdaExecution": {
@@ -63,7 +51,7 @@
                       "-",
                       [
                         "dev",
-                        "serverless-flask",
+                        "Portfolio",
                         "lambda"
                       ]
                     ]
@@ -78,13 +66,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev-app:*"
-                          },
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev-getUser:*"
-                          },
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev-createUser:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Portfolio-dev-app:*"
                           }
                         ]
                       },
@@ -95,13 +77,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev-app:*:*"
-                          },
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev-getUser:*:*"
-                          },
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev-createUser:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Portfolio-dev-app:*:*"
                           }
                         ]
                       }
@@ -114,7 +90,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-flask",
+                    "Portfolio",
                     "dev",
                     "us-east-1",
                     "lambdaRole"
@@ -130,9 +106,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-flask/dev/1542251131196-2018-11-15T03:05:31.196Z/serverless-flask.zip"
+                "S3Key": "serverless/Portfolio/dev/1544049568121-2018-12-05T22:39:28.121Z/Portfolio.zip"
               },
-              "FunctionName": "serverless-flask-dev-app",
+              "FunctionName": "Portfolio-dev-app",
               "Handler": "wsgi.handler",
               "MemorySize": 1024,
               "Role": {
@@ -149,92 +125,20 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionUoSHD14X05eWwpBSk0BO1VBNpqUht9dCXG8ZxY1A": {
+          "AppLambdaVersionghvytJNz7cT4ea1LhCGrAe1tUUaPiweKC6YzfEGKMg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "KWiP7lDaOlR1PSxmdUCVPuizFsgYlNodjcEsQEGVAZY="
-            }
-          },
-          "GetUserLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/serverless-flask/dev/1542251131196-2018-11-15T03:05:31.196Z/serverless-flask.zip"
-              },
-              "FunctionName": "serverless-flask-dev-getUser",
-              "Handler": "wsgi.handler",
-              "MemorySize": 1024,
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              },
-              "Runtime": "python3.6",
-              "Timeout": 6
-            },
-            "DependsOn": [
-              "GetUserLogGroup",
-              "IamRoleLambdaExecution"
-            ]
-          },
-          "GetUserLambdaVersionaETec5GDsdriNH8OkKZM6CaDKHJ02nfnwCQ9gXTJIE": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetUserLambdaFunction"
-              },
-              "CodeSha256": "KWiP7lDaOlR1PSxmdUCVPuizFsgYlNodjcEsQEGVAZY="
-            }
-          },
-          "CreateUserLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/serverless-flask/dev/1542251131196-2018-11-15T03:05:31.196Z/serverless-flask.zip"
-              },
-              "FunctionName": "serverless-flask-dev-createUser",
-              "Handler": "wsgi.handler",
-              "MemorySize": 1024,
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              },
-              "Runtime": "python3.6",
-              "Timeout": 6
-            },
-            "DependsOn": [
-              "CreateUserLogGroup",
-              "IamRoleLambdaExecution"
-            ]
-          },
-          "CreateUserLambdaVersiongBh5NlKAvmDPqXZ4DssZ0d6aFf8AjL60Aoli5k6ze8": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "CreateUserLambdaFunction"
-              },
-              "CodeSha256": "KWiP7lDaOlR1PSxmdUCVPuizFsgYlNodjcEsQEGVAZY="
+              "CodeSha256": "+E21wBVCxQ9l2lMVq11kL97FFAtsBGfV6TDHz8H8FJg="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-serverless-flask",
+              "Name": "dev-Portfolio",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -250,33 +154,6 @@
                   "ApiGatewayRestApi",
                   "RootResourceId"
                 ]
-              },
-              "PathPart": "{proxy+}",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceUsers": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "PathPart": "users",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceUsersProxyVar": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Ref": "ApiGatewayResourceUsers"
               },
               "PathPart": "{proxy+}",
               "RestApiId": {
@@ -373,93 +250,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodUsersProxyVarGet": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "GET",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceUsersProxyVar"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "GetUserLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            }
-          },
-          "ApiGatewayMethodUsersPost": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "POST",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceUsers"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "CreateUserLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            }
-          },
-          "ApiGatewayDeployment1542251132561": {
+          "ApiGatewayDeployment1544049568418": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -469,9 +260,7 @@
             },
             "DependsOn": [
               "ApiGatewayMethodAny",
-              "ApiGatewayMethodProxyVarAny",
-              "ApiGatewayMethodUsersProxyVarGet",
-              "ApiGatewayMethodUsersPost"
+              "ApiGatewayMethodProxyVarAny"
             ]
           },
           "AppLambdaPermissionApiGateway": {
@@ -480,100 +269,6 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "AppLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "apigateway.",
-                    {
-                      "Ref": "AWS::URLSuffix"
-                    }
-                  ]
-                ]
-              },
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetUserLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetUserLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "apigateway.",
-                    {
-                      "Ref": "AWS::URLSuffix"
-                    }
-                  ]
-                ]
-              },
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "CreateUserLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "CreateUserLambdaFunction",
                   "Arn"
                 ]
               },
@@ -625,19 +320,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionUoSHD14X05eWwpBSk0BO1VBNpqUht9dCXG8ZxY1A"
-            }
-          },
-          "GetUserLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetUserLambdaVersionaETec5GDsdriNH8OkKZM6CaDKHJ02nfnwCQ9gXTJIE"
-            }
-          },
-          "CreateUserLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "CreateUserLambdaVersiongBh5NlKAvmDPqXZ4DssZ0d6aFf8AjL60Aoli5k6ze8"
+              "Ref": "AppLambdaVersionghvytJNz7cT4ea1LhCGrAe1tUUaPiweKC6YzfEGKMg"
             }
           },
           "ServiceEndpoint": {
@@ -680,18 +363,12 @@
       "vpc": {}
     },
     "custom": {
-      "tableName": "users-table-dev",
       "wsgi": {
         "app": "app.app",
         "packRequirements": false
       },
       "pythonRequirements": {
         "dockerizePip": "non-linux"
-      },
-      "dynamodb": {
-        "start": {
-          "migrate": true
-        }
       }
     },
     "plugins": [
@@ -710,35 +387,7 @@
             "http": "ANY {proxy+}"
           }
         ],
-        "name": "serverless-flask-dev-app",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "python3.6",
-        "vpc": {}
-      },
-      "getUser": {
-        "handler": "wsgi.handler",
-        "events": [
-          {
-            "http": "GET /users/{proxy+}"
-          }
-        ],
-        "name": "serverless-flask-dev-getUser",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "python3.6",
-        "vpc": {}
-      },
-      "createUser": {
-        "handler": "wsgi.handler",
-        "events": [
-          {
-            "http": "POST /users"
-          }
-        ],
-        "name": "serverless-flask-dev-createUser",
+        "name": "Portfolio-dev-app",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -746,10 +395,10 @@
         "vpc": {}
       }
     },
-    "artifact": "/Users/edermazariegos/Public/Portfolio/.serverless/serverless-flask.zip"
+    "artifact": "/Users/edermazariegos/Public/Portfolio/.serverless/Portfolio.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-flask/dev/1542251131196-2018-11-15T03:05:31.196Z",
-    "artifact": "serverless-flask.zip"
+    "artifactDirectoryName": "serverless/Portfolio/dev/1544049568121-2018-12-05T22:39:28.121Z",
+    "artifact": "Portfolio.zip"
   }
 }

@@ -5,8 +5,14 @@ service: Portfolio
 plugins:
   - serverless-python-requirements
   - serverless-wsgi
+  - serverless-domain-manager
 
 custom:
+  customDomain:
+    domainName: www.edermazariegos.com
+    basePath: ""
+    stage: ${self:provider.stage}
+    createRoute53Record: true
   wsgi:
     app: app.app
     packRequirements: false
@@ -24,4 +30,4 @@ functions:
     handler: wsgi.handler
     events:
       - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: "ANY {proxy+}"

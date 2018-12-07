@@ -4,168 +4,185 @@
 .bgcolor {
   background-color: white; }
 
+section {
+  height: 100vh; }
+
 .navbar {
   background-color: rgba(255, 255, 255, 0.85) !important;
   font-family: "Work Sans", sans-serif; }
   .navbar .navbar-brand {
-    font-size: 15px;
+    font-size: 15vw;
     color: white !important; }
 
-.section-One-Layout {
-  margin-top: 25%; }
-  .section-One-Layout div h1 {
-    color: #ff6868;
-    letter-spacing: 0.5rem; }
-    .section-One-Layout div h1 span {
-      color: black; }
-  .section-One-Layout div p {
-    padding-top: 30px;
-    color: white; }
+.Row1 {
+  padding-top: 30vh; }
+  .Row1 h1 {
+    font-size: 7vw; }
+  .Row1 span {
+    color: #ff6868; }
 
-.skills-Height {
-  height: 90vh !important; }
-
-.intro {
-  height: 100vh; }
-  .intro .headerOne {
-    padding-top: 20%; }
-    .intro .headerOne h1 {
-      font-size: 7rem; }
-    .intro .headerOne span {
-      color: #ff6868; }
-  .intro .headerTwo {
-    padding-top: 25%; }
-    .intro .headerTwo h1 {
-      font-size: 7rem; }
-    .intro .headerTwo span {
-      color: #ff6868; }
-  .intro .headerThree {
-    padding-top: 25%; }
-    .intro .headerThree h1 {
-      font-size: 7rem; }
-    .intro .headerThree span {
-      color: #ff6868; }
-
-.section-Two-Layout {
-  height: 50vh;
+.Row2 {
   font-family: "Work Sans", sans-serif; }
-  .section-Two-Layout div {
-    color: #ff6868;
-    padding-bottom: 5%; }
-    .section-Two-Layout div div p {
-      text-indent: 50px;
-      font-size: 22px;
-      color: #333; }
-      .section-Two-Layout div div p b a {
-        text-decoration: none; }
-    .section-Two-Layout div img {
-      border: 0.5rem solid #ff6868;
-      width: 240px;
-      height: 240px; }
-
-.section-Three-Layout {
-  color: #ff6868;
-  font-family: "Work Sans", sans-serif; }
-  .section-Three-Layout p {
-    text-indent: 50px;
-    font-size: 25px;
+  .Row2 p {
+    font-size: 2vw;
     color: #333; }
-    .section-Three-Layout p a {
+    .Row2 p b a {
       text-decoration: none; }
+  .Row2 img {
+    border: 0.5rem solid #ff6868; }
 
-.section-Four-Layout {
-  color: #ff6868;
+@media screen and (max-width: 600px) {
+  .Row2 p {
+    font-size: 5vw !important; }
+
+  .Row4 p {
+    font-size: 5vw !important; }
+
+  .Row6 div {
+    padding-top: 20px !important; }
+
+  .hide-mobile {
+    display: none !important; }
+
+  .skill-Set-List-AWS div div div {
+    padding-top: 50px; }
+
+  .skill-Set-List-Database div div div {
+    padding-top: 50px; }
+
+  .skill-Set-List-CICD div div div {
+    padding-top: 50px; }
+
+  .skill-Set-List-Languages div div div {
+    padding-top: 50px; }
+
+  .skill-Set-List-Linux div div div {
+    padding-top: 50px; }
+
+  .skill-Set-List-Networking div div div {
+    padding-top: 50px; } }
+.Row3 {
+  padding-top: 30vh; }
+  .Row3 span {
+    color: #ff6868; }
+  .Row3 h1 {
+    font-size: 7vw; }
+
+.Row4 {
   font-family: "Work Sans", sans-serif; }
-  .section-Four-Layout p {
-    font-size: 18px;
-    color: black; }
-  .section-Four-Layout .skillist {
-    padding-top: 3%;
-    color: black; }
-
-.section-Five-Layout .skill-Set-List-AWS {
-  padding-top: 5%;
-  padding-bottom: 5%; }
-  .section-Five-Layout .skill-Set-List-AWS div h4 {
-    color: black; }
-  .section-Five-Layout .skill-Set-List-AWS div ul li {
-    font-size: 1rem;
-    background-color: #333; }
-.section-Five-Layout .skill-Set-List-Database {
-  padding-top: 5%;
-  padding-bottom: 5%; }
-  .section-Five-Layout .skill-Set-List-Database ul li {
-    font-size: 2rem;
-    color: black;
-    background-color: #333; }
-.section-Five-Layout .skill-Set-List-CICD {
-  padding-top: 5%;
-  padding-bottom: 5%; }
-  .section-Five-Layout .skill-Set-List-CICD ul li {
-    font-size: 2rem;
-    color: black;
-    background-color: #333; }
-.section-Five-Layout .skill-Set-List-Languages {
-  padding-top: 5%;
-  padding-bottom: 5%; }
-  .section-Five-Layout .skill-Set-List-Languages ul li {
-    font-size: 2rem;
-    color: black;
-    background-color: #333; }
-.section-Five-Layout .skill-Set-List-Linux {
-  padding-top: 5%;
-  padding-bottom: 5%; }
-  .section-Five-Layout .skill-Set-List-Linux ul li {
-    font-size: 2rem;
-    color: black;
-    background-color: #333; }
-.section-Five-Layout .skill-Set-List-Networking {
-  padding-top: 5%;
-  padding-bottom: 5%; }
-  .section-Five-Layout .skill-Set-List-Networking ul li {
-    font-size: 2rem;
-    color: black;
-    background-color: #333; }
-
-.section-Six-Layout {
-  height: 100vh;
-  padding-top: 5%; }
-
-.footer {
-  background-color: #333;
-  margin-top: 25%;
-  padding-bottom: 3%; }
-  .footer .footer-Message-One {
-    padding-top: 9%;
-    color: white; }
-    .footer .footer-Message-One h5 a {
-      color: white; }
-  .footer .footer-Message-Two {
-    padding-top: 5%;
-    color: white; }
-  .footer .footer-Message-Three {
-    padding-top: 9%;
-    color: white; }
-    .footer .footer-Message-Three h5 a {
-      color: white; }
-  .footer h1 {
-    letter-spacing: 3rem; }
-  .footer .letter-1 {
-    color: rgba(1, 255, 1, 0.76); }
-  .footer .letter-2 {
-    color: rgba(1, 255, 1, 0.76); }
-  .footer .letter-3 {
-    color: #5d95fd; }
-  .footer .letter-4 {
+  .Row4 p {
+    font-size: 2vw;
+    color: #333; }
+    .Row4 p a {
+      text-decoration: none; }
+  .Row4 span {
     color: #ff6868; }
-  .footer .letter-5 {
-    color: orange; }
 
-.section-One-Toolbox {
-  padding-top: 5%; }
-  .section-One-Toolbox h1 {
+.Row5 {
+  padding-top: 30vh; }
+  .Row5 h1 {
+    font-size: 7vw; }
+  .Row5 span {
     color: #ff6868; }
-  .section-One-Toolbox pre code {
-    font-size: 20px; }
+
+.Row7 {
+  padding-top: 40px; }
+
+.infotag-bottom {
+  padding-top: 50px; }
+
+.skill-Set-List-AWS {
+  padding-top: 2vw; }
+  .skill-Set-List-AWS ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+  .skill-Set-List-AWS ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+
+.skill-Set-List-Database {
+  padding-top: 2vh; }
+  .skill-Set-List-Database ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+
+.skill-Set-List-CICD {
+  padding-top: 2vh; }
+  .skill-Set-List-CICD ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+
+.skill-Set-List-Languages {
+  padding-top: 2vh; }
+  .skill-Set-List-Languages ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+
+.skill-Set-List-Linux {
+  padding-top: 2vh; }
+  .skill-Set-List-Linux ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+
+.skill-Set-List-Networking {
+  padding-top: 2vh; }
+  .skill-Set-List-Networking ul li {
+    font-size: 2rem;
+    color: black;
+    background-color: #333; }
+
+.scroller {
+  padding-top: 50px; }
+
+/*********
+Padding
+*********/
+/**********
+Padding Classes
+***********/
+.pad-10 {
+  padding-top: 10px; }
+
+.pad-20 {
+  padding-top: 20px; }
+
+.pad-30 {
+  padding-top: 30px; }
+
+.pad-40 {
+  padding-top: 40px; }
+
+.pad-50 {
+  padding-top: 50px; }
+
+.pad-60 {
+  padding-top: 60px; }
+
+.pad-70 {
+  padding-top: 70px; }
+
+.pad-80 {
+  padding-top: 80px; }
+
+.pad-90 {
+  padding-top: 90px; }
+
+.pad-100 {
+  padding-top: 100px; }
+
+.pad-200 {
+  padding-top: 100px; }
+
+.pad-300 {
+  padding-top: 100px; }
+
+.pad-400 {
+  padding-top: 100px; }
 
 /*# sourceMappingURL=main.css.map */

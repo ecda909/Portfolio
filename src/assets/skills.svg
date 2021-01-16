@@ -1,0 +1,34 @@
+<svg id="Component_3_1" data-name="Component 3 – 1" xmlns="http://www.w3.org/2000/svg" width="461.669" height="190.171"
+    viewBox="0 0 461.669 190.171">
+    <text id="Python_80_" data-name="Python 80%" transform="translate(1 40.171)" fill="#fff" font-size="11"
+        font-family="Helvetica-Bold, Helvetica" font-weight="700">
+        <tspan x="0" y="0">Python 80%</tspan>
+    </text>
+    <text id="Javascript_75_" data-name="Javascript 75%" transform="translate(0 104.171)" fill="#fff" font-size="11"
+        font-family="Helvetica-Bold, Helvetica" font-weight="700">
+        <tspan x="0" y="0">Javascript 75%</tspan>
+    </text>
+    <text id="AWS_90_" data-name="AWS 90%" transform="translate(1 168.171)" fill="#fff" font-size="11"
+        font-family="Helvetica-Bold, Helvetica" font-weight="700">
+        <tspan x="0" y="0">AWS 90%</tspan>
+    </text>
+    <g id="Group_207" data-name="Group 207" transform="translate(1.542)">
+        <path id="Path_36889" data-name="Path 36889" d="M460.127,0" fill="none" stroke="#707070" stroke-width="5" />
+        <path id="Path_36890" data-name="Path 36890" d="M363.557,0" fill="none" stroke="#f97641" stroke-width="5" />
+    </g>
+    <g id="Group_208" data-name="Group 208" transform="translate(1.542 58.226)">
+        <line id="Line_35" data-name="Line 35" x2="460.127" fill="none" stroke="#707070" stroke-width="5" />
+        <line id="Line_36" data-name="Line 36" x2="366.958" y2="0.445" fill="none" stroke="#f97641" stroke-width="5" />
+    </g>
+    <g id="Group_209" data-name="Group 209" transform="translate(1.542 122.133)">
+        <line id="Line_35-2" data-name="Line 35" x2="460.127" fill="none" stroke="#707070" stroke-width="5" />
+        <line id="Line_36-2" data-name="Line 36" y1="0.461" x2="338.958" transform="translate(0 -0.461)" fill="none"
+            stroke="#f97641" stroke-width="5" />
+    </g>
+    <g id="Group_210" data-name="Group 210" transform="translate(0.542 186.039)">
+        <line id="Line_35-3" data-name="Line 35" x2="459.958" y2="1.632" fill="none" stroke="#707070"
+            stroke-width="5" />
+        <line id="Line_37" data-name="Line 37" x2="422.958" y2="1.539" transform="translate(0 0.094)" fill="none"
+            stroke="#f97641" stroke-width="5" />
+    </g>
+</svg>

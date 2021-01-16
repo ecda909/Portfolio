@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+.services {
+    background-color: $black-background;
+    height: 100%;
+
+    .services-text {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: white;
+        }
+    }
+
+    .services-title {
+        margin-top: 9%;
+
+        span {
+            font-size: 1.7rem !important;
+            font-family: 'Raleway', sans-serif;
+        }
+    }
+
+    .services-icon {
+        margin-top: 4%;
+    }
+
+    .card {
+        border-radius: 3px !important;
+        padding: 2rem;
+        height: 7rem;
+        width: 26rem;
+
+        span {
+            color: #c4c4c4;
+        }
+    }
+
+    .bg-dark-s {
+        background-color: #313131 !important;
+    }
+
+    .bg-dark-s:hover {
+        background-color: #F97641 !important;
+
+        span {
+            color: white !important;
+        }
+    }
+
+    .bg-orange-s {
+        background-color: #F97641 !important;
+
+        span {
+            color: white !important;
+        }
+    }
+
+    .card {
+        .card-body {
+            font-size: 1.3rem;
+            color: black;
+        }
+    }
+
+    .card-text-s {
+        font-size: 2.5rem;
+    }
+
+    .card-text-s-s {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        vertical-align: middle;
+        overflow: hidden;
+    }
+
+    svg {
+        width: auto;
+        height: auto;
+    }
+
+    .service-padding {
+        padding-top: 12%;
+    }
+}

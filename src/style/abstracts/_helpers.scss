@@ -1,0 +1,33 @@
+// Margins
+.mb-8 {
+  margin-bottom: 8rem !important;
+}
+
+// Scroll Reveal UX
+.load-hidden {
+  visibility: hidden;
+}
+
+// Container Padding
+.container-adjust {
+  padding-left: 0vw !important;
+  padding-right: 0px !important;
+}
+
+// Hide outlines
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+// Change highlight color
+::selection {
+  background: #FF914D;
+  /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: #FF914D;
+  /* Gecko Browsers */
+}

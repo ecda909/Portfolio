@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+.about-story {
+    display: flex;
+    align-items: center;
+    border-bottom: 0px;
+    font-weight: 400;
+    color: $white-color;
+    margin-bottom: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background-color: $black-background !important;
+    //background: url('/background.svg') no-repeat !important;
+
+    background-size: cover;
+    width: 100vw;
+
+    @include respond(phone) {
+        padding: 0rem $default-font-size;
+    }
+
+    p {
+        text-indent: 50px;
+        font-family: 'Raleway', sans-serif;
+
+    }
+
+    hr {
+        background-color: white;
+    }
+
+    .hero-title {
+        font-size: 3rem !important;
+        font-weight: 200;
+        text-align: left;
+
+        @include respond(tab-land) {
+            font-size: 3rem;
+        }
+
+        @include respond(tab-port) {
+            font-size: 3.6rem;
+            text-align: center;
+        }
+
+        @include respond(phone) {
+            font-size: 3.5rem;
+            line-height: 1.5;
+        }
+
+        @include respond(phone-xs) {
+            font-size: 2.8rem;
+        }
+    }
+
+    .hero-cta {
+        display: flex;
+
+        @include respond(tab-port) {
+            justify-content: center;
+        }
+
+        & a {
+            font-size: 2.4rem;
+
+            @include respond(phone) {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .lead {
+        font-size: 2rem;
+    }
+}

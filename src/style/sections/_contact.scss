@@ -1,0 +1,96 @@
+.contact {
+  background-color: $black-background;
+  padding-top: 10%;
+
+  span {
+    color: white;
+  }
+
+  p {
+    color: white;
+    font-size: 1rem;
+  }
+
+  form {
+    input {
+      background-color: #272626 !important;
+    }
+
+    .form-control {
+      height: 50px;
+      border: none !important;
+      color: white;
+
+      input {
+        border: none !important;
+      }
+    }
+
+    .form-group {
+      textarea {
+        height: 120px !important;
+        background-color: #272626 !important;
+        border: none !important;
+      }
+    }
+  }
+
+  .message-text {
+    font-size: 5rem !important
+  }
+
+  .title-text {
+    color: $just-grey;
+  }
+
+  .number-text {
+    font-size: 1rem;
+  }
+
+  .contact-text {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: white;
+    }
+
+    .sub-text {
+      font-size: 1.4rem;
+    }
+  }
+
+  .contactForm {
+    .form-group {
+      label {
+        color: black !important;
+      }
+    }
+
+    .cta-btn {
+      float: left !important;
+      padding: 10px;
+      font-size: 1rem !important;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  a {
+    svg {
+      cursor: pointer !important;
+    }
+  }
+
+  a:hover {
+
+    path,
+    .fa {
+      fill: $green !important;
+      color: $green !important;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+.aboutme {
+    background-color: $black-background;
+    height: 100%;
+
+    .about-text {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: white;
+        }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        vertical-align: middle;
+        overflow: hidden;
+    }
+
+    svg {
+        width: auto;
+        height: auto;
+    }
+
+    .about-padding {
+        padding-top: 12%;
+    }
+
+    .readmore {
+        a {
+            font-size: 1.3rem;
+            color: $white-color !important;
+        }
+    }
+
+    .readmore:hover {
+        a {
+            color: $green !important;
+        }
+    }
+}

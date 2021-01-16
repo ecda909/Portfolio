@@ -1,0 +1,16 @@
+.vertical {
+    position: fixed;
+    background-color: #cccccc;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: calc(100% - 48px);
+}
+
+.wrapper {
+    position: absolute;
+    margin-right: -100%;
+    transform: rotate(90deg) translate(0, -15px);
+    transform-origin: left bottom;
+    width: 100vh;
+}

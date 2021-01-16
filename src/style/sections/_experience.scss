@@ -1,0 +1,68 @@
+.experience {
+  background-color: $black-background;
+  height: 100%;
+
+  .experience-text {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: white;
+    }
+  }
+
+  .card {
+    border-radius: 10px !important;
+    padding: 3rem;
+    height: 14rem;
+    width: 17rem;
+
+    span {
+      color: #c4c4c4;
+    }
+  }
+
+  .bg-dark-e {
+    background-color: #313131 !important;
+  }
+
+  .bg-orange-e {
+    background-color: #F97641 !important;
+
+    span {
+      color: white !important;
+    }
+  }
+
+  .card-text-e {
+    font-size: 2.5rem;
+  }
+
+  .card-text-e-s {
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  .svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+
+  svg {
+    width: auto;
+    height: auto;
+  }
+
+  .experience-padding {
+    padding-top: 12%;
+  }
+}

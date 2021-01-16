@@ -1,0 +1,26 @@
+@import './abstracts/mixins';
+@import './abstracts/variables';
+@import './abstracts/helpers';
+@import './abstracts/positions';
+
+@import './base/base';
+@import './base/typography';
+@import './base/colors';
+
+@import './components/buttons';
+@import './components/sidebar';
+
+@import './layout/footer';
+@import './layout/sections';
+
+@import './sections/about-story';
+@import './sections/aboutme';
+@import './sections/experience';
+@import './sections/portfolio';
+@import './sections/services';
+@import './sections/contact';
+@import './sections/hero';
+@import './sections/projects';
+
+@import './vendor/css/font-awesome.min.css';
+@import '~react-pro-sidebar/dist/scss/styles.scss';

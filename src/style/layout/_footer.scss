@@ -1,0 +1,53 @@
+.footer {
+  background-color: #202020;
+  color: $white-color;
+  box-shadow: 0px 0 4px rgba(0, 0, 0, 0.8);
+}
+
+.footer-text {
+  margin-top: 3.5rem;
+
+  div {
+    a {
+      font-size: 1.2rem;
+      cursor: pointer !important;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.social-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $white-color;
+    font-size: 2rem;
+    height: 5rem;
+    margin: $default-font-size $default-font-size;
+    transition: all 0.2s ease-in;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.back-to-top i {
+  color: $white-color;
+  margin: 1rem 0 $default-font-size;
+  margin-top: 3.5vh;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

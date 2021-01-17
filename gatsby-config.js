@@ -6,6 +6,14 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-offline`,
     {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: "www.edermazariegos.com",
+        protocol: "https",
+        hostname: "www.edermazariegos.com",
+    },
+    },
+    {
       resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {

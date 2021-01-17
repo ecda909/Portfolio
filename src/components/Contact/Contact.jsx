@@ -31,7 +31,7 @@ const Contact = () => {
               <Col>
                 <span className="white-text font-weight-light grey-text float-md-left float-lg-left">Call</span><br />
                 <a href="tel:352-286-9493">
-                  <span className="sub-text float-md-left float-lg-left">+3522869493</span>
+                  <span className="sub-text float-md-left float-lg-left">+352.286.9493</span>
                 </a>
               </Col>
             </Row>

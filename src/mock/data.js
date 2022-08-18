@@ -78,7 +78,7 @@ export const projectsData = [
 export const contactData ={
   cta: '',
   btn: '',
-  email: 'ecda909@gmail.com',
+  email: 'edermazariegos.careers@gmail.com',
   img: 'contact_background.png'
 };
 
@@ -88,7 +88,7 @@ export const footerData = {
     {
       id: nanoid(),
       name: 'twitter',
-      url: 'https://twitter.com/ecda909',
+      url: 'https://twitter.com/eder_mazariegos',
     },
     {
       id: nanoid(),

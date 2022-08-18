@@ -74,7 +74,7 @@ const Portfolio = () => {
                   </Row>
                   <Row>
                     <Col className="pr-0 mr-0">
-                      <span className="circle blink-green float-md-right float-lg-right" /><span className="green-text ml-4 ml-md-0 ml-lg-0 float-md-right float-lg-right">Live</span>
+                      <span className="circle blink-red float-md-right float-lg-right" /><span className="red-text ml-4 ml-md-0 ml-lg-0 float-md-right float-lg-right">Paused</span>
                     </Col>
                   </Row>
                   <Row className="mt-4 row d-flex justify-content-center ml-0 pl-md-0 pl-lg-0">

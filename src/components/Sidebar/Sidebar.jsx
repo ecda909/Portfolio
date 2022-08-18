@@ -52,7 +52,7 @@ const Sidebar = () => {
           </Link>
         </MenuItem>
         <MenuItem>
-          <LinkTo to="https://twitter.com/ecda909" smooth duration={1000}>
+          <LinkTo to="https://twitter.com/eder_mazariegos" smooth duration={1000}>
             <Icon6 width="90px" height="25px" viewBox="0 100 1200 80" className="icon-padding" />
           </LinkTo>
         </MenuItem>
@@ -62,12 +62,12 @@ const Sidebar = () => {
           </LinkTo>
         </MenuItem>
         <MenuItem>
-          <LinkTo to="https://medium.com/@thelonelydeveloper" smooth duration={1000}>
+          <LinkTo to="https://medium.com/@overcoffee" smooth duration={1000}>
             <Icon9 width="90px" height="25px" viewBox="0 100 1200 80" />
           </LinkTo>
         </MenuItem>
         <MenuItem>
-          <LinkTo to="https://www.instagram.com/eder_mazariegos_jr/" smooth duration={1000}>
+          <LinkTo to="https://www.instagram.com/edermazariegosjr/" smooth duration={1000}>
             <Icon7 width="90px" height="25px" viewBox="0 100 1200 80" />
           </LinkTo>
         </MenuItem>

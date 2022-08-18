@@ -9,6 +9,7 @@ module.exports = {
       resolve: `gatsby-plugin-s3`,
       options: {
         bucketName: "www.edermazariegos.com",
+        acl: null,
         protocol: "https",
         hostname: "www.edermazariegos.com",
     },

@@ -37,14 +37,14 @@ const Contact = () => {
             </Row>
             <Row className="justify-content-start mt-4">
               <Col lg={1} md={1} sm={12} className="ml-0 pl-0 d-none d-sm-none d-md-inline d-lg-inline">
-                <a href='mailto:ecda909@gmail.com'>
+                <a href='mailto:edermazariegos.careers@gmail.com'>
                   <Mail width="180px" height="50px" viewBox="100 100 300 300" preserveAspectRatio="xMinYMin meet" />
                 </a>
               </Col>
               <Col>
                 <span className="white-text font-weight-light grey-text float-md-left float-lg-left">Email</span><br />
-                <a href='mailto:ecda909@gmail.com'>
-                  <span className="sub-text float-md-left float-lg-left">ecda909@gmail.com</span>
+                <a href='mailto:edermazariegos.careers@gmail.com'>
+                  <span className="sub-text float-md-left float-lg-left">edermazariegos.careers@gmail.com</span>
                 </a>
               </Col>
             </Row>

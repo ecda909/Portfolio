@@ -46,8 +46,8 @@ const Experience = () => {
                   className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
                 >
                   <div className="card bg-dark-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">2</span>
-                    <span className="card-text card-text-e-s">Startups (In Progress)</span>
+                    <span className="card-text card-text-e font-weight-bold mt-3">1</span>
+                    <span className="card-text card-text-e-s">Startup (In Progress)</span>
                   </div>
                 </Col>
                 <Col
@@ -68,7 +68,7 @@ const Experience = () => {
                   className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
                 >
                   <div className="card bg-orange-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">10+</span>
+                    <span className="card-text card-text-e font-weight-bold mt-3">11+</span>
                     <span className="card-text card-text-e-s">Projects</span>
                   </div>
                 </Col>
@@ -79,7 +79,7 @@ const Experience = () => {
                   className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
                 >
                   <div className="card bg-dark-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">03+</span>
+                    <span className="card-text card-text-e font-weight-bold mt-3">04+</span>
                     <span className="card-text card-text-e-s">Years Experience</span>
                   </div>
                 </Col>

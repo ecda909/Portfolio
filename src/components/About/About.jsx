@@ -51,13 +51,12 @@ const About = () => {
                   distance="30px"
                 >
                   <p className="font-weight-light grey-text text-center text-md-left text-lg-left">
-                    I first started exploring technology when I was about 12 years old and ever
-                    since then, I've been hooked. At a younger age, I loved learning how things
-                    worked; I jailbroke iPhones for money on the side, took apart gadgets, drew
-                    sketches of weird-looking devices that I dreamed of building, and even made
-                    imitational companies I wished to start when I got older. I've always had a deep
-                    burning passion for tech and entrepreneurship and feel as though the work I do
-                    and the life I live today exemplifies that.
+                  I graduated from the University of Central Florida in 2018. Shortly thereafter, I 
+                  joined the Fortune 500 consultant firm Booz Allen Hamilton (BAH). At Booz Allen, 
+                  I've built and worked on new, innovative, and impactful projects related to the DOD. 
+                  I've played a lead role in DevOps engineering, web development, and Cloud Architecture. 
+                  As well as making a name for myself and work within the firm as a DevOps engineer and 
+                  Solutions Architect.
                   </p>
                 </Fade>
               </Col>

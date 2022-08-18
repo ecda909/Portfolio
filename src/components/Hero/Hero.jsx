@@ -32,7 +32,7 @@ const Header = () => {
             <h1 className="hero-title mt-3 ml-0 pl-0 white-text text-center text-md-left text-lg-left">
               {name || 'Eder Mazariegos'}.
               <br />
-              <span className="grey-text">{subtitle || 'A Full-Stack web developer.'}</span>
+              <span className="grey-text">{subtitle || 'Site Reliability Engineer'}</span>
             </h1>
           </div>
         </Fade>
@@ -40,9 +40,8 @@ const Header = () => {
           <div className="row mb-5">
             <div className="col-12 col-md-7 col-lg-7 ml-0 pl-md-0 pl-lg-0 mx-sm-auto mx-md-0 float-md-left float-lg-left">
               <p className="grey-text text-center text-md-left text-lg-left">
-                I have a deep passion for cloud, Full-Stack, and DevOps engineering/development; I'm
-                also an aspiring tech entrepreneur. My work is very important to me and using my
-                skills to help others at scale is what I work to accomplish everyday.
+              Motivated, experienced, detail-oriented Site Reliability Engineer (SRE) highly regarded for delivering professional, 
+              elegant solutions to cloud-based application design.
               </p>
             </div>
           </div>

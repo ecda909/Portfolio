@@ -29,6 +29,7 @@ gatsby --help
 If you want to run/build locally...
 
 ```
+npm i
 gatsby build
 gatsby develop
 navigate to http://localhost:8000/

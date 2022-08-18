@@ -26,6 +26,10 @@
     .blink-orange {
         right: 0% !important;
     }
+
+    .blink-red {
+        right: 0% !important;
+    }
 }
 
 @media (min-width: 768px) {
@@ -55,6 +59,10 @@
 
     .blink-orange {
         right: 36% !important;
+    }
+
+    .blink-red {
+        right: 14% !important;
     }
 }
 
@@ -86,6 +94,10 @@
     .blink-orange {
         right: 36% !important;
     }
+
+    .blink-red {
+        right: 14% !important;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -115,5 +127,9 @@
 
     .blink-orange {
         right: 36% !important;
+    }
+
+    .blink-red {
+        right: 14% !important;
     }
 }

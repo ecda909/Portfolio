@@ -40,31 +40,32 @@ export default () => {
             <Row className="justify-content-center mb-5">
               <Col sm={12} md={8} lg={8}>
                 <p className="lead" align="left">
-                  I first started exploring technology when I was about 12 years old and ever since
-                  then, I've been hooked. At a younger age, I loved learning how things worked; I
-                  jailbroke iPhones for money on the side, took apart gadgets, drew sketches of
-                  weird-looking devices that I dreamed of building, and even made imitational
-                  companies I wished to start when I got older. I've always had a deep burning
-                  passion for tech and entrepreneurship and feel as though the work I do and the
-                  life I live today exemplifies that. <br />
+                  I graduated from the University of Central Florida in 2018. Shortly thereafter, 
+                  I joined the Fortune 500 consultant firm Booz Allen Hamilton (BAH). At Booz Allen, 
+                  I've built and worked on new, innovative, and impactful projects related to the DOD. 
+                  I've played a lead role in DevOps engineering, web development, and Cloud Architecture. 
+                  As well as making a name for myself and work within the firm as a DevOps engineer and 
+                  Solutions Architect. 
                   <br />
-                  In 2018, I graduated from the University of Central Florida (BS) and began my
-                  career as a Full-Stack web developer and Cloud Solutions Architect. Shortly after,
-                  I was hired by one of the top consulting firms in the nation and Fortune 500
-                  companies Booz Allen Hamilton (BAH). At Booz Allen, I have continued building new,
-                  innovative, and impactful projects for the DOD. I've worked to expand my knowledge
-                  in DevOps engineering, web development, and cloud solutions architecture and
-                  picked up a few entrepreneurial and leadership skills along the way. <br />
                   <br />
-                  Leading and using my skills to help others at large is what I am wholeheartedly
-                  passionate about doing. In both my work within the firm and at home, I constantly
-                  seek to achieve excellence for my clients and future clients. I continuously learn
-                  new things and lean on others to validate and diversify my point of view on the
-                  work I engage within. I believe the people I work with have a profound impact on
-                  my life and because of that I always look to build new things with others so that
-                  what we create together is truly extraordinary. I hope the work I do can leave an
-                  imprint on the world and allow for others to profit in ways no one has ever seen
-                  before.
+                  Leading and using my skills to help others at large is what I'm passionate about. In 
+                  my personal project (Blank Cut) I seek to provide people with tools to help them build 
+                  a better business. At Booz Allen, I've worked on projects that benefit and hugely impact 
+                  our society every day. I work with clubs to help teach others about data science, 
+                  web development, and emerging technologies and continue to do so in the wake of a pandemic. 
+                  It's through these and other projects that I make a change and strive to help others accomplish 
+                  their goals and live a better life. 
+                  <br />
+                  <br />
+                  In both my work within the firm and at home, I always seek to achieve excellence for my clients 
+                  and myself. I take on hard work because I know it will make me a more skilled developer in the end. 
+                  I teach myself new and emerging technologies and lean on others to confirm and diversify my point of 
+                  view on the work I engage within. I always hold firm the belief that the people I work with have a 
+                  profound impact on my life and I on there's. It is with this very understanding, I seek to provide 
+                  world-class quality in the work I do and always keep others' expectations in mind.
+                  <br />
+                  <br />
+                  "The people who are crazy enough to think they can change the world are the ones who do." - Steve Jobs
                 </p>
               </Col>
             </Row>

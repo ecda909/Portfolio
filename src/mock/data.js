@@ -192,8 +192,8 @@ export const researchData = {
       id: 'article-1',
       title: 'Hierarchical Multi-Agent Systems: Concepts and Operational Considerations',
       description: 'Advanced research into hierarchical multi-agent systems for task orchestration and coordination in distributed computing environments.',
-      publishDate: '2024-01-15',
-      readTime: '15 min read',
+      publishDate: '2025-06-16',
+      readTime: '30 min read',
       tags: ['Multi-Agent Systems', 'AI Research', 'Distributed Computing', 'Task Orchestration'],
       url: 'https://overcoffee.medium.com/hierarchical-multi-agent-systems-concepts-and-operational-considerations-e06fff0bea8c',
       featured: true

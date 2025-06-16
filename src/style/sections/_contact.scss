@@ -1,96 +1,473 @@
 .contact {
   background-color: $black-background;
-  padding-top: 10%;
+  color: $white-color;
+  padding: 8rem 0;
+  position: relative;
 
-  span {
-    color: white;
+  // Remove background image overlay
+
+  .container {
+    position: relative;
+    z-index: 2;
   }
 
-  p {
-    color: white;
-    font-size: 1rem;
-  }
-
-  form {
-    input {
-      background-color: #272626 !important;
-    }
-
-    .form-control {
-      height: 50px;
-      border: none !important;
-      color: white;
-
-      input {
-        border: none !important;
-      }
-    }
-
-    .form-group {
-      textarea {
-        height: 120px !important;
-        background-color: #272626 !important;
-        border: none !important;
-      }
+  // Contact Information Section
+  .contact-info {
+    @include respond(tab-port) {
+      margin-bottom: 3rem;
     }
   }
 
-  .message-text {
-    font-size: 5rem !important
+  // Main header section
+  .contact-main-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: $white-color;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+    @include respond(phone) {
+      font-size: 2.5rem;
+    }
   }
 
-  .title-text {
+  .contact-main-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
     color: $just-grey;
-  }
+    margin-bottom: 0;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
 
-  .number-text {
-    font-size: 1rem;
-  }
-
-  .contact-text {
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: white;
-    }
-
-    .sub-text {
-      font-size: 1.4rem;
+    @include respond(phone) {
+      font-size: 1.1rem;
     }
   }
 
-  .contactForm {
-    .form-group {
-      label {
-        color: black !important;
+  // Section titles
+  .contact-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $white-color;
+    margin-bottom: 1.5rem;
+    text-align: left;
+
+    @include respond(tab-port) {
+      text-align: left;
+    }
+
+    @include respond(phone) {
+      text-align: center;
+    }
+  }
+
+  .contact-methods {
+    margin-bottom: 3rem;
+
+    @include respond(tab-port) {
+      text-align: left;
+    }
+
+    @include respond(phone) {
+      text-align: center;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+
+      @include respond(phone) {
+        justify-content: center;
+        text-align: center;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(10px);
+
+        @include respond(phone) {
+          transform: translateY(-5px);
+        }
+      }
+
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, $orange, darken($orange, 10%));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        flex-shrink: 0;
+
+        svg {
+          font-size: 1.2rem;
+          color: $white-color;
+        }
+      }
+
+      .contact-details {
+        flex: 1;
+        text-align: left;
+
+        @include respond(phone) {
+          text-align: center;
+        }
+
+        h5 {
+          color: $white-color;
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+
+        a, span {
+          color: $just-grey;
+          font-size: 1rem;
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .social-links {
+    margin-top: 2rem;
+
+    @include respond(tab-port) {
+      text-align: left;
+    }
+
+    @include respond(phone) {
+      text-align: center;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+
+      @include respond(phone) {
+        justify-content: center;
+      }
+
+      a {
+        width: 45px;
+        height: 45px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $just-grey;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $orange;
+          color: $white-color;
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+
+  // Contact Form Section
+  .contact-form {
+    padding-left: 2rem;
+
+    @include respond(tab-port) {
+      padding-left: 0;
+    }
+  }
+
+  .form-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: $white-color;
+    margin-bottom: 2rem;
+    text-align: left;
+
+    @include respond(tab-port) {
+      text-align: center;
+    }
+
+    @include respond(phone) {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+  }
+
+  .contact-form-container {
+    .form-input {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: $white-color;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      &:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: $primary-color;
+        box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+        color: $white-color;
+      }
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.4);
       }
     }
 
-    .cta-btn {
-      float: left !important;
-      padding: 10px;
-      font-size: 1rem !important;
-      padding-left: 3rem;
-      padding-right: 3rem;
+    .submit-btn {
+      background: linear-gradient(135deg, $orange, darken($orange, 10%));
+      border: none;
+      border-radius: 8px;
+      color: $white-color;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      transition: all 0.3s ease;
+      width: 100%;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba($orange, 0.4);
+        background: linear-gradient(135deg, darken($orange, 5%), darken($orange, 15%));
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      @include respond(phone) {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+      }
     }
   }
 
-  a {
-    svg {
-      cursor: pointer !important;
+  // Alert styling
+  .alert {
+    border-radius: 8px;
+    border: none;
+
+    &.alert-success {
+      background-color: rgba($green, 0.2);
+      color: $green;
+      border: 1px solid rgba($green, 0.3);
+    }
+
+    &.alert-danger {
+      background-color: rgba($red, 0.2);
+      color: $red;
+      border: 1px solid rgba($red, 0.3);
     }
   }
 
-  a:hover {
+  // Responsive Design
+  @include respond(tab-port) {
+    padding: 6rem 0;
 
-    path,
-    .fa {
-      fill: $green !important;
-      color: $green !important;
+    .contact-info,
+    .contact-form {
+      padding-left: 0;
+      padding-right: 0;
     }
+  }
+
+  @include respond(phone) {
+    padding: 4rem 0;
+
+    .contact-methods {
+      .contact-method {
+        padding: 1rem;
+
+        .contact-icon {
+          width: 40px;
+          height: 40px;
+          margin-right: 1rem;
+
+          svg {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    .social-links {
+      text-align: center;
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// Social Media Section
+.social-section {
+  background-color: $dark-grey;
+  color: $white-color;
+  padding: 5rem 0;
+
+  .social-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: $white-color;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .number-text {
+      color: $primary-color;
+      font-weight: 300;
+    }
+
+    @include respond(phone) {
+      font-size: 2.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  .social-description {
+    font-size: 1.2rem;
+    color: $just-grey;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+
+    @include respond(phone) {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+
+    @include respond(phone) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  .social-card {
+    background-color: rgba($white-color, 0.05);
+    border: 1px solid rgba($white-color, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+
+    &:hover {
+      transform: translateY(-10px);
+      background-color: rgba($white-color, 0.1);
+      border-color: rgba($primary-color, 0.3);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+
+      &:hover {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    .social-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, $primary-color, $secondary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem auto;
+      transition: all 0.3s ease;
+
+      svg {
+        font-size: 2rem;
+        color: $white-color;
+      }
+    }
+
+    h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: $white-color;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: $just-grey;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    &:hover .social-icon {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba($primary-color, 0.4);
+    }
+
+    @include respond(phone) {
+      padding: 1.5rem;
+
+      .social-icon {
+        width: 60px;
+        height: 60px;
+
+        svg {
+          font-size: 1.5rem;
+        }
+      }
+
+      h4 {
+        font-size: 1.2rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // Responsive Design
+  @include respond(tab-port) {
+    padding: 4rem 0;
+  }
+
+  @include respond(phone) {
+    padding: 3rem 0;
   }
 }

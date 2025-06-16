@@ -43,7 +43,7 @@ module.exports = {
         short_name: `Portfolio`,
         start_url: `/`,
         background_color: `#fff`,
-        theme_color: `#02aab0`,
+        theme_color: `#4c44cb`,
         display: `standalone`,
         icon: 'src/images/favicon.png',
       },

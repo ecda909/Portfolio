@@ -1,89 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import Fade from 'react-reveal/Fade';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect, useContext } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { Link as LinkTo } from 'gatsby';
+import { FaDownload, FaArrowRight } from 'react-icons/fa';
+import PortfolioContext from '../../context/context';
 import AboutMe from '../../assets/aboutme.svg';
-import Skills from '../../assets/skills.svg';
+import AnimatedSkills from './AnimatedSkills';
 import Title from '../Title/Title';
 
 const About = () => {
+  const { about } = useContext(PortfolioContext);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth > 769) {
       setIsDesktop(true);
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-      setIsDesktop(false);
     }
   }, []);
+
+  if (!about) return null;
+
+  const { paragraphOne, paragraphTwo, paragraphThree, resume } = about;
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
     <section className="aboutme" id="aboutme">
       <Container>
-        <Row>
-          <Col className="d-none d-sm-none d-md-inline d-lg-inline" sm={12} md={6}>
-            <Fade bottom duration={1000} delay={400} distance="30px">
-              <div className="svg-container">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <Row className="align-items-center">
+            {/* About Image */}
+            <Col lg={6} md={6} sm={12} className="about-image-col">
+              <motion.div variants={imageVariants} className="about-image">
                 <AboutMe viewBox="0 0 300 400" preserveAspectRatio="xMinYMin meet" />
-              </div>
-            </Fade>
-          </Col>
-          <Col className="about-text about-padding" sm={12} md={6} lg={6}>
-            <Row className="justify-content-center justify-content-md-start justify-content-lg-start">
-              <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={900} distance="30px">
-                <h1>
-                  <span className="grey-text number-text">01.</span>
+              </motion.div>
+            </Col>
+
+            {/* About Content */}
+            <Col lg={6} md={6} sm={12} className="about-content">
+              <motion.div variants={itemVariants}>
+                <h1 className="about-title">
+                  <span className="number-text">01.</span>
                   <Title title="About Me" />
                 </h1>
-              </Fade>
-            </Row>
-            <Row className="mt-5 mt-md-3 mt-lg-3">
-              <Col className="ml-md-0 ml-lg-0 pl-md-0 pl-lg-0" sm={12} md={12} lg={12}>
-                <Fade
-                  left={isDesktop}
-                  bottom={isMobile}
-                  duration={1000}
-                  delay={900}
-                  distance="30px"
-                >
-                  <p className="font-weight-light grey-text text-center text-md-left text-lg-left">
-                  I graduated from the University of Central Florida in 2018. Shortly thereafter, I 
-                  joined the Fortune 500 consultant firm Booz Allen Hamilton (BAH). At Booz Allen, 
-                  I've built and worked on new, innovative, and impactful projects related to the DOD. 
-                  I've played a lead role in DevOps engineering, web development, and Cloud Architecture. 
-                  As well as making a name for myself and work within the firm as a DevOps engineer and 
-                  Solutions Architect.
-                  </p>
-                </Fade>
-              </Col>
-            </Row>
-            <Row className="justify-content-center justify-content-md-end justify-content-lg-end mt-3 mt-md-0 mt-lg-0 mb-0">
-              <Fade bottom duration={1000} delay={400} distance="30px">
-                <span className="readmore" align="right">
-                  <LinkTo to="/about" smooth duration={1000}>
-                    Read more...
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="about-text">
+                <p>{paragraphOne}</p>
+                {paragraphTwo && <p>{paragraphTwo}</p>}
+                {paragraphThree && <p>{paragraphThree}</p>}
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="about-skills">
+                <h4>Technologies I work with:</h4>
+                <AnimatedSkills />
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="about-actions">
+                <div className="action-buttons">
+                  {resume && (
+                    <a
+                      href={resume}
+                      className="btn-primary"
+                      download
+                    >
+                      <FaDownload className="me-2" />
+                      Download Resume
+                    </a>
+                  )}
+                  <Link to="contact" smooth duration={500}>
+                    <Button className="btn-secondary">
+                      Get In Touch
+                      <FaArrowRight className="ms-2" />
+                    </Button>
+                  </Link>
+                </div>
+
+                <div className="read-more">
+                  <LinkTo to="/about">
+                    Read my full story <FaArrowRight className="ms-1" />
                   </LinkTo>
-                </span>
-              </Fade>
-            </Row>
-            <Row className="mt-0 justify-content-center justify-content-md-start justify-content-lg-start">
-              <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={900} distance="30px">
-                <Skills width="330" height="140" />
-              </Fade>
-            </Row>
-            <Row className="mt-5 justify-content-center justify-content-md-start justify-content-lg-start">
-              <Fade bottom duration={1000} delay={400} distance="30px">
-                <Link to="contact" smooth duration={1000}>
-                  <span className="cta-btn cta-btn--hero">Get in touch</span>
-                </Link>
-              </Fade>
-            </Row>
-          </Col>
-        </Row>
+                </div>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
       </Container>
     </section>
   );

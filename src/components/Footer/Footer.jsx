@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import PortfolioContext from '../../context/context';
+import { footerData } from '../../mock/data';
 import Icon0 from '../../assets/emblem.svg';
 
-const Footer = () => {
-  const { footer } = useContext(PortfolioContext);
+const Footer = ({ isStandalonePage = false }) => {
+  const context = useContext(PortfolioContext);
+  const footer = context?.footer || footerData;
   const { networks } = footer;
 
   return (
@@ -15,25 +17,27 @@ const Footer = () => {
           <Col sm={12} md={3} lg={3}>
             <Icon0 width="90px" height="70px" viewBox="60 120 300 90.999991" />
           </Col>
-          <Col sm={12} md={4} lg={4} className="d-none d-sm-none d-md-inline d-lg-inline">
-            <Row className="footer-text justify-content-center">
-              <Col sm={4} md={4} lg={4}>
-                <Link to="experience" smooth duration={1000}>
-                  Experience
-                </Link>
-              </Col>
-              <Col sm={4} md={4} lg={4}>
-                <Link to="services" smooth duration={1000}>
-                  Services
-                </Link>
-              </Col>
-              <Col sm={4} md={4} lg={4}>
-                <Link to="contact" smooth duration={1000}>
-                  Contact
-                </Link>
-              </Col>
-            </Row>
-          </Col>
+          {!isStandalonePage && (
+            <Col sm={12} md={4} lg={4} className="d-none d-sm-none d-md-inline d-lg-inline">
+              <Row className="footer-text justify-content-center">
+                <Col sm={4} md={4} lg={4}>
+                  <Link to="experience" smooth duration={500}>
+                    Experience
+                  </Link>
+                </Col>
+                <Col sm={4} md={4} lg={4}>
+                  <Link to="services" smooth duration={500}>
+                    Services
+                  </Link>
+                </Col>
+                <Col sm={4} md={4} lg={4}>
+                  <Link to="contact" smooth duration={500}>
+                    Contact
+                  </Link>
+                </Col>
+              </Row>
+            </Col>
+          )}
           <Col sm={12} md={3} lg={3}>
             <Row>
               <Col>
@@ -66,9 +70,13 @@ const Footer = () => {
           </Col>
           <Col sm={12} md={1} lg={1} className="offset-0 offset-md-1 offset-lg-1">
             <span className="back-to-top">
-              <Link to="hero" smooth duration={1000}>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                aria-label="Scroll to top"
+              >
                 <i className="fa fa-angle-up fa-2x" aria-hidden="true" />
-              </Link>
+              </button>
             </span>
           </Col>
         </Row>

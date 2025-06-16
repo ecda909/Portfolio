@@ -3,6 +3,7 @@ import Hero from './Hero/Hero';
 import About from './About/About';
 import Experience from './Experience/Experience';
 import Portfolio from './Portfolio/Portfolio';
+import Research from './Research/Research';
 import Contact from './Contact/Contact';
 import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
@@ -16,6 +17,7 @@ import {
   experienceData,
   portfolioData,
   projectsData,
+  researchData,
   contactData,
   footerData,
 } from '../mock/data';
@@ -26,6 +28,7 @@ function App() {
   const [experience, setExperience] = useState({});
   const [portfolio, setPortfolio] = useState({});
   const [projects, setProjects] = useState([]);
+  const [research, setResearch] = useState({});
   const [contact, setContact] = useState({});
   const [footer, setFooter] = useState({});
 
@@ -35,20 +38,24 @@ function App() {
     setExperience({ ...experienceData });
     setPortfolio({ ...portfolioData });
     setProjects([...projectsData]);
+    setResearch({ ...researchData });
     setContact({ ...contactData });
     setFooter({ ...footerData });
   }, []);
 
   return (
-    <PortfolioProvider value={{ hero, about, experience, portfolio, projects, contact, footer }}>
+    <PortfolioProvider value={{ hero, about, experience, portfolio, projects, research, contact, footer }}>
       <Sidebar />
-      <Hero />
-      <About />
-      <Experience />
-      <Services />
-      <Portfolio />
-      <Contact />
-      <Footer />
+      <div className="main-content">
+        <Hero />
+        <About />
+        <Experience />
+        <Services />
+        <Portfolio />
+        <Research />
+        <Contact />
+        <Footer />
+      </div>
     </PortfolioProvider>
   );
 }

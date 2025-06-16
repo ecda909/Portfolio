@@ -1,8 +1,48 @@
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+* {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+
+
+// Utility classes
+.grey-text {
+  color: #6c757d;
+}
+
+.white-text {
+  color: #fff;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// Remove default margins and paddings
+* {
+  box-sizing: border-box;
+}
+
+// Smooth scrolling for anchor links
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }

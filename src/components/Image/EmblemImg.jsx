@@ -1,37 +1,32 @@
 import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-const EmblemImg = ({ filename, alt }) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        images: allFile {
-          edges {
-            node {
-              relativePath
-              name
-              childImageSharp {
-                fixed(width: 350) {
-                  ...GatsbyImageSharpFixed
-                }
-              }
+const EmblemImg = ({ filename, alt }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      images: allFile {
+        edges {
+          node {
+            relativePath
+            name
+            childImageSharp {
+              gatsbyImageData(width: 350, placeholder: BLURRED)
             }
           }
         }
       }
-    `}
-    render={(data) => {
-      const image = data.images.edges.find((n) => n.node.relativePath.includes(filename));
+    }
+  `);
 
-      if (!image) return null;
+  const image = data.images.edges.find((n) => n.node.relativePath.includes(filename));
 
-      const imageFixed = image.node.childImageSharp.fixed;
-      return <Img className="rounded shadow-lg" alt={alt} fixed={imageFixed} />;
-    }}
-  />
-);
+  if (!image) return null;
+
+  const gatsbyImageData = getImage(image.node.childImageSharp);
+  return <GatsbyImage className="rounded shadow-lg" alt={alt} image={gatsbyImageData} />;
+};
 
 EmblemImg.propTypes = {
   filename: PropTypes.string,

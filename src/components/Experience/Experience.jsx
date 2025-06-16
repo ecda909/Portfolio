@@ -1,92 +1,107 @@
-import React, { useState, useEffect } from 'react';
-import Fade from 'react-reveal/Fade';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import PortfolioContext from '../../context/context';
 import Title from '../Title/Title';
 
 const Experience = () => {
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const { experience } = useContext(PortfolioContext);
 
-  useEffect(() => {
-    if (window.innerWidth > 769) {
-      setIsDesktop(true);
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-      setIsDesktop(false);
+  if (!experience) return null;
+
+  const { paragraphOne, paragraphTwo, paragraphThree } = experience;
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
     }
-  }, []);
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const stats = [
+    { number: "1", label: "Startup (In Progress)", color: "dark" },
+    { number: "2", label: "Awards", color: "dark" },
+    { number: "11+", label: "Projects", color: "orange" },
+    { number: "6+", label: "Years Experience", color: "dark" }
+  ];
 
   return (
     <section className="experience" id="experience">
       <Container>
-        {/* <Title title="Experience" /> */}
-        <Row className="about-wrapper justify-content-center">
-          <Col md={9} sm={12} className="experience-padding experience-text">
-            <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-              <Row className="justify-content-center justify-content-md-start justify-content-lg-start">
-                <h1>
-                  <span className="grey-text number-text">02.</span>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <Row className="align-items-center">
+            {/* Experience Content */}
+            <Col lg={6} md={6} sm={12} className="experience-content">
+              <motion.div variants={itemVariants}>
+                <h1 className="experience-title">
+                  <span className="number-text">02.</span>
                   <Title title="Experience" />
                 </h1>
-              </Row>
-              <Row className="mt-5">
-                <Col md={8} sm={8} className="ml-0 pl-md-0 pl-lg-0">
-                  <p className="font-weight-light grey-text text-center text-md-left text-lg-left">
-                    A numerical list of my accomplishments, awards, projects, and years of
-                    experience to date.
-                  </p>
-                </Col>
-              </Row>
-              <Row className="mt-5 justify-content-center">
-                <Col
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
-                >
-                  <div className="card bg-dark-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">1</span>
-                    <span className="card-text card-text-e-s">Startup (In Progress)</span>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="experience-text">
+                <p>{paragraphOne}</p>
+                {paragraphTwo && <p>{paragraphTwo}</p>}
+                {paragraphThree && <p>{paragraphThree}</p>}
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="experience-stats">
+                <Row>
+                  {stats.map((stat, index) => (
+                    <Col lg={6} md={6} sm={6} xs={6} key={index} className="mb-3">
+                      <motion.div
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <Card className={`stat-card ${stat.color === 'orange' ? 'stat-card-orange' : 'stat-card-dark'}`}>
+                          <Card.Body className="text-center">
+                            <div className="stat-number">{stat.number}</div>
+                            <div className="stat-label">{stat.label}</div>
+                          </Card.Body>
+                        </Card>
+                      </motion.div>
+                    </Col>
+                  ))}
+                </Row>
+              </motion.div>
+            </Col>
+
+            {/* Experience Image/Visual */}
+            <Col lg={6} md={6} sm={12} className="experience-visual">
+              <motion.div variants={itemVariants} className="experience-image">
+                <div className="experience-graphic">
+                  <div className="experience-circle">
+                    <div className="experience-inner">
+                      <h3>6+</h3>
+                      <p>Years of Professional Experience</p>
+                    </div>
                   </div>
-                </Col>
-                <Col
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
-                >
-                  <div className="card bg-dark-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">2</span>
-                    <span className="card-text card-text-e-s">Awards</span>
-                  </div>
-                </Col>
-                <Col
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
-                >
-                  <div className="card bg-orange-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">11+</span>
-                    <span className="card-text card-text-e-s">Projects</span>
-                  </div>
-                </Col>
-                <Col
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  className="ml-0 pl-0 mt-5 mt-md-0 mt-lg-0 d-flex justify-content-center justify-content-md-start justify-content-lg-start"
-                >
-                  <div className="card bg-dark-e shadow-lg">
-                    <span className="card-text card-text-e font-weight-bold mt-3">04+</span>
-                    <span className="card-text card-text-e-s">Years Experience</span>
-                  </div>
-                </Col>
-              </Row>
-            </Fade>
-          </Col>
-        </Row>
+                </div>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
       </Container>
     </section>
   );

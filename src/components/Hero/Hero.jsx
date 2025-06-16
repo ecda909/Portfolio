@@ -1,65 +1,89 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
-import Fade from 'react-reveal/Fade';
+import { Container, Row, Col } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { FaDownload } from 'react-icons/fa';
 import PortfolioContext from '../../context/context';
 import downloadFile from '../../../static/resume.pdf';
 
-const Header = () => {
+const Hero = () => {
   const { hero } = useContext(PortfolioContext);
-  const { name, subtitle, cta } = hero;
+  const { title, name, subtitle, cta } = hero;
 
   const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth > 769) {
       setIsDesktop(true);
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-      setIsDesktop(false);
     }
   }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
     <section id="hero">
       <Container>
-        <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={500} distance="30px">
-          <div className="row justify-content-center justify-content-md-start justify-content-lg-start">
-            <h4 className="font-weight-light grey-text">Hi, my name is</h4>
-          </div>
-          <div className="row justify-content-center justify-content-md-start justify-content-lg-start">
-            <h1 className="hero-title mt-3 ml-0 pl-0 white-text text-center text-md-left text-lg-left">
-              {name || 'Eder Mazariegos'}.
-              <br />
-              <span className="grey-text">{subtitle || 'Site Reliability Engineer'}</span>
-            </h1>
-          </div>
-        </Fade>
-        <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-          <div className="row mb-5">
-            <div className="col-12 col-md-7 col-lg-7 ml-0 pl-md-0 pl-lg-0 mx-sm-auto mx-md-0 float-md-left float-lg-left">
-              <p className="grey-text text-center text-md-left text-lg-left">
-              Motivated, experienced, detail-oriented Site Reliability Engineer (SRE) highly regarded for delivering professional, 
-              elegant solutions to cloud-based application design.
-              </p>
-            </div>
-          </div>
-        </Fade>
-        <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-          <div className="row justify-content-center justify-content-md-start justify-content-lg-start">
-            <p className="hero-cta ml-0">
-              <span className="cta-btn cta-btn--hero">
-                <a href={downloadFile} smooth duration={1000} download>
-                  {cta || 'Download Resume'}
-                </a>
-              </span>
-            </p>
-          </div>
-        </Fade>
+        <motion.div
+          className="hero-content"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <Row className="justify-content-center justify-content-lg-start">
+            <Col lg={8} md={10} sm={12}>
+              <motion.div variants={itemVariants}>
+                <h4 className="hero-greeting">{title || 'Hi, my name is'}</h4>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <h1 className="hero-title">
+                  {name || 'Eder Mazariegos'}.
+                  <br />
+                  <span className="hero-subtitle">{subtitle || 'Site Reliability Engineer'}</span>
+                </h1>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <p className="hero-description">
+                  Motivated, experienced, detail-oriented Site Reliability Engineer (SRE) highly regarded for delivering professional,
+                  elegant solutions to cloud-based application design.
+                </p>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <div className="hero-cta">
+                  <a href={downloadFile} className="btn-primary" download>
+                    <FaDownload className="me-2" />
+                    {cta || 'Download Resume'}
+                  </a>
+                </div>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
       </Container>
     </section>
   );
 };
 
-export default Header;
+export default Hero;

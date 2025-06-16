@@ -1,68 +1,241 @@
 .experience {
   background-color: $black-background;
-  height: 100%;
+  color: $white-color;
+  padding: 8rem 0;
+
+  .number-text {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-right: 1rem;
+    color: $primary-color;
+  }
+
+  .experience-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $white-color;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    @include respond(tab-port) {
+      font-size: 2.2rem;
+      text-align: center;
+      justify-content: center;
+    }
+
+    @include respond(phone) {
+      font-size: 2rem;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .number-text {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  // Experience Content
+  .experience-content {
+    @include respond(tab-port) {
+      order: 2;
+      margin-top: 3rem;
+    }
+  }
 
   .experience-text {
+    margin-bottom: 3rem;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: white;
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $just-grey;
+      margin-bottom: 1.5rem;
+      text-align: left;
+
+      @include respond(tab-port) {
+        text-align: center;
+      }
+
+      @include respond(phone) {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
     }
   }
 
-  .card {
-    border-radius: 10px !important;
-    padding: 3rem;
-    height: 14rem;
-    width: 17rem;
+  // Stats Cards
+  .experience-stats {
+    .stat-card {
+      background-color: #2a2a2a;
+      border: 1px solid #404040;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      height: 120px;
 
-    span {
-      color: #c4c4c4;
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      &.stat-card-orange {
+        background: linear-gradient(135deg, $orange, darken($orange, 10%));
+        border-color: $orange;
+
+        .stat-number,
+        .stat-label {
+          color: $white-color;
+        }
+      }
+
+      &.stat-card-dark {
+        .stat-number {
+          color: $white-color;
+        }
+
+        .stat-label {
+          color: $just-grey;
+        }
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-align: center;
+        line-height: 1.2;
+      }
     }
   }
 
-  .bg-dark-e {
-    background-color: #313131 !important;
-  }
+  // Experience Visual
+  .experience-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  .bg-orange-e {
-    background-color: #F97641 !important;
-
-    span {
-      color: white !important;
+    @include respond(tab-port) {
+      order: 1;
+      margin-bottom: 3rem;
     }
   }
 
-  .card-text-e {
-    font-size: 2.5rem;
-  }
-
-  .card-text-e-s {
-    font-size: 1.2rem;
-  }
-
-  h1 {
-    font-size: 4rem;
-  }
-
-  .svg-container {
-    display: inline-block;
-    position: relative;
+  .experience-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    vertical-align: middle;
-    overflow: hidden;
   }
 
-  svg {
-    width: auto;
-    height: auto;
+  .experience-graphic {
+    position: relative;
+    width: 300px;
+    height: 300px;
+
+    @include respond(phone) {
+      width: 250px;
+      height: 250px;
+    }
   }
 
-  .experience-padding {
-    padding-top: 12%;
+  .experience-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border-radius: 50%;
+      background: $black-background;
+      z-index: 1;
+    }
+
+    .experience-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: $white-color;
+
+      h3 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+
+        @include respond(phone) {
+          font-size: 2.5rem;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        color: $just-grey;
+        margin: 0;
+        line-height: 1.3;
+
+        @include respond(phone) {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  // Responsive Design
+  @include respond(tab-port) {
+    padding: 6rem 0;
+  }
+
+  @include respond(phone) {
+    padding: 4rem 0;
+
+    .experience-text {
+      margin-bottom: 2rem;
+    }
+
+    .experience-stats {
+      .stat-card {
+        height: 100px;
+        margin-bottom: 1rem;
+
+        .stat-number {
+          font-size: 1.5rem;
+        }
+
+        .stat-label {
+          font-size: 0.8rem;
+        }
+      }
+    }
   }
 }

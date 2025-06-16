@@ -1,132 +1,291 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'gatsby';
-import Phone from '../../assets/phone.svg'
-import Mail from '../../assets/mail_footer.svg'
-import Location from '../../assets/location.svg'
-import Git from '../../assets/git.svg';
-import Instagram from '../../assets/instagram.svg';
+import React, { useContext, useState } from 'react';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import PortfolioContext from '../../context/context';
 
 const Contact = () => {
+  const { contact } = useContext(PortfolioContext);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertType, setAlertType] = useState('success');
+
+  if (!contact) return null;
+
+  const { cta, btn, email } = contact;
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://formspree.io/f/xpzokapd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setAlertType('success');
+        setShowAlert(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setAlertType('danger');
+        setShowAlert(true);
+      }
+    } catch (error) {
+      setAlertType('danger');
+      setShowAlert(true);
+    }
+
+    setTimeout(() => setShowAlert(false), 5000);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
-    <section className="contact" id="contact">
+    <>
+      <section className="contact" id="contact">
       <Container>
-        <Row className="justify-content-center">
-          <Col sm={12} md={5} lg={5} className="contact-text offset-md-1 offset-lg-1">
-            <Row className="justify-content-center justify-content-md-start justify-content-lg-start">
-              <Link to="https://github.com/ecda909">
-                <h1 className="font-weight-light">Contact Me</h1>
-              </Link>
-            </Row>
-            <Row className="justify-content-center justify-content-center justify-content-md-start justify-content-lg-start">
-              <p className="grey-text justify-content-center" align="left">Let's make something different, new, and meaningful.</p>
-            </Row>
-            <Row className="justify-content-start mt-4">
-              <Col lg={1} md={1} sm={12} className="ml-0 pl-0 d-none d-sm-none d-md-inline d-lg-inline">
-                <a href="tel:352-286-9493">
-                  <Phone width="180px" height="50px" viewBox="100 100 300 300" preserveAspectRatio="xMinYMin meet" />
-                </a>
-              </Col>
-              <Col>
-                <span className="white-text font-weight-light grey-text float-md-left float-lg-left">Call</span><br />
-                <a href="tel:352-286-9493">
-                  <span className="sub-text float-md-left float-lg-left">+352.286.9493</span>
-                </a>
-              </Col>
-            </Row>
-            <Row className="justify-content-start mt-4">
-              <Col lg={1} md={1} sm={12} className="ml-0 pl-0 d-none d-sm-none d-md-inline d-lg-inline">
-                <a href='mailto:edermazariegos.careers@gmail.com'>
-                  <Mail width="180px" height="50px" viewBox="100 100 300 300" preserveAspectRatio="xMinYMin meet" />
-                </a>
-              </Col>
-              <Col>
-                <span className="white-text font-weight-light grey-text float-md-left float-lg-left">Email</span><br />
-                <a href='mailto:edermazariegos.careers@gmail.com'>
-                  <span className="sub-text float-md-left float-lg-left">edermazariegos.careers@gmail.com</span>
-                </a>
-              </Col>
-            </Row>
-            <Row className="justify-content-start mt-4">
-              <Col lg={1} md={1} sm={12} className="ml-0 pl-0 d-none d-sm-none d-md-inline d-lg-inline">
-                <Link to="https://goo.gl/maps/BmKQtRB3yXGA5P1PA">
-                  <Location width="180px" height="50px" viewBox="100 100 300 300" preserveAspectRatio="xMinYMin meet" />
-                </Link>
-              </Col>
-              <Col>
-                <span className="white-text font-weight-light grey-text float-md-left float-lg-left">Location</span><br />
-                <Link to="https://goo.gl/maps/BmKQtRB3yXGA5P1PA">
-                  <span className="sub-text float-md-left float-lg-left">Washington, DC</span>
-                </Link>
-              </Col>
-            </Row>
-            <Row className="mt-5 d-none d-sm-none d-md-block d-lg-block" align="left">
-              <h4 className="grey-text">Find Me on</h4><br />
-            </Row>
-            <Row className="d-none d-sm-none d-md-block d-lg-block">
-              <Col className="ml-0 pl-0" sm={12} md={4} lg={4} align="left">
-                <Row>
-                  <Col sm={4} md={4} lg={4}>
-                    <Link to="https://github.com/ecda909">
-                      <Git width="180px" height="50px" viewBox="80 30 300 300" preserveAspectRatio="xMinYMin meet" />
-                    </Link>
-                  </Col>
-                  <Col sm={4} md={4} lg={4} className="mt-0 mt-md-3 mt-lg-3">
-                    <Link to="https://www.linkedin.com/in/eder-mazariegos-6a97b757">
-                      <i className="fa fa-linkedin fa-inverse fa-2x" />
-                    </Link>
-                  </Col>
-                  <Col sm={4} md={4} lg={4}>
-                    <Link to="https://www.instagram.com/eder_mazariegos_jr/">
-                      <Instagram width="180px" height="50px" viewBox="80 30 300 300" preserveAspectRatio="xMinYMin meet" />
-                    </Link>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col sm={12} md={5} lg={5} className="contact-text contact-form-padding">
-            <Row className="justify-content-start">
-              <Col align="left">
-                <h1 className="white-text font-weight-light">Drop a Line</h1>
-              </Col>
-            </Row>
-            <Row className="mt-3 justify-content-center">
-              <Col>
-                <form className="contactForm" action="https://formspree.io/f/xpzokapd" method="POST">
-                  <input id="csrf_token" name="csrf_token" type="hidden" />
-                  <div className="form-group">
-                    <div className="form-row">
-                      <Col>
-                        <input className="form-control" id="name" name="name" required="" type="text" placeholder="Name" />
-                      </Col>
-                      <Col>
-                        <input className="form-control" id="email" name="email" required="" type="text" placeholder="Email" />
-                      </Col>
-                    </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {/* Main Contact Header */}
+          <Row className="justify-content-center mb-5">
+            <Col lg={8} md={10} sm={12} className="text-center">
+              <motion.div variants={itemVariants}>
+                <h1 className="contact-main-title">Get In Touch</h1>
+                <p className="contact-main-description">
+                  {cta || "Let's work together to build reliable, scalable systems. I'm always open to discussing new opportunities and interesting projects."}
+                </p>
+              </motion.div>
+            </Col>
+          </Row>
+
+          <Row className="justify-content-center align-items-start">
+            {/* Contact Form - Drop a Line */}
+            <Col lg={6} md={6} sm={12} className="contact-form mb-5">
+              <motion.div variants={itemVariants}>
+                <h2 className="form-title">Drop a Line</h2>
+
+                {showAlert && (
+                  <Alert variant={alertType} className="mb-4">
+                    {alertType === 'success'
+                      ? 'Thank you! Your message has been sent successfully.'
+                      : 'Sorry, there was an error sending your message. Please try again.'}
+                  </Alert>
+                )}
+
+                <Form onSubmit={handleSubmit} className="contact-form-container">
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Control
+                          type="text"
+                          name="name"
+                          placeholder="Your Name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="form-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          placeholder="Your Email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="form-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Control
+                          type="tel"
+                          name="phone"
+                          placeholder="Your Phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="form-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Control
+                          type="text"
+                          name="subject"
+                          placeholder="Subject"
+                          value={formData.subject}
+                          onChange={handleInputChange}
+                          required
+                          className="form-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Form.Group className="mb-4">
+                    <Form.Control
+                      as="textarea"
+                      rows={5}
+                      name="message"
+                      placeholder="Your Message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
+                      className="form-input"
+                    />
+                  </Form.Group>
+
+                  <Button type="submit" className="submit-btn">
+                    {btn || 'Send Message'}
+                  </Button>
+                </Form>
+              </motion.div>
+            </Col>
+
+            {/* Contact Information */}
+            <Col lg={6} md={6} sm={12} className="contact-info">
+              <motion.div variants={itemVariants} className="contact-methods mb-4">
+                <h3 className="contact-section-title">Get In Touch</h3>
+                <div className="contact-method">
+                  <div className="contact-icon">
+                    <FaEnvelope />
                   </div>
-                  <div className="form-group">
-                    <div className="form-row">
-                      <Col>
-                        <input className="form-control" id="phone" name="phone" required="" type="text" placeholder="Phone" />
-                      </Col>
-                      <Col>
-                        <input className="form-control" id="subject" name="subject" required="" type="text" placeholder="Subject" />
-                      </Col>
-                    </div>
+                  <div className="contact-details">
+                    <h5>Email</h5>
+                    <a href={`mailto:${email}`}>{email}</a>
                   </div>
-                  <div className="form-group">
-                    <textarea className="form-control" id="message" name="message" required="" placeholder="Message" />
+                </div>
+
+                <div className="contact-method">
+                  <div className="contact-icon">
+                    <FaPhone />
                   </div>
-                  <input className="cta-btn cta-btn--hero mb-5 mt-3" id="submit" name="submit" type="submit" value="Submit" />
-                </form>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+                  <div className="contact-details">
+                    <h5>Call</h5>
+                    <a href="tel:352-286-9493">+1 (352) 286-9493</a>
+                  </div>
+                </div>
+
+                <div className="contact-method">
+                  <div className="contact-icon">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div className="contact-details">
+                    <h5>Location</h5>
+                    <span>Boston, MA</span>
+                  </div>
+                </div>
+              </motion.div>
+
+            </Col>
+
+          </Row>
+        </motion.div>
       </Container>
     </section>
+
+    {/* Find Me On Section */}
+    <section id="social" className="social-section">
+      <Container>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <Row className="justify-content-center">
+            <Col lg={8} md={10} sm={12} className="text-center">
+              <motion.div variants={itemVariants}>
+                <h2 className="social-title">
+                  <span className="number-text">Find Me</span>
+                  On
+                </h2>
+                <p className="social-description">
+                  Connect with me on social media and stay updated with my latest projects and insights.
+                </p>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="social-grid">
+                <div className="social-card">
+                  <a href="https://github.com/ecda909" target="_blank" rel="noopener noreferrer">
+                    <div className="social-icon">
+                      <FaGithub />
+                    </div>
+                    <h4>GitHub</h4>
+                    <p>Check out my repositories and open source contributions</p>
+                  </a>
+                </div>
+
+                <div className="social-card">
+                  <a href="https://www.linkedin.com/in/eder-mazariegos-6a97b757" target="_blank" rel="noopener noreferrer">
+                    <div className="social-icon">
+                      <FaLinkedin />
+                    </div>
+                    <h4>LinkedIn</h4>
+                    <p>Connect professionally and view my career journey</p>
+                  </a>
+                </div>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </Container>
+    </section>
+    </>
   );
 };
 

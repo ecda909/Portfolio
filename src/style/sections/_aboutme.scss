@@ -1,50 +1,293 @@
 .aboutme {
-    background-color: $black-background;
-    height: 100%;
+  background-color: $black-background;
+  color: $white-color;
+  padding: 8rem 0;
 
-    .about-text {
+  .number-text {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-right: 1rem;
+    color: $primary-color;
+  }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            color: white;
-        }
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $white-color;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    @include respond(tab-port) {
+      font-size: 2.2rem;
+      text-align: center;
+      justify-content: center;
     }
 
-    h1 {
-        font-size: 2.5rem;
-    }
+    @include respond(phone) {
+      font-size: 2rem;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
 
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        vertical-align: middle;
-        overflow: hidden;
+      .number-text {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
     }
+  }
+
+  // About Image
+  .about-image-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    @include respond(tab-port) {
+      order: 2;
+      margin-bottom: 0;
+      margin-top: 3rem;
+    }
+  }
+
+  .about-image {
+    max-width: 400px;
+    width: 100%;
 
     svg {
-        width: auto;
-        height: auto;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
     }
 
-    .about-padding {
-        padding-top: 20%;
+    @include respond(phone) {
+      max-width: 300px;
+    }
+  }
+
+  // About Content
+  .about-content {
+    @include respond(tab-port) {
+      order: 1;
+    }
+  }
+
+  .about-text {
+    margin-bottom: 3rem;
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $just-grey;
+      margin-bottom: 1.5rem;
+      text-align: left;
+
+      @include respond(tab-port) {
+        text-align: center;
+      }
+
+      @include respond(phone) {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .about-skills {
+    margin-bottom: 3rem;
+
+    h4 {
+      color: $white-color;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: left;
+
+      @include respond(tab-port) {
+        text-align: center;
+      }
     }
 
-    .readmore {
-        a {
-            font-size: 1.3rem;
-            color: $white-color !important;
+    .animated-skills {
+      max-width: 400px;
+      width: 100%;
+
+      @include respond(tab-port) {
+        margin: 0 auto;
+      }
+
+      @include respond(phone) {
+        margin: 0 auto;
+      }
+
+      .skill-item {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
         }
+
+        .skill-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.5rem;
+
+          .skill-name {
+            color: $white-color;
+            font-size: 0.9rem;
+            font-weight: 600;
+          }
+
+          .skill-percentage {
+            color: $primary-color;
+            font-size: 0.9rem;
+            font-weight: 700;
+          }
+        }
+
+        .skill-bar-container {
+          position: relative;
+          height: 4px;
+          border-radius: 2px;
+          overflow: hidden;
+
+          .skill-bar-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #707070;
+            border-radius: 2px;
+          }
+
+          .skill-bar-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: $primary-color;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba($primary-color, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  .about-actions {
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      @include respond(tab-port) {
+        justify-content: center;
+      }
+
+      @include respond(phone) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+
+        @include respond(phone) {
+          width: 100%;
+          justify-content: center;
+          max-width: 250px;
+        }
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, $orange, darken($orange, 10%));
+        color: $white-color;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba($orange, 0.4);
+          color: $white-color;
+          text-decoration: none;
+        }
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: $white-color;
+        border: 2px solid $white-color;
+
+        &:hover {
+          background-color: $white-color;
+          color: $black-background;
+          transform: translateY(-2px);
+        }
+      }
+
+      svg {
+        font-size: 0.9rem;
+      }
     }
 
-    .readmore:hover {
-        a {
-            color: $green !important;
+    .read-more {
+      @include respond(tab-port) {
+        text-align: center;
+      }
+
+      a {
+        color: $primary-color;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: $secondary-color;
+          text-decoration: none;
+          transform: translateX(5px);
         }
+
+        svg {
+          font-size: 0.8rem;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover svg {
+          transform: translateX(3px);
+        }
+      }
     }
+  }
+
+  // Responsive Design
+  @include respond(tab-port) {
+    padding: 6rem 0;
+  }
+
+  @include respond(phone) {
+    padding: 4rem 0;
+
+    .about-text {
+      margin-bottom: 2rem;
+    }
+
+    .about-skills {
+      margin-bottom: 2rem;
+    }
+  }
 }

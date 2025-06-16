@@ -1,98 +1,186 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
-
 .services {
-    background-color: $black-background;
-    height: 100%;
+  background-color: $white-color;
+  color: $dark-blue-text;
+  padding: 8rem 0;
+
+  .number-text {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-right: 1rem;
+    color: $primary-color;
+  }
+
+  .services-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $dark-blue-text;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    @include respond(tab-port) {
+      font-size: 2.2rem;
+      text-align: center;
+      justify-content: center;
+    }
+
+    @include respond(phone) {
+      font-size: 2rem;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .number-text {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  // Services Content
+  .services-content {
+    @include respond(tab-port) {
+      order: 2;
+      margin-top: 3rem;
+    }
+  }
+
+  .services-text {
+    margin-bottom: 3rem;
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+      text-align: left;
+
+      @include respond(tab-port) {
+        text-align: center;
+      }
+
+      @include respond(phone) {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  // Services Grid
+  .services-grid {
+    @include respond(tab-port) {
+      order: 1;
+      margin-bottom: 3rem;
+    }
+
+    .additional-services-container {
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
+
+  // Service Cards
+  .service-card {
+    background-color: $white-color;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-color: $orange;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      margin-right: 1rem;
+      flex-shrink: 0;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        transition: transform 0.3s ease;
+      }
+
+      &:hover svg {
+        transform: scale(1.1);
+      }
+    }
+
+    .service-name {
+      flex: 1;
+
+      h5 {
+        color: $dark-blue-text;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+  }
+
+  // CTA Button
+  .cta-btn--services {
+    background: linear-gradient(135deg, $orange, darken($orange, 10%));
+    border: none;
+    border-radius: 8px;
+    color: $white-color;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba($orange, 0.4);
+      background: linear-gradient(135deg, darken($orange, 5%), darken($orange, 15%));
+      color: $white-color;
+      text-decoration: none;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Responsive Design
+  @include respond(tab-port) {
+    padding: 6rem 0;
+  }
+
+  @include respond(phone) {
+    padding: 4rem 0;
 
     .services-text {
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            color: white;
-        }
+      margin-bottom: 2rem;
     }
 
-    .services-title {
-        margin-top: 9%;
+    .service-card {
+      .card-body {
+        padding: 1rem;
+      }
 
-        span {
-            font-size: 1.7rem !important;
-            font-family: 'Raleway', sans-serif;
-        }
+      .service-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 0.75rem;
+      }
+
+      .service-name h5 {
+        font-size: 1rem;
+      }
     }
-
-    .services-icon {
-        margin-top: 4%;
-    }
-
-    .card {
-        border-radius: 3px !important;
-        padding: 2rem;
-        height: 7rem;
-        width: 26rem;
-
-        span {
-            color: #c4c4c4;
-        }
-    }
-
-    .bg-dark-s {
-        background-color: #313131 !important;
-    }
-
-    .bg-dark-s:hover {
-        background-color: #F97641 !important;
-
-        span {
-            color: white !important;
-        }
-    }
-
-    .bg-orange-s {
-        background-color: #F97641 !important;
-
-        span {
-            color: white !important;
-        }
-    }
-
-    .card {
-        .card-body {
-            font-size: 1.3rem;
-            color: black;
-        }
-    }
-
-    .card-text-s {
-        font-size: 2.5rem;
-    }
-
-    .card-text-s-s {
-        font-size: 1.2rem;
-    }
-
-    h1 {
-        font-size: 4rem;
-    }
-
-    .svg-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        vertical-align: middle;
-        overflow: hidden;
-    }
-
-    svg {
-        width: auto;
-        height: auto;
-    }
-
-    .service-padding {
-        padding-top: 20%;
-    }
+  }
 }

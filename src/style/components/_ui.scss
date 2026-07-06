@@ -1,0 +1,156 @@
+// ============ UI PRIMITIVES ============
+
+// ---- Grid ----
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: var(--gap, 2.4rem);
+
+  @include respond(tab-port) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Two-column split that keeps side-by-side on tablet
+.grid--split {
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  @include respond(tab-port) { grid-template-columns: 1fr; gap: 4rem; }
+}
+
+// ---- Card ----
+.card {
+  @include squared-card;
+  padding: 2.8rem;
+  position: relative;
+}
+
+.card--interactive {
+  @include lift;
+  cursor: pointer;
+}
+
+// ---- Tag / tech chip ----
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid $ink-line;
+  background: $white;
+  color: $ink;
+  white-space: nowrap;
+}
+
+.tag--orange { border-color: $accent-orange; color: $accent-orange; }
+.tag--purple { border-color: $accent-purple; color: $accent-purple; }
+.tag--green  { border-color: $accent-green;  color: #04b15d; }
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+// ---- Stat block ----
+.stat {
+  border: 1px solid $ink-line;
+  padding: 2rem;
+  background: $white;
+
+  &__value {
+    font-family: $font-mono;
+    font-size: $fs-xl;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  &__label {
+    @include mono-kicker;
+    margin-top: 0.8rem;
+    color: $muted;
+  }
+  &--accent .stat__value { color: $accent; }
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid $ink-line;
+
+  .stat {
+    border: 0;
+    border-right: 1px solid $hairline;
+    &:last-child { border-right: 0; }
+  }
+
+  @include respond(phone) {
+    grid-template-columns: repeat(2, 1fr);
+    .stat { border-bottom: 1px solid $hairline; }
+  }
+}
+
+// ---- Brand icons ----
+.brand-icon {
+  color: $ink;
+  flex-shrink: 0;
+}
+.brand-icon--mono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: $ink;
+  border: 1px solid $ink-line;
+  line-height: 1;
+}
+.brand-icon--square {
+  display: inline-block;
+  border: 1px solid $hairline;
+  background: $surface-alt;
+}
+
+// ---- Status dot ----
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  @include mono-kicker;
+  color: $ink;
+
+  &::before {
+    content: '';
+    width: 0.8rem; height: 0.8rem;
+    background: $muted-2;
+    border-radius: 50%;
+  }
+  &--live::before,
+  &--production::before {
+    background: $accent-green;
+    animation: status-pulse 3s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+  &--oss::before { background: $accent-green; } // available, but static (not a live service)
+  &--development::before { background: $accent-orange; }
+  &--research::before,
+  &--planning::before { background: $accent-purple; }
+  // --past falls through to the default muted dot (historical work)
+}
+
+// Slow, gradual pulse for live/production status dots
+@keyframes status-pulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(5, 223, 114, 0); }
+  50%      { transform: scale(1.18); box-shadow: 0 0 0 4px rgba(5, 223, 114, 0.14); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status--live::before,
+  .status--production::before { animation: none; }
+}

@@ -1,3 +1,10 @@
-.orange {
-    color: $orange !important;
-}
+// ============ COLOR UTILITIES ============
+
+.ink-text    { color: $ink !important; }
+.muted-text  { color: $muted !important; }
+.grey-text   { color: $muted !important; }
+
+.accent-text        { color: $accent !important; }
+.accent-orange-text { color: $accent-orange !important; }
+.accent-purple-text { color: $accent-purple !important; }
+.accent-green-text  { color: $accent-green !important; }

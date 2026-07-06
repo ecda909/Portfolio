@@ -1,267 +1,109 @@
+// ============ RESEARCH & INTERESTS ============
+
 .research {
-  background-color: $black-background;
-  color: $white-color;
-  padding: 8rem 0;
+  border-bottom: 1px solid $hairline;
 
-  .number-text {
-    font-size: 2rem;
-    font-weight: 300;
-    margin-right: 1rem;
+  &__subhead {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    @include mono-kicker;
+    color: $ink;
+    margin: 3.6rem 0 1.8rem;
+
+    svg { color: $accent; }
+
+    &--future svg { color: $accent-purple; }
+  }
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+
+  @include respond(tab-port) { grid-template-columns: 1fr; }
+}
+
+.research-card {
+  @include squared-card;
+  padding: 2.4rem;
+  padding-left: 2.8rem;
+  position: relative;
+  overflow: hidden;
+
+  &__bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--pc, #{$accent-orange});
   }
 
-  .lead {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  &__title { font-size: $fs-md; margin-bottom: 1rem; }
+  &__desc { color: $muted; font-size: $fs-sm; margin-bottom: 1.6rem; }
 
-  // Tab Navigation
-  .research-tabs {
-    .tab-btn {
-      background: transparent;
-      border: 2px solid $primary-color;
-      color: $primary-color;
-      padding: 12px 24px;
-      margin: 0 8px;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
+  // Future interest — visually lighter, dashed, no accent bar
+  &--future {
+    background: $surface-alt;
+    border-style: dashed;
+    .research-card__title { color: $ink; }
+  }
+}
+
+.research-articles { display: flex; flex-direction: column; gap: 1.6rem; }
+
+.article-card {
+  @include squared-card;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2.4rem;
+  padding: 2.8rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover { transform: translate(-3px, -3px); @include hard-shadow; }
+
+  &__flag {
+    display: inline-block;
+    @include mono-kicker;
+    color: $ink;
+    background: $accent-green;
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+  &__title { font-size: $fs-lg; margin-bottom: 0.8rem; }
+  &__desc { color: $muted; margin-bottom: 1.4rem; max-width: 70ch; }
+
+  &__meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.4rem;
+    span {
       display: inline-flex;
       align-items: center;
-
-      &:hover {
-        background-color: $primary-color;
-        color: $white-color;
-        transform: translateY(-2px);
-      }
-
-      &.active {
-        background-color: $primary-color;
-        color: $white-color;
-        box-shadow: 0 4px 15px rgba($primary-color, 0.3);
-      }
-
-      @include respond(phone) {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-        margin: 0 4px;
-      }
+      gap: 0.5rem;
+      font-family: $font-mono;
+      font-size: $fs-xs;
+      color: $muted-2;
     }
   }
 
-  // Research Cards
-  .research-card {
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    height: 100%;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      border-color: $primary-color;
-    }
-
-    &.featured {
-      border-color: $orange;
-      box-shadow: 0 5px 20px rgba($orange, 0.2);
-
-      &:hover {
-        border-color: $orange;
-        box-shadow: 0 10px 30px rgba($orange, 0.3);
-      }
-    }
-
-    .card-body {
-      padding: 1.5rem;
-    }
-
-    .card-title {
-      color: $white-color;
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .card-text {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
+  &__go {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: flex-end;
+    white-space: nowrap;
+    font-family: $font-mono;
+    font-size: $fs-sm;
+    color: $ink;
+    svg { transition: transform 0.16s ease; }
   }
-
-  // Progress Bar
-  .progress-section {
-    .progress {
-      height: 8px;
-      background-color: #404040;
-      border-radius: 4px;
-      overflow: hidden;
-
-      .progress-bar {
-        border-radius: 4px;
-        transition: width 0.6s ease;
-      }
-    }
-  }
-
-  // Badges
-  .badge {
-    font-size: 0.75rem;
-    padding: 0.4em 0.8em;
-    border-radius: 6px;
-    font-weight: 500;
-
-    &.bg-outline-secondary {
-      background-color: transparent !important;
-      border: 1px solid #6c757d;
-      color: #adb5bd;
-    }
-
-    &.bg-outline-primary {
-      background-color: transparent !important;
-      border: 1px solid $primary-color;
-      color: $primary-color;
-    }
-  }
-
-  // Technologies and Tags
-  .technologies,
-  .tags {
-    .badge {
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  // Article Meta
-  .article-meta {
-    small {
-      font-size: 0.85rem;
-      color: $white-color !important;
-
-      svg {
-        font-size: 0.8rem;
-        color: $white-color;
-      }
-    }
-  }
-
-  // Buttons
-  .btn-outline-primary {
-    border-color: $primary-color;
-    color: $primary-color;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $primary-color;
-      border-color: $primary-color;
-      color: $white-color;
-      transform: translateY(-1px);
-    }
-
-    svg {
-      font-size: 0.75rem;
-    }
-  }
-
-  // Responsive Design
-  @include respond(tab-port) {
-    padding: 6rem 0;
-
-    .research-card {
-      margin-bottom: 2rem;
-    }
-  }
+  &:hover &__go { color: $accent; svg { transform: translate(2px, -2px); } }
 
   @include respond(phone) {
-    padding: 4rem 0;
-
-    .number-text {
-      font-size: 1.5rem;
-    }
-
-    .lead {
-      font-size: 1.1rem;
-      padding: 0 1rem;
-    }
-
-    .research-tabs {
-      .tab-btn {
-        display: block;
-        width: 100%;
-        margin: 0.5rem 0;
-        text-align: center;
-      }
-    }
-
-    .research-card {
-      .card-body {
-        padding: 1.25rem;
-      }
-
-      .card-title {
-        font-size: 1.1rem;
-      }
-    }
-  }
-}
-
-// Custom animations for research section
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.research {
-  .research-card {
-    animation: fadeInUp 0.6s ease-out;
-  }
-}
-
-// Status-specific styling
-.badge {
-  &.bg-success {
-    background-color: darken($green, 20%) !important;
-    color: $white-color !important;
-  }
-
-  &.bg-warning {
-    background-color: $orange !important;
-    color: $white-color !important;
-  }
-
-  &.bg-primary {
-    background-color: $primary-color !important;
-    color: $white-color !important;
-  }
-}
-
-// Progress bar variants
-.progress-bar {
-  &.bg-success {
-    background-color: $green !important;
-  }
-
-  &.bg-warning {
-    background-color: $orange !important;
-  }
-
-  &.bg-primary {
-    background-color: $primary-color !important;
+    flex-direction: column;
+    gap: 1.6rem;
+    &__go { align-self: flex-start; }
   }
 }

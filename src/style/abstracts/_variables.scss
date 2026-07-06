@@ -1,25 +1,43 @@
-// COLORS
-$primary-color: #F97641;
-$secondary-color: #ff8c42;
-$tertiary-color: #4c44cb;
+// ============ DESIGN TOKENS ============
 
-// $primary-color: #7f449d;
-// $secondary-color: #793fc1;
+// Canvas & ink
+$white:        #ffffff;
+$ink:          #0a0a0a;   // primary text / near-black
+$ink-line:     #000000;   // borders
+$muted:        #5a5a5a;   // secondary text
+$muted-2:      #8a8a8a;   // tertiary text
+$hairline:     #e6e6e6;   // subtle dividers
+$surface-alt:  #f6f6f4;   // faint panel fill
 
-$white-color: #fff;
-$just-white: white;
-$just-grey: #949494;
-$black-background: #1D1D1D;
-$orange: #F97641;
-$green: #22c55e;  // Darker green replacing the light green
-$purple: #5E17EB;
-$dark-grey: #333333;
-$red: #FF2626;
+// Accents — use strategically & sparingly
+$accent-orange: #f97641;
+$accent-purple: #4429d5;
+$accent-green:  #05df72;
+$accent:        $accent-orange; // default emphasis
 
-$dark-blue-text: #272341; // For Headings
+// Typography
+$font-sans:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif; // headings
+$font-mono:    'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
 
-// FONT SIZE
-$default-font-size: 1.6rem;
-$big-font-size: 4rem;
-$mid-font-size: 2.5rem;
-$small-font-size: 1rem;
+// Type scale (html is 62.5% → 1rem = 10px)
+$fs-xs:   1.2rem;
+$fs-sm:   1.4rem;
+$fs-base: 1.6rem;
+$fs-md:   1.8rem;
+$fs-lg:   2.2rem;
+$fs-xl:   3.0rem;
+$fs-2xl:  4.4rem;
+$fs-3xl:  6.0rem;
+
+// Layout
+$maxw:       1160px;
+$sidebar-w:  80px;
+$radius:     0;
+
+// ---- Legacy aliases (kept so stray references still resolve) ----
+$orange:  $accent-orange;
+$purple:  $accent-purple;
+$green:   $accent-green;
+$primary-color: $accent-orange;
+$white-color: $white;

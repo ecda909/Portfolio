@@ -1,0 +1,53 @@
+// ============ ABOUT ============
+
+.about {
+  border-bottom: 1px solid $hairline;
+
+  &__grid { align-items: start; }
+
+  &__figure { position: relative; }
+  &__portrait {
+    border: 1px solid $ink-line;
+    background: $surface-alt;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    @include hard-shadow($ink-line, 6px, 6px);
+
+    svg { width: 100%; height: 100%; padding: 2.4rem; } // illustration fallback inset
+    @include respond(tab-port) { max-width: 420px; margin: 0 auto; }
+  }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__content h2 { max-width: 18ch; margin-bottom: 2.4rem; }
+
+  &__text p { margin-bottom: 1.6rem; }
+
+  &__tech {
+    margin: 2.8rem 0;
+    padding-top: 2.4rem;
+    border-top: 1px solid $hairline;
+  }
+  &__tech-label {
+    @include mono-kicker;
+    display: block;
+    margin-bottom: 1.2rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__story { margin-top: 0.4rem; }
+}

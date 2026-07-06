@@ -1,254 +1,186 @@
-.portfolio {
-  background-color: $black-background;
-  color: $white-color;
-  padding: 8rem 0;
+// ============ PORTFOLIO + PROJECT CARDS ============
 
-  .number-text {
-    font-size: 2rem;
-    font-weight: 300;
-    margin-right: 1rem;
+// Accent variable per card
+.accent-orange { --pc: #{$accent-orange}; }
+.accent-purple { --pc: #{$accent-purple}; }
+.accent-green  { --pc: #{$accent-green}; }
+
+.portfolio { border-bottom: 1px solid $hairline; }
+
+.portfolio-group {
+  margin-bottom: 5.6rem;
+  &:last-of-type { margin-bottom: 0; }
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.6rem;
+    padding-bottom: 1.6rem;
+    margin-bottom: 2.8rem;
+    border-bottom: 1px solid $ink-line;
+
+    @include respond(phone) { flex-direction: column; gap: 0.4rem; }
+  }
+  &__company { font-size: $fs-xl; font-weight: 700; letter-spacing: -0.02em; }
+  &__role { @include mono-kicker; }
+}
+
+.portfolio__more { margin-top: 4rem; }
+
+// ---- Project card (shared) ----
+.project-card {
+  @include squared-card;
+  padding: 2.8rem;
+  padding-left: 3.2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+  &__bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--pc, #{$accent-orange});
   }
 
-  .lead {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
+  &--compact:hover {
+    transform: translate(-3px, -3px);
+    @include hard-shadow;
   }
 
-  // Filter Buttons
-  .portfolio-filters {
-    .filter-btn {
-      background: transparent;
-      border: 2px solid $primary-color;
-      color: $primary-color;
-      padding: 10px 20px;
-      margin: 0 8px 8px 0;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background-color: $primary-color;
-        color: $white-color;
-        transform: translateY(-2px);
-      }
-
-      &.active {
-        background-color: $primary-color;
-        color: $white-color;
-        box-shadow: 0 4px 15px rgba($primary-color, 0.3);
-      }
-
-      @include respond(phone) {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-        margin: 0 4px 8px 0;
-      }
-    }
+  &__head { margin-bottom: 1.4rem; }
+  &__title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  &__title { font-size: $fs-lg; margin: 0; }
+  &__tagline {
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $muted;
+    margin: 0;
+    letter-spacing: 0.02em;
   }
 
-  // Portfolio Cards
-  .portfolio-card {
-    background-color: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    height: 100%;
+  &__summary { color: $ink; margin-bottom: 1.6rem; }
 
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      border-color: $primary-color;
-    }
-
-    .card-body {
-      padding: 1.5rem;
-    }
-
-    .portfolio-logo {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-
-    .card-title {
-      color: $white-color;
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-
-    .card-text {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    .card-text-secondary {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-  }
-
-  // Badges
-  .badge {
-    font-size: 0.75rem;
-    padding: 0.4em 0.8em;
-    border-radius: 6px;
-    font-weight: 500;
-
-    &.bg-outline-secondary {
-      background-color: transparent !important;
-      border: 1px solid #6c757d;
-      color: #adb5bd;
-    }
-
-    &.bg-outline-primary {
-      background-color: transparent !important;
-      border: 1px solid $primary-color;
-      color: $primary-color;
-    }
-
-    &.bg-success {
-      background-color: $green !important;
-    }
-
-    &.bg-warning {
-      background-color: $orange !important;
-      color: $white-color !important;
-    }
-
-    &.bg-danger {
-      background-color: $red !important;
-    }
-  }
-
-  // Technologies
-  .technologies {
-    .badge {
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  // Project Links
-  .project-links {
-    .btn {
-      font-size: 0.875rem;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-
-      &.btn-outline-primary {
-        border-color: $primary-color;
-        color: $primary-color;
-
-        &:hover {
-          background-color: $primary-color;
-          border-color: $primary-color;
-          color: $white-color;
-          transform: translateY(-1px);
-        }
-      }
-
-      &.btn-outline-secondary {
-        border-color: #6c757d;
-        color: #adb5bd;
-
-        &:hover {
-          background-color: #6c757d;
-          border-color: #6c757d;
-          color: $white-color;
-          transform: translateY(-1px);
-        }
-      }
-
-      svg {
-        font-size: 0.75rem;
+  &__highlights {
+    list-style: none;
+    margin: 0 0 1.8rem;
+    padding: 0;
+    li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 0.9rem;
+      font-size: $fs-sm;
+      color: $muted;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0.9rem;
+        width: 0.8rem; height: 1px;
+        background: var(--pc, #{$ink-line});
       }
     }
   }
 
-  // CTA Button
-  .cta-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    color: $white-color;
-    background: linear-gradient(135deg, $primary-color, $secondary-color);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+  &__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid $hairline;
+    margin-bottom: 1.8rem;
 
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba($primary-color, 0.4);
-      color: $white-color;
-      text-decoration: none;
-    }
+    .project-metric {
+      flex: 1;
+      min-width: 90px;
+      padding: 1.2rem 1.4rem;
+      border-right: 1px solid $hairline;
+      &:last-child { border-right: 0; }
 
-    &:active {
-      transform: translateY(-1px);
-    }
-  }
-
-  // Responsive Design
-  @include respond(tab-port) {
-    padding: 6rem 0;
-
-    .portfolio-card {
-      margin-bottom: 2rem;
-    }
-  }
-
-  @include respond(phone) {
-    padding: 4rem 0;
-
-    .number-text {
-      font-size: 1.5rem;
-    }
-
-    .lead {
-      font-size: 1.1rem;
-      padding: 0 1rem;
-    }
-
-    .portfolio-filters {
-      .filter-btn {
+      &__value {
         display: block;
-        width: 100%;
-        margin: 0.5rem 0;
+        font-family: $font-mono;
+        font-size: $fs-md;
+        line-height: 1;
+        color: $ink;
+      }
+      &__label {
+        display: block;
+        margin-top: 0.5rem;
+        font-family: $font-mono;
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: $muted-2;
+      }
+    }
+  }
+
+  &__chart {
+    border: 1px solid $hairline;
+    padding: 0.8rem 0.8rem 0.6rem;
+    margin-bottom: 1.8rem;
+
+    .minichart__values {
+      display: flex;
+      padding: 0 0.6rem;
+      margin-top: 0.4rem;
+
+      span {
+        flex: 1;
         text-align: center;
-      }
-    }
-
-    .portfolio-card {
-      .card-body {
-        padding: 1.25rem;
-      }
-
-      .card-title {
-        font-size: 1.1rem;
-      }
-    }
-
-    .project-links {
-      .btn {
-        display: block;
-        width: 100%;
-        margin-bottom: 0.5rem;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
+        font-family: $font-mono;
+        font-size: $fs-xs;
+        color: $ink;
       }
     }
   }
+
+  &__tech { margin-bottom: 1.8rem; }
+  &__more { color: $muted; }
+
+  &__clients {
+    margin-bottom: 1.8rem;
+    padding: 1.4rem;
+    border: 1px solid $hairline;
+    background: $surface-alt;
+
+    &-label {
+      @include mono-kicker;
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+    &-list { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+  }
+
+  &__links {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid $hairline;
+  }
+}
+
+.client-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid $ink-line;
+  background: $white;
+  color: $ink;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, color 0.16s ease;
+
+  svg { width: 1.4rem; height: 1.4rem; }
+  &:hover { color: $accent; transform: translate(-2px, -2px); @include hard-shadow; }
 }

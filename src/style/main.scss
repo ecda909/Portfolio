@@ -1,28 +1,31 @@
-@import './abstracts/mixins';
+// ============================================================
+// Eder Mazariegos — Portfolio
+// Design system: white canvas · near-black ink · squared UI
+// Restrained accents (orange / purple / green)
+// ============================================================
+
 @import './abstracts/variables';
+@import './abstracts/mixins';
 @import './abstracts/helpers';
-@import './abstracts/positions';
 
 @import './base/base';
 @import './base/typography';
 @import './base/colors';
 
+@import './components/ui';
 @import './components/buttons';
 @import './components/sidebar';
 
-@import './layout/footer';
 @import './layout/sections';
+@import './layout/footer';
 
-@import './sections/about-story';
-@import './sections/aboutme';
-@import './sections/experience';
-@import './sections/portfolio';
-@import './sections/services';
-@import './sections/contact';
 @import './sections/hero';
-@import './sections/projects';
-@import './sections/projects-page';
-@import './sections/research';
+@import './sections/about';
+@import './sections/experience';
 @import './sections/technologies';
-
-@import './vendor/css/font-awesome.min.css';
+@import './sections/portfolio';
+@import './sections/research';
+@import './sections/contact';
+@import './sections/projects-page';
+@import './sections/technologies-page';
+@import './sections/about-story';

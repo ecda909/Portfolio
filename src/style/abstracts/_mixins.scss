@@ -1,109 +1,44 @@
-// MEDIA QUERY MANAGER
-/*
+// ============ MIXINS ============
 
-0 - 600px:          Phone
-600px - 900px       Table Portrait
-900px - 1200px      Table Landscape
-[1200px - 1800px]   Desktop Normal Styles
-1800px +            Big Desktop
-
-1em = 16px
-
-ORDER: Base + Typography > Generar Layout + Grid > Page Layout > Components
-
-*/
-@mixin respond($breakpoint) {
-
-  // Phone-xs
-  @if $breakpoint==phone-xs {
-    @media (max-width: 20em) {
-      @content;
-
-      #hero .hero-title {
-        font-size: 10vw !important;
-      }
-
-      .contact-form-padding {
-        margin-top: 20% !important;
-      }
-    }
-
-    //0 - 320px
-  }
-
-  // Phone
-  @if $breakpoint==phone {
-    @media (max-width: 37.5em) {
-      @content;
-
-      #hero .hero-title {
-        font-size: 10vw !important;
-      }
-
-      .contact-form-padding {
-        margin-top: 20% !important;
-      }
-    }
-
-    //0 - 600px
-  }
-
-  // Table Portrait
-  @if $breakpoint==tab-port {
-    @media (max-width: 56.25em) {
-      @content;
-
-      #hero .hero-title {
-        font-size: 4vw !important;
-      }
-
-      .contact-form-padding {
-        margin-top: 0% !important;
-      }
-    }
-
-    //900px
-  }
-
-  // Table Landscape
-  @if $breakpoint==tab-land {
-    @media (max-width: 75em) {
-      @content;
-
-
-      #hero .hero-title {
-        font-size: 4vw !important;
-      }
-
-      .contact-form-paddin {
-        margin-top: 0% !important;
-      }
-    }
-
-    //1200px
-  }
-
-  // Big Desktop
-  @if $breakpoint==big-desktop {
-    @media (min-width: 112.5em) {
-      @content;
-
-      #hero .hero-title {
-        font-size: 4vw !important;
-      }
-
-      .contact-form-padding {
-        margin-top: 0% !important;
-      }
-    }
-
-    //1800px +
+// Responsive breakpoints (1em = 16px)
+@mixin respond($bp) {
+  @if $bp == phone {
+    @media (max-width: 37.5em) { @content; }        // 600px
+  } @else if $bp == tab-port {
+    @media (max-width: 56.25em) { @content; }        // 900px
+  } @else if $bp == tab-land {
+    @media (max-width: 75em) { @content; }           // 1200px
+  } @else if $bp == big-desktop {
+    @media (min-width: 112.5em) { @content; }        // 1800px
   }
 }
 
-// Border White Mixin
-@mixin section-borders {
-  border: 1.5rem solid #fff;
-  border-top: 0;
-  border-bottom: 0;
+// Squared card
+@mixin squared-card {
+  background: $white;
+  border: 1px solid $ink-line;
+  border-radius: $radius;
+}
+
+// Flat "hard" shadow used on hover for interactive elements
+@mixin hard-shadow($color: $ink-line, $x: 4px, $y: 4px) {
+  box-shadow: #{$x} #{$y} 0 $color;
+}
+
+// Monospace uppercase label / kicker
+@mixin mono-kicker {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $muted;
+}
+
+// Lift-on-hover interaction for cards/links
+@mixin lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  &:hover {
+    transform: translate(-2px, -2px);
+    @include hard-shadow;
+  }
 }

@@ -1,127 +1,94 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { Link as LinkTo } from 'gatsby';
-import { FaDownload, FaArrowRight } from 'react-icons/fa';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import PortfolioContext from '../../context/context';
+import { coreTech } from '../../mock/data';
+import { Container, Grid, Kicker, Tag } from '../ui';
 import AboutMe from '../../assets/aboutme.svg';
-import AnimatedSkills from './AnimatedSkills';
-import Title from '../Title/Title';
+import downloadFile from '../../../static/resume.pdf';
+
+// Uses the real photo at /profile.jpg; falls back to the illustration if absent.
+const AboutPortrait = () => {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return <AboutMe viewBox="0 0 300 400" preserveAspectRatio="xMidYMin meet" />;
+  }
+  return (
+    <img
+      src="/profile.png"
+      alt="Eder Mazariegos"
+      className="about__photo"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+};
 
 const About = () => {
   const { about } = useContext(PortfolioContext);
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth > 769) {
-      setIsDesktop(true);
-    }
-  }, []);
-
   if (!about) return null;
+  const { paragraphs = [] } = about;
 
-  const { paragraphOne, paragraphTwo, paragraphThree, resume } = about;
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const imageVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
+  const item = {
+    hidden: { y: 24, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.55, ease: 'easeOut' } },
   };
 
   return (
-    <section className="aboutme" id="aboutme">
+    <section className="about" id="about">
       <Container>
         <motion.div
-          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
         >
-          <Row className="align-items-center">
-            {/* About Image */}
-            <Col lg={6} md={6} sm={12} className="about-image-col">
-              <motion.div variants={imageVariants} className="about-image">
-                <AboutMe viewBox="0 0 300 400" preserveAspectRatio="xMinYMin meet" />
-              </motion.div>
-            </Col>
+          <Grid className="grid--split about__grid">
+            <motion.div className="about__figure" variants={item}>
+              <div className="about__portrait">
+                <AboutPortrait />
+              </div>
+            </motion.div>
 
-            {/* About Content */}
-            <Col lg={6} md={6} sm={12} className="about-content">
-              <motion.div variants={itemVariants}>
-                <h1 className="about-title">
-                  <span className="number-text">01.</span>
-                  <Title title="About Me" />
-                </h1>
-              </motion.div>
+            <motion.div className="about__content" variants={item}>
+              <Kicker num="01">About</Kicker>
+              <h2>A Site Reliability Engineer obsessed with systems that don’t fall over.</h2>
 
-              <motion.div variants={itemVariants} className="about-text">
-                <p>{paragraphOne}</p>
-                {paragraphTwo && <p>{paragraphTwo}</p>}
-                {paragraphThree && <p>{paragraphThree}</p>}
-              </motion.div>
+              <div className="about__text">
+                {paragraphs.map((p, i) => (
+                  <p key={i} className={i === 0 ? '' : 'muted'}>
+                    {p}
+                  </p>
+                ))}
+              </div>
 
-              <motion.div variants={itemVariants} className="about-skills">
-                <h4>Technologies I work with:</h4>
-                <AnimatedSkills />
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="about-actions">
-                <div className="action-buttons">
-                  {resume && (
-                    <a
-                      href={resume}
-                      className="btn-primary"
-                      download
-                    >
-                      <FaDownload className="me-2" />
-                      Download Resume
-                    </a>
-                  )}
-                  <Link to="contact" smooth duration={500}>
-                    <Button className="btn-secondary">
-                      Get In Touch
-                      <FaArrowRight className="ms-2" />
-                    </Button>
-                  </Link>
+              <div className="about__tech">
+                <span className="about__tech-label">Core stack</span>
+                <div className="tag-row">
+                  {coreTech.map((t) => (
+                    <Tag key={t}>{t}</Tag>
+                  ))}
                 </div>
+              </div>
 
-                <div className="read-more">
-                  <LinkTo to="/about">
-                    Read my full story <FaArrowRight className="ms-1" />
-                  </LinkTo>
-                </div>
-              </motion.div>
-            </Col>
-          </Row>
+              <div className="about__actions">
+                <a href={downloadFile} className="btn btn--solid" download>
+                  Download Résumé
+                </a>
+                <Link to="contact" smooth duration={500} className="btn btn--outline">
+                  Get in touch
+                  <ArrowRight strokeWidth={1.8} />
+                </Link>
+              </div>
+
+              <LinkTo to="/about" className="text-link about__story">
+                Read my full story
+                <ArrowUpRight strokeWidth={1.8} />
+              </LinkTo>
+            </motion.div>
+          </Grid>
         </motion.div>
       </Container>
     </section>

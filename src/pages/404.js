@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { Container } from 'react-bootstrap';
-import Fade from '../components/Animation/Fade';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { ArrowLeft } from 'lucide-react';
 
 import { headData } from '../mock/data';
+import { Container } from '../components/ui';
 import '../style/main.scss';
 
 const NotFoundPage = () => {
@@ -15,27 +14,18 @@ const NotFoundPage = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Page not found</title>
+        <title>Page not found — Eder Mazariegos</title>
         <html lang={lang || 'en'} />
         <meta name="description" content="Page not found" />
       </Helmet>
-      <section id="hero" className="jumbotron">
+      <section className="notfound">
         <Container>
-          <Fade bottom duration={1000} delay={500} distance="30px">
-            <h1 className="hero-title text-center">
-              Sorry, this path does not exist{' '}
-              <span role="img" aria-label="emoji">
-                <i className="fa far fa-question-circle" aria-hidden="true" />
-              </span>
-            </h1>
-          </Fade>
-          <Fade bottom duration={1000} delay={1000} distance="30px">
-            <p className="hero-cta justify-content-center">
-              <Link className="cta-btn cta-btn--hero" to="/">
-                Go back
-              </Link>
-            </p>
-          </Fade>
+          <span className="kicker"><span className="kicker__num">404</span>Not found</span>
+          <h1>This path doesn’t exist.</h1>
+          <p className="lead">The page you’re looking for may have moved or never existed.</p>
+          <Link to="/" className="btn btn--solid">
+            <ArrowLeft strokeWidth={1.8} /> Go back home
+          </Link>
         </Container>
       </section>
     </>

@@ -1,54 +1,21 @@
-import React, { useContext, useState } from 'react';
-import { Container, Row, Col, Card, Badge, ProgressBar } from 'react-bootstrap';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaClock, FaExternalLinkAlt, FaFlask, FaBookOpen } from 'react-icons/fa';
+import { Calendar, Clock, ArrowUpRight, Sparkles, Compass } from 'lucide-react';
 import PortfolioContext from '../../context/context';
-import Title from '../Title/Title';
+import { Container, Kicker, Tag } from '../ui';
+
+const formatDate = (d) =>
+  new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
 const Research = () => {
   const { research } = useContext(PortfolioContext);
-  const [activeTab, setActiveTab] = useState('studies');
-
   if (!research) return null;
 
-  const { title, description, currentStudies = [], articles = [] } = research;
+  const { title, description, activeStudies = [], futureInterests = [], articles = [] } = research;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
+  const item = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Active': return 'success';
-      case 'Planning': return 'warning';
-      case 'Completed': return 'primary';
-      default: return 'secondary';
-    }
-  };
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    visible: { y: 0, opacity: 1, transition: { duration: 0.45, ease: 'easeOut' } },
   };
 
   return (
@@ -58,163 +25,99 @@ const Research = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          variants={containerVariants}
+          variants={{ visible: { transition: { staggerChildren: 0.07 } } }}
         >
-          <Row className="justify-content-center">
-            <Col lg={10}>
-              <motion.div variants={itemVariants} className="text-center mb-5">
-                <h1>
-                  <span className="grey-text number-text">05.</span>
-                  <Title title={title} />
-                </h1>
-                <p className="lead grey-text mt-4">{description}</p>
-              </motion.div>
+          <motion.div className="section-head" variants={item}>
+            <Kicker num="05">Research &amp; Interests</Kicker>
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </motion.div>
 
-              {/* Tab Navigation */}
-              <motion.div variants={itemVariants} className="research-tabs mb-4">
-                <div className="d-flex justify-content-center">
-                  <button
-                    className={`tab-btn ${activeTab === 'studies' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('studies')}
-                  >
-                    <FaFlask className="me-2" />
-                    Current Studies
-                  </button>
-                  <button
-                    className={`tab-btn ${activeTab === 'articles' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('articles')}
-                  >
-                    <FaBookOpen className="me-2" />
-                    Research Articles
-                  </button>
+          {/* Currently exploring */}
+          <motion.div className="research__subhead" variants={item}>
+            <Sparkles size={16} strokeWidth={1.7} />
+            Currently exploring
+          </motion.div>
+          <div className="research-grid">
+            {activeStudies.map((s) => (
+              <motion.div key={s.id} className={`research-card accent-${s.accent || 'orange'}`} variants={item}>
+                <span className="research-card__bar" aria-hidden />
+                <h3 className="research-card__title">{s.title}</h3>
+                <p className="research-card__desc">{s.description}</p>
+                <div className="tag-row">
+                  {s.tags.map((t) => (
+                    <Tag key={t}>{t}</Tag>
+                  ))}
                 </div>
               </motion.div>
+            ))}
+          </div>
 
-              {/* Current Studies Tab */}
-              {activeTab === 'studies' && (
-                <motion.div
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Row>
-                    {currentStudies && currentStudies.length > 0 ? currentStudies.map((study) => (
-                      <Col lg={6} md={6} sm={12} key={study.id} className="mb-4">
-                        <motion.div variants={itemVariants}>
-                          <Card className="research-card h-100">
-                            <Card.Body>
-                              <div className="d-flex justify-content-between align-items-start mb-3">
-                                <h5 className="card-title">{study.title}</h5>
-                                <Badge bg={getStatusColor(study.status)}>
-                                  {study.status}
-                                </Badge>
-                              </div>
-                              
-                              <p className="card-text grey-text">{study.description}</p>
-                              
-                              <div className="mb-3">
-                                <small className="text-muted d-flex align-items-center mb-2">
-                                  <FaCalendarAlt className="me-2" />
-                                  Started: {formatDate(study.startDate)}
-                                </small>
-                                <div className="progress-section">
-                                  <div className="d-flex justify-content-between mb-1">
-                                    <small>Progress</small>
-                                    <small>{study.progress}%</small>
-                                  </div>
-                                  <ProgressBar 
-                                    now={study.progress} 
-                                    variant={getStatusColor(study.status)}
-                                    className="custom-progress"
-                                  />
-                                </div>
-                              </div>
-                              
-                              <div className="technologies">
-                                {study.technologies.map((tech, index) => (
-                                  <Badge key={index} bg="outline-secondary" className="me-1 mb-1">
-                                    {tech}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </Card.Body>
-                          </Card>
-                        </motion.div>
-                      </Col>
-                    )) : (
-                      <Col xs={12} className="text-center">
-                        <p className="grey-text">No current studies available.</p>
-                      </Col>
-                    )}
-                  </Row>
-                </motion.div>
-              )}
+          {/* On the horizon (future interests) */}
+          {futureInterests.length > 0 && (
+            <>
+              <motion.div className="research__subhead research__subhead--future" variants={item}>
+                <Compass size={16} strokeWidth={1.7} />
+                On the horizon — future learning interests
+              </motion.div>
+              <div className="research-grid">
+                {futureInterests.map((s) => (
+                  <motion.div key={s.id} className="research-card research-card--future" variants={item}>
+                    <h3 className="research-card__title">{s.title}</h3>
+                    <p className="research-card__desc">{s.description}</p>
+                    <div className="tag-row">
+                      {s.tags.map((t) => (
+                        <Tag key={t}>{t}</Tag>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          )}
 
-              {/* Research Articles Tab */}
-              {activeTab === 'articles' && (
-                <motion.div
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Row>
-                    {articles && articles.length > 0 ? articles.map((article) => (
-                      <Col lg={6} md={6} sm={12} key={article.id} className="mb-4">
-                        <motion.div variants={itemVariants}>
-                          <Card className={`research-card h-100 ${article.featured ? 'featured' : ''}`}>
-                            <Card.Body>
-                              <div className="d-flex justify-content-between align-items-start mb-3">
-                                <h5 className="card-title">{article.title}</h5>
-                                {article.featured && (
-                                  <Badge bg="warning" text="dark">Featured</Badge>
-                                )}
-                              </div>
-                              
-                              <p className="card-text grey-text">{article.description}</p>
-                              
-                              <div className="article-meta mb-3">
-                                <small className="text-muted d-flex align-items-center mb-1">
-                                  <FaCalendarAlt className="me-2" />
-                                  {formatDate(article.publishDate)}
-                                </small>
-                                <small className="text-muted d-flex align-items-center">
-                                  <FaClock className="me-2" />
-                                  {article.readTime}
-                                </small>
-                              </div>
-                              
-                              <div className="tags mb-3">
-                                {article.tags.map((tag, index) => (
-                                  <Badge key={index} bg="outline-primary" className="me-1 mb-1">
-                                    {tag}
-                                  </Badge>
-                                ))}
-                              </div>
-                              
-                              {article.url !== '#' && (
-                                <a 
-                                  href={article.url} 
-                                  className="btn btn-outline-primary btn-sm"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  Read Article <FaExternalLinkAlt className="ms-1" />
-                                </a>
-                              )}
-                            </Card.Body>
-                          </Card>
-                        </motion.div>
-                      </Col>
-                    )) : (
-                      <Col xs={12} className="text-center">
-                        <p className="grey-text">No research articles available.</p>
-                      </Col>
-                    )}
-                  </Row>
-                </motion.div>
-              )}
-            </Col>
-          </Row>
+          {/* Writing */}
+          {articles.length > 0 && (
+            <>
+              <motion.div className="research__subhead" variants={item}>
+                Writing
+              </motion.div>
+              <div className="research-articles">
+                {articles.map((a) => (
+                  <motion.a
+                    key={a.id}
+                    href={a.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="article-card"
+                    variants={item}
+                  >
+                    <div className="article-card__body">
+                      {a.featured && <span className="article-card__flag">Featured</span>}
+                      <h3 className="article-card__title">{a.title}</h3>
+                      <p className="article-card__desc">{a.description}</p>
+                      <div className="tag-row">
+                        {a.tags.map((t) => (
+                          <Tag key={t}>{t}</Tag>
+                        ))}
+                      </div>
+                      <div className="article-card__meta">
+                        <span>
+                          <Calendar size={13} strokeWidth={1.6} /> {formatDate(a.publishDate)}
+                        </span>
+                        <span>
+                          <Clock size={13} strokeWidth={1.6} /> {a.readTime}
+                        </span>
+                      </div>
+                    </div>
+                    <span className="article-card__go">
+                      Read <ArrowUpRight strokeWidth={1.8} />
+                    </span>
+                  </motion.a>
+                ))}
+              </div>
+            </>
+          )}
         </motion.div>
       </Container>
     </section>

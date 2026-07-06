@@ -1,86 +1,68 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload } from 'react-icons/fa';
+import { Download, ArrowDown } from 'lucide-react';
+import { Link } from 'react-scroll';
 import PortfolioContext from '../../context/context';
+import { Container } from '../ui';
 import downloadFile from '../../../static/resume.pdf';
 
 const Hero = () => {
   const { hero } = useContext(PortfolioContext);
-  const { title, name, subtitle, cta } = hero;
+  const { greeting, name, roles = [], description, cta } = hero || {};
 
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth > 769) {
-      setIsDesktop(true);
-    }
-  }, []);
-
-  const containerVariants = {
+  const container = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
   };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
+  const item = {
+    hidden: { y: 24, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
   return (
-    <section id="hero">
+    <section id="hero" className="hero">
       <Container>
-        <motion.div
-          className="hero-content"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <Row className="justify-content-center justify-content-lg-start">
-            <Col lg={8} md={10} sm={12}>
-              <motion.div variants={itemVariants}>
-                <h4 className="hero-greeting">{title || 'Hi, my name is'}</h4>
-              </motion.div>
+        <motion.div className="hero__content" variants={container} initial="hidden" animate="visible">
+          <motion.span className="hero__eyebrow kicker" variants={item}>
+            <span className="kicker__num">EM</span>
+            {greeting}
+          </motion.span>
 
-              <motion.div variants={itemVariants}>
-                <h1 className="hero-title">
-                  {name || 'Eder Mazariegos'}.
-                  <br />
-                  <span className="hero-subtitle">{subtitle || 'Site Reliability Engineer'}</span>
-                </h1>
-              </motion.div>
+          <motion.h1 className="hero__title" variants={item}>
+            {(name || 'Site Reliability Engineer').split('\n').map((line, i) => (
+              <span key={i} className="hero__title-line">
+                {line}
+              </span>
+            ))}
+          </motion.h1>
 
-              <motion.div variants={itemVariants}>
-                <p className="hero-description">
-                  Motivated, experienced, detail-oriented Site Reliability Engineer (SRE) highly regarded for delivering professional,
-                  elegant solutions to cloud-based application design.
-                </p>
-              </motion.div>
+          <motion.div className="hero__roles" variants={item}>
+            {roles.map((r) => (
+              <span key={r} className="hero__role">
+                {r}
+              </span>
+            ))}
+          </motion.div>
 
-              <motion.div variants={itemVariants}>
-                <div className="hero-cta">
-                  <a href={downloadFile} className="btn-primary" download>
-                    <FaDownload className="me-2" />
-                    {cta || 'Download Resume'}
-                  </a>
-                </div>
-              </motion.div>
-            </Col>
-          </Row>
+          <motion.p className="hero__desc" variants={item}>
+            {description}
+          </motion.p>
+
+          <motion.div className="hero__cta" variants={item}>
+            <a href={downloadFile} className="btn btn--solid" download>
+              <Download strokeWidth={1.8} />
+              {cta || 'Download Résumé'}
+            </a>
+            <Link to="portfolio" smooth duration={600} offset={-40} className="btn btn--outline">
+              View Work
+            </Link>
+          </motion.div>
         </motion.div>
+
+        <Link to="about" smooth duration={600} offset={-40} className="hero__scroll" aria-label="Scroll to about">
+          <span>Scroll</span>
+          <ArrowDown strokeWidth={1.6} />
+        </Link>
       </Container>
     </section>
   );

@@ -1,72 +1,78 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 import { Link as LinkTo } from 'gatsby';
-import { FaHome, FaUser, FaBriefcase, FaTools, FaFolderOpen, FaFlask, FaEnvelope, FaShare, FaTwitter, FaGithub, FaMedium, FaInstagram } from 'react-icons/fa';
+import {
+  Home,
+  User,
+  Briefcase,
+  Cpu,
+  FolderGit2,
+  FlaskConical,
+  Mail,
+  Github,
+  Linkedin,
+  BookOpen,
+  Twitter,
+} from 'lucide-react';
 import Icon0 from '../../assets/emblem.svg';
 
 const Sidebar = ({ isStandalonePage = false }) => {
   const allNavigationItems = [
-    { to: 'hero', icon: FaHome, label: 'Home' },
-    { to: 'aboutme', icon: FaUser, label: 'About' },
-    { to: 'experience', icon: FaBriefcase, label: 'Experience' },
-    { to: 'services', icon: FaTools, label: 'Services' },
-    { to: 'portfolio', icon: FaFolderOpen, label: 'Portfolio' },
-    { to: 'research', icon: FaFlask, label: 'Research' },
-    { to: 'contact', icon: FaEnvelope, label: 'Contact' },
-    { to: 'social', icon: FaShare, label: 'Social' }
+    { to: 'hero', icon: Home, label: 'Home' },
+    { to: 'about', icon: User, label: 'About' },
+    { to: 'experience', icon: Briefcase, label: 'Experience' },
+    { to: 'technologies', icon: Cpu, label: 'Technologies' },
+    { to: 'portfolio', icon: FolderGit2, label: 'Work' },
+    { to: 'research', icon: FlaskConical, label: 'Research' },
+    { to: 'contact', icon: Mail, label: 'Contact' },
   ];
 
-  // For standalone pages, only show Home navigation
   const navigationItems = isStandalonePage
-    ? [{ to: '/', icon: FaHome, label: 'Home', isRoute: true }]
+    ? [{ to: '/', icon: Home, label: 'Home', isRoute: true }]
     : allNavigationItems;
 
   const socialItems = [
-    { href: 'https://twitter.com/eder_mazariegos', icon: FaTwitter, label: 'Twitter' },
-    { href: 'https://github.com/ecda909', icon: FaGithub, label: 'GitHub' },
-    { href: 'https://medium.com/@overcoffee', icon: FaMedium, label: 'Medium' },
-    { href: 'https://www.instagram.com/edermazariegosjr/', icon: FaInstagram, label: 'Instagram' }
+    { href: 'https://github.com/ecda909', icon: Github, label: 'GitHub' },
+    { href: 'https://www.linkedin.com/in/eder-mazariegos-6a97b757', icon: Linkedin, label: 'LinkedIn' },
+    { href: 'https://medium.com/@overcoffee', icon: BookOpen, label: 'Medium' },
+    { href: 'https://twitter.com/eder_mazariegos', icon: Twitter, label: 'Twitter' },
   ];
 
   return (
     <div className="custom-sidebar">
-      {/* Logo */}
       <div className="sidebar-logo">
         {isStandalonePage ? (
-          <LinkTo to="/">
-            <Icon0 width="40px" height="50px" viewBox="30 120 400 90.999991" />
+          <LinkTo to="/" aria-label="Home">
+            <Icon0 className="sidebar-emblem" viewBox="0 0 375 375" />
           </LinkTo>
         ) : (
-          <Link to="hero" smooth duration={500} offset={-50}>
-            <Icon0 width="40px" height="50px" viewBox="30 120 400 90.999991" />
+          <Link to="hero" smooth duration={500} offset={-50} aria-label="Home">
+            <Icon0 className="sidebar-emblem" viewBox="0 0 375 375" />
           </Link>
         )}
       </div>
 
-      {/* Navigation */}
       <nav className="sidebar-nav">
         {navigationItems.map((item) => {
           const IconComponent = item.icon;
           return (
             <div key={item.to} className="sidebar-item">
               {item.isRoute ? (
-                <LinkTo
-                  to={item.to}
-                  className="sidebar-link"
-                  title={item.label}
-                >
-                  <IconComponent size={20} />
+                <LinkTo to={item.to} className="sidebar-link" title={item.label}>
+                  <IconComponent strokeWidth={1.6} />
                 </LinkTo>
               ) : (
                 <Link
                   to={item.to}
+                  spy
                   smooth
                   duration={500}
                   offset={-50}
                   className="sidebar-link"
+                  activeClass="active"
                   title={item.label}
                 >
-                  <IconComponent size={20} />
+                  <IconComponent strokeWidth={1.6} />
                 </Link>
               )}
             </div>
@@ -74,21 +80,20 @@ const Sidebar = ({ isStandalonePage = false }) => {
         })}
       </nav>
 
-      {/* Social Links */}
       <div className="sidebar-social">
         {socialItems.map((item) => {
           const IconComponent = item.icon;
           return (
             <div key={item.href} className="sidebar-item">
-              <LinkTo
-                to={item.href}
+              <a
+                href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="sidebar-link social-link"
                 title={item.label}
               >
-                <IconComponent size={18} />
-              </LinkTo>
+                <IconComponent strokeWidth={1.6} />
+              </a>
             </div>
           );
         })}

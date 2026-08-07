@@ -1,0 +1,77 @@
+# Builds the container on every push to main and pushes it to Google Artifact
+# Registry, via the shared CodeBuild project (ARM64 runners).
+#
+# Requires the org-level AWS_ACCESS_KEY / AWS_SECRET_KEY secrets. The GCP
+# service-account key is NOT a repo secret — it lives once in AWS Secrets
+# Manager at blankcut/gcp-sa-key and the buildspec pulls it at build time.
+#
+# ArgoCD Image Updater watches the `latest` tag and writes the resolved digest
+# back into values-app.yaml in blank-cut-cicd, which is what actually rolls the
+# deployment. Nothing here talks to the cluster.
+
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+  APP_NAME: edermazariegos-portfolio
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build metadata
+        id: meta
+        run: |
+          echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Trigger CodeBuild
+        id: codebuild
+        run: |
+          BUILD_ID=$(aws codebuild start-build \
+            --project-name ${{ env.APP_NAME }}-arm64-build \
+            --source-version ${{ github.sha }} \
+            --environment-variables-override \
+              name=VERSION,value=${{ steps.meta.outputs.version }},type=PLAINTEXT \
+              name=SHORT_SHA,value=${{ steps.meta.outputs.short_sha }},type=PLAINTEXT \
+              name=IMAGE_NAME,value=${{ env.APP_NAME }},type=PLAINTEXT \
+              name=BUILD_CONTEXT,value=.,type=PLAINTEXT \
+              name=DOCKERFILE_PATH,value=Dockerfile,type=PLAINTEXT \
+            --query 'build.id' --output text)
+          echo "build_id=${BUILD_ID}" >> $GITHUB_OUTPUT
+          echo "Started CodeBuild: ${BUILD_ID}"
+
+      - name: Wait for CodeBuild
+        run: |
+          BUILD_ID="${{ steps.codebuild.outputs.build_id }}"
+          while true; do
+            STATUS=$(aws codebuild batch-get-builds --ids "${BUILD_ID}" \
+              --query 'builds[0].buildStatus' --output text)
+            PHASE=$(aws codebuild batch-get-builds --ids "${BUILD_ID}" \
+              --query 'builds[0].currentPhase' --output text)
+            echo "Status: ${STATUS}, Phase: ${PHASE}"
+            if [ "${STATUS}" = "SUCCEEDED" ]; then break; fi
+            # Any terminal state that isn't SUCCEEDED fails the job — a silent
+            # pass here would leave ArgoCD rolling out a stale image.
+            if [ "${STATUS}" != "IN_PROGRESS" ]; then
+              echo "CodeBuild finished with status: ${STATUS}"
+              aws codebuild batch-get-builds --ids "${BUILD_ID}" \
+                --query 'builds[0].logs.deepLink' --output text
+              exit 1
+            fi
+            sleep 15
+          done

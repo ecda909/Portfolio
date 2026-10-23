@@ -67,11 +67,13 @@ const Experience = () => {
                       </div>
                     </div>
                     <p className="timeline__summary">{role.summary}</p>
-                    <ul className="timeline__bullets">
-                      {role.bullets.map((b, i) => (
-                        <li key={i}>{b}</li>
-                      ))}
-                    </ul>
+                    {role.bullets.length > 0 && (
+                      <ul className="timeline__bullets">
+                        {role.bullets.map((b, i) => (
+                          <li key={i}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </motion.div>
               ))}

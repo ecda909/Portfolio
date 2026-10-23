@@ -9,6 +9,7 @@ import {
   Briefcase,
   Rocket,
   Heart,
+  Users,
   FileDown,
   Linkedin,
   Github,
@@ -34,7 +35,7 @@ const AboutPage = () => {
         <meta charSet="utf-8" />
         <title>About — Eder Mazariegos</title>
         <html lang={lang || 'en'} />
-        <meta name="description" content="The story of Eder Mazariegos — Site Reliability Engineer, Lead SRE at Booz Allen Hamilton and Founder of Blank Cut Inc." />
+        <meta name="description" content="The story of Eder Mazariegos — Site Reliability Engineering Manager at Accenture Federal Services and Founder & CTO of Blank Cut Inc." />
       </Helmet>
 
       <Sidebar isStandalonePage />
@@ -58,7 +59,7 @@ const AboutPage = () => {
                   </div>
                   <div>
                     <span className="about-story__name">Eder Mazariegos</span>
-                    <span className="about-story__role">Site Reliability Engineer · Boston, MA</span>
+                    <span className="about-story__role">SRE Manager &amp; Founder · Boston, MA</span>
                   </div>
                   <div className="about-story__actions">
                     <a href="/resume.pdf" className="btn btn--solid" download>
@@ -109,23 +110,41 @@ const AboutPage = () => {
                     I started at Booz Allen Hamilton delivering cloud-modernization and secure containerization for
                     defense and intelligence clients, then spent two years at Red Hat architecting large-scale
                     infrastructure — including a globally distributed replacement system for UPS that ran at 99.999%
-                    uptime with a team of 20 senior SREs.
+                    uptime and 99.999% durability with a team of 20 senior SREs.
                   </p>
                   <p>
-                    Today I’m back at Booz Allen as a Lead Site Reliability Engineer for the CDAO and Intelligence
+                    I later returned to Booz Allen as a Lead Site Reliability Engineer for the CDAO and Intelligence
                     Community, modernizing API gateways and automating Kubernetes across secured AWS environments — with
                     a TS/SCI clearance and a focus on NIST RMF compliance.
                   </p>
                 </div>
 
                 <div className="story-section">
+                  <h2><Users className="story-icon" strokeWidth={1.6} /> Leading at Accenture Federal Services</h2>
+                  <p>
+                    In October 2026 I joined Accenture Federal Services as a Site Reliability Engineering Manager. I now
+                    lead a team of SREs supporting mission-critical federal systems, bringing the same reliability-first
+                    approach to how a team works, not just how a platform runs.
+                  </p>
+                </div>
+
+                <div className="story-section">
                   <h2><Rocket className="story-icon" strokeWidth={1.6} /> Founding Blank Cut</h2>
                   <p>
-                    In 2024 I founded Blank Cut Inc., a platform-engineering company. Its flagship is a multi-tenant
-                    hosting platform that takes a client’s Git repo from onboarding to a live production URL, with
-                    Claude-powered agents guarding the deploy gate. Around it I’ve built products like Venture Track and
-                    Echo (evidence-based VC intelligence) and MedCAT (RAG-grounded clinical AI), plus open-source tooling
-                    like a Kubernetes-native MCP server.
+                    In 2024 I founded Blank Cut Inc., a platform-engineering company where I&rsquo;m Founder &amp; CTO.
+                    Its flagship is a multi-tenant hosting platform that takes a client’s Git repo from onboarding to a
+                    live production URL at 99.999% availability and 99.999% durability, with Claude-powered agents
+                    guarding the deploy gate (<a href="https://medium.com/@overcoffee/putting-an-ai-agent-on-the-production-deploy-gate-safely-9c4ca56a0cc1" target="_blank" rel="noopener noreferrer">I wrote
+                    about how that works</a>). Around it I’ve built products like{' '}
+                    <a href="https://venturetrack.io/" target="_blank" rel="noopener noreferrer">Venture Track</a> and
+                    Echo (evidence-based VC intelligence) and MedCAT (RAG-grounded clinical AI), plus developer tooling
+                    like the{' '}
+                    <a href="https://docs.blankcut.com/cli/" target="_blank" rel="noopener noreferrer">Blank Cut CLI</a>{' '}
+                    and the open-source{' '}
+                    <a href="https://docs.blankcut.com/kubernetes-mcp-server/" target="_blank" rel="noopener noreferrer">
+                      Kubernetes MCP Server
+                    </a>
+                    .
                   </p>
                 </div>
 

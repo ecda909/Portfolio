@@ -1,24 +1,24 @@
 // ============================================================
 // Portfolio content — Eder Mazariegos
-// Aligned with resume: Lead SRE @ Booz Allen Hamilton +
-// Founder @ Blank Cut Inc. as the primary focus.
+// Aligned with resume: SRE Manager @ Accenture Federal Services +
+// Founder & CTO @ Blank Cut Inc. as the primary focus.
 // ============================================================
 
 // ---------------- HEAD ----------------
 export const headData = {
-  title: 'Eder Mazariegos | Site Reliability Engineer',
+  title: 'Eder Mazariegos | SRE Manager & Founder',
   lang: 'en',
   description:
-    'Eder Mazariegos — Site Reliability Engineer. Lead SRE at Booz Allen Hamilton and Founder of Blank Cut Inc., building large-scale cloud-native platforms, GitOps automation, and agentic AI systems.',
+    'Eder Mazariegos — Site Reliability Engineering Manager at Accenture Federal Services and Founder & CTO of Blank Cut Inc., building large-scale cloud-native platforms, GitOps automation, and agentic AI systems.',
 };
 
 // ---------------- HERO ----------------
 export const heroData = {
   greeting: 'Eder Mazariegos',
-  name: 'Site Reliability\nEngineer',
-  roles: ['Lead SRE @ Booz Allen Hamilton', 'Founder @ Blank Cut Inc.'],
+  name: 'Site Reliability\nEngineering Manager',
+  roles: ['SRE Manager @ Accenture Federal Services', 'Founder & CTO @ Blank Cut Inc.'],
   description:
-    'I design, build, and operate large-scale cloud-native platforms — from enterprise Kubernetes and GitOps automation to agentic AI systems — with a track record of 99.999% uptime and secure, compliant delivery.',
+    'I lead SRE teams and build large-scale cloud-native platforms — from enterprise Kubernetes and GitOps automation to agentic AI systems — with a track record of 99.999% uptime, 99.999% durability, and secure, compliant delivery.',
   cta: 'Download Résumé',
   resume: '/resume.pdf',
 };
@@ -26,8 +26,8 @@ export const heroData = {
 // ---------------- ABOUT ----------------
 export const aboutData = {
   paragraphs: [
-    'I’m a Site Reliability Engineer based in Boston. As Lead SRE at Booz Allen Hamilton, I lead platform-engineering initiatives for the Chief Digital and Artificial Intelligence Office (CDAO) and the Intelligence Community — modernizing API gateways and automating Kubernetes across secured AWS environments to keep critical systems reliable at scale.',
-    'That reliability-first mindset carries into everything I build. I also founded Blank Cut Inc., a platform-engineering company behind a multi-tenant application-hosting platform and AI-driven developer tooling — where I put GitOps automation, agentic AI, and full-stack delivery into practice.',
+    'I’m a Site Reliability Engineering Manager based in Boston. At Accenture Federal Services, I lead a team of SREs supporting mission-critical federal systems. Before that, as Lead SRE at Booz Allen Hamilton, I led platform-engineering initiatives for the Chief Digital and Artificial Intelligence Office (CDAO) and the Intelligence Community — modernizing API gateways and automating Kubernetes across secured AWS environments to keep critical systems reliable at scale.',
+    'That reliability-first mindset carries into everything I build. I’m also the Founder & CTO of Blank Cut Inc., a platform-engineering company behind a multi-tenant application-hosting platform that runs at 99.999% availability and 99.999% durability, plus AI-driven developer tooling like the Blank Cut CLI — where I put GitOps automation, agentic AI, and full-stack delivery into practice.',
     'Whatever I’m working on, the focus is the same: reliable, secure, well-automated systems that let teams deploy with confidence. I hold a TS/SCI clearance.',
   ],
   resume: '/resume.pdf',
@@ -51,18 +51,29 @@ export const coreTech = [
 export const experienceData = {
   title: 'Experience',
   intro:
-    'Nine-plus years across enterprise SRE, platform engineering, and founding my own company. Booz Allen Hamilton and Blank Cut are where I spend my time today.',
+    'Nine-plus years across enterprise SRE, platform engineering, and founding my own company. Accenture Federal Services and Blank Cut are where I spend my time today.',
 
   timeline: [
+    {
+      id: 'afs-sre-manager',
+      company: 'Accenture Federal Services',
+      role: 'Site Reliability Engineering Manager',
+      location: 'Boston, MA',
+      period: '2026 — Present',
+      current: true,
+      summary:
+        'Lead a team of Site Reliability Engineers supporting mission-critical federal systems, bringing a reliability-first approach to how the team works as well as how its platforms run.',
+      bullets: [],
+    },
     {
       id: 'bah-lead-sre',
       company: 'Booz Allen Hamilton',
       role: 'Lead Site Reliability Engineer',
       location: 'Boston, MA',
-      period: '2024 — Present',
-      current: true,
+      period: '2024 — 2026',
+      current: false,
       summary:
-        'Lead enterprise platform-engineering for the CDAO and Intelligence Community, directing API-gateway modernization across secured AWS EKS environments.',
+        'Led enterprise platform-engineering for the CDAO and Intelligence Community, directing API-gateway modernization across secured AWS EKS environments.',
       bullets: [
         'Built automation frameworks with Terraform, Helm, ArgoCD, Tekton, and custom Python/Bash tooling across multiple EKS clusters.',
         'Architected Crossplane across AWS EKS and GCP GKE with custom compositions for automated resource provisioning.',
@@ -73,16 +84,17 @@ export const experienceData = {
     {
       id: 'blankcut-founder',
       company: 'Blank Cut Inc.',
-      role: 'Founder',
+      role: 'Founder & CTO',
       location: 'Boston, MA',
       period: '2024 — Present',
       current: true,
       summary:
         'Founded and lead a platform-engineering company building a multi-tenant application-hosting platform and AI-driven developer tooling.',
       bullets: [
-        'Architected a multi-tenant PaaS that takes a client’s Git repo from onboarding to a live production URL on AWS EKS with ArgoCD GitOps.',
+        'Architected a multi-tenant PaaS that takes a client’s Git repo from onboarding to a live production URL on AWS EKS with ArgoCD GitOps, running at 99.999% availability and 99.999% durability.',
         'Shipped Claude-powered agents for the deploy gate: an autonomous deploy reviewer and an agentic fix-loop, with human-in-the-loop merge control.',
-        'Open-sourced a Kubernetes-native MCP server (Go) integrating Claude with ArgoCD, GitLab, and Vault.',
+        'Built the Blank Cut CLI (Go) so developers can connect, deploy, and manage apps (secrets, storage, scheduled jobs, and domains) from the terminal.',
+        'Open-sourced the Kubernetes MCP Server, a Go service that uses Claude to analyze clusters alongside ArgoCD and GitLab.',
         'Runs the full production stack: CI/CD image builds, SSM + KMS secrets, Stripe usage billing, and a first-party observability pipeline.',
       ],
     },
@@ -96,7 +108,7 @@ export const experienceData = {
       summary:
         'Developed SRE practices and tooling while architecting large-scale infrastructure for global enterprise clients.',
       bullets: [
-        'Helped design and build a globally distributed replacement system for UPS on OpenShift, Ansible Automation Platform, ArgoCD, and Python microservices — 99.999% uptime with a team of 20 senior SREs.',
+        'Helped design and build a globally distributed replacement system for UPS on OpenShift, Ansible Automation Platform, ArgoCD, and Python microservices — 99.999% uptime and 99.999% durability with a team of 20 senior SREs.',
         'Delivered GitOps implementations with Ansible, ArgoCD, GitLab CI, and Kubernetes operators.',
         'Built highly available public and private cloud environments with auto-scaling, load balancing, and monitoring to SLI/SLO standards.',
       ],
@@ -121,7 +133,7 @@ export const experienceData = {
   // Stat strip (headline numbers)
   stats: [
     { value: '9+', label: 'Years in the field' },
-    { value: '99.999%', label: 'Uptime delivered' },
+    { value: '99.999%', label: 'Uptime & durability' },
     { value: '20', label: 'Member SRE Team (Lead)' },
     { value: '3', label: 'Cloud & K8s certifications' },
   ],
@@ -158,9 +170,9 @@ export const projectGroups = [
   {
     id: 'blank-cut',
     company: 'Blank Cut Inc.',
-    role: 'Founder',
+    role: 'Founder & CTO',
     blurb:
-      'The platform-engineering company I founded — a multi-tenant hosting platform (running production apps for clients like Vine Management and Wave Maker Wellness) plus a portfolio of AI-native products.',
+      'The platform-engineering company I founded — a multi-tenant hosting platform running at 99.999% availability and durability (serving production apps for clients like Vine Management and Wave Maker Wellness), plus a portfolio of AI-native products and developer tooling.',
     projects: [
       {
         id: 'blank-cut-platform',
@@ -178,8 +190,8 @@ export const projectGroups = [
         ],
         tech: ['AWS EKS', 'ArgoCD', 'Helm', 'Fastify', 'Go', 'Anthropic Claude', 'Stripe', 'KMS'],
         metrics: [
-          { value: 'Repo → URL', label: 'Onboarding' },
-          { value: 'GitOps', label: 'Delivery' },
+          { value: '99.999%', label: 'Availability' },
+          { value: '99.999%', label: 'Durability' },
           { value: 'HITL', label: 'Agent control' },
         ],
         clients: [
@@ -187,12 +199,15 @@ export const projectGroups = [
           { name: 'Notice Hub — Vine Mgmt', url: 'https://notices.vinemgt.com/login' },
           { name: 'Wave Maker Wellness', url: 'https://wavemakerwellness.com/' },
         ],
-        links: [{ label: 'Blank Cut', url: 'https://blankcut.com', type: 'live' }],
+        links: [
+          { label: 'Blank Cut', url: 'https://blankcut.com', type: 'live' },
+          { label: 'How the deploy gate works', url: 'https://medium.com/@overcoffee/putting-an-ai-agent-on-the-production-deploy-gate-safely-9c4ca56a0cc1', type: 'live' },
+        ],
       },
       {
         id: 'venture-track',
         title: 'Venture Track',
-        tagline: 'Evidence-based VC intelligence platform',
+        tagline: 'Evidence-first venture intelligence',
         status: 'Live',
         statusType: 'live',
         accent: 'purple',
@@ -217,7 +232,7 @@ export const projectGroups = [
             { name: 'Sources', value: 9 },
           ],
         },
-        links: [{ label: 'venture-track.blankcut.com', url: 'https://venture-track.blankcut.com/', type: 'live' }],
+        links: [{ label: 'venturetrack.io', url: 'https://venturetrack.io/', type: 'live' }],
       },
       {
         id: 'echo',
@@ -273,6 +288,28 @@ export const projectGroups = [
         links: [{ label: 'Read more', url: 'https://blankcut.com/innovation/medcat', type: 'live' }],
       },
       {
+        id: 'blank-cut-cli',
+        title: 'Blank Cut CLI',
+        tagline: 'Deploy and manage apps from the terminal',
+        status: 'Live',
+        statusType: 'live',
+        accent: 'orange',
+        summary:
+          'The blankcut command-line tool connects a repository to Meerkat, Blank Cut’s hosting platform: create or connect a project, deploy it, and manage everything it needs without leaving the terminal.',
+        highlights: [
+          'Deploy, read the environment an app actually runs in, and manage its secrets, files, scheduled jobs, and domains.',
+          'Check live status and image-scan findings; local init, validate, and sync commands work against the repo itself.',
+          'Installs with Homebrew; sign in through the browser, or use an API key in CI.',
+        ],
+        tech: ['Go', 'CLI', 'Homebrew', 'REST API', 'CI/CD'],
+        metrics: [
+          { value: 'Go', label: 'Language' },
+          { value: 'brew', label: 'Install' },
+          { value: 'CI-ready', label: 'API-key auth' },
+        ],
+        links: [{ label: 'CLI docs', url: 'https://docs.blankcut.com/cli/', type: 'live' }],
+      },
+      {
         id: 'k8s-claude-mcp',
         title: 'Kubernetes Claude MCP Server',
         tagline: 'Open-source AI GitOps analysis',
@@ -280,18 +317,21 @@ export const projectGroups = [
         statusType: 'oss',
         accent: 'green',
         summary:
-          'An open-source Model Context Protocol server, written in Go, that integrates Claude with Kubernetes, ArgoCD, GitLab, and Vault for AI-powered analysis and troubleshooting of GitOps workflows.',
+          'An open-source Go service that answers questions about a Kubernetes cluster with Claude, pulling context from the Kubernetes API, ArgoCD, and GitLab and serving AI-powered analysis and troubleshooting over a REST API.',
         highlights: [
-          'REST API for resource analysis, troubleshooting, and commit-level correlation across systems.',
-          'Distributed as a versioned Docker image with a Helm chart for in-cluster deployment, under an MIT license.',
+          'Read-only by design: namespace analysis, warning events, failing CronJobs, and rule-based Pod and Deployment troubleshooting, correlated with ArgoCD and GitLab status.',
+          'Ships as a multi-arch Docker image, a Helm chart, or a release binary, under an MIT license.',
         ],
-        tech: ['Go', 'MCP', 'Kubernetes', 'ArgoCD', 'GitLab', 'Vault', 'Helm', 'Docker'],
+        tech: ['Go', 'Kubernetes', 'ArgoCD', 'GitLab', 'Claude', 'Helm', 'Docker'],
         metrics: [
           { value: 'Go', label: 'Language' },
           { value: 'MIT', label: 'License' },
           { value: 'Helm', label: 'Distribution' },
         ],
-        links: [{ label: 'Blank Cut', url: 'https://blankcut.com', type: 'live' }],
+        links: [
+          { label: 'Docs', url: 'https://docs.blankcut.com/kubernetes-mcp-server/', type: 'live' },
+          { label: 'Source', url: 'https://github.com/Blankcut/kubernetes-mcp-server', type: 'repo' },
+        ],
       },
     ],
   },
@@ -306,7 +346,7 @@ export const projectGroups = [
         id: 'bah-platform-engineering',
         title: 'Enterprise Platform Engineering — CDAO / IC',
         tagline: 'API-gateway modernization & LLM gateway at scale',
-        status: '2024 — Present',
+        status: '2024 — 2026',
         statusType: 'development',
         accent: 'orange',
         summary:
@@ -356,12 +396,12 @@ export const projectGroups = [
       {
         id: 'ups-orchestration',
         title: 'UPS Global Backend Orchestration',
-        tagline: '99.999% uptime across global data centers',
+        tagline: '99.999% uptime & durability across global data centers',
         status: '2022 — 2024',
         statusType: 'past',
         accent: 'green',
         summary:
-          'Collaborated on the architecture and implementation of a replacement system for UPS’s global backend orchestration platform, requiring five-nines uptime across worldwide data centers.',
+          'Collaborated on the architecture and implementation of a replacement system for UPS’s global backend orchestration platform, requiring five-nines uptime and durability across worldwide data centers.',
         highlights: [
           'Multi-cluster EKS with ArgoCD-based GitOps, Ansible Automation Platform for orchestration, and Python event-driven microservices.',
           '24/7 global availability with comprehensive disaster recovery, delivered with a team of 20 senior SREs.',
@@ -369,8 +409,8 @@ export const projectGroups = [
         tech: ['OpenShift', 'EKS', 'ArgoCD', 'Ansible', 'Python', 'GitLab CI'],
         metrics: [
           { value: '99.999%', label: 'Uptime' },
+          { value: '99.999%', label: 'Durability' },
           { value: '20', label: 'SRE team' },
-          { value: 'Global', label: 'Data centers' },
         ],
         links: [{ label: 'Details in résumé', url: '/resume.pdf', type: 'resume' }],
       },
@@ -450,6 +490,17 @@ export const researchData = {
 
   articles: [
     {
+      id: 'article-2',
+      title: 'Putting an AI Agent on the Production Deploy Gate, Safely',
+      description:
+        'A reference architecture for putting an LLM on the production deploy path, with bounded capability, reasoning separated from execution, and humans kept in the loop.',
+      publishDate: '2026-08-02',
+      readTime: '8 min read',
+      tags: ['AI Agents', 'GitOps', 'Platform Safety'],
+      url: 'https://medium.com/@overcoffee/putting-an-ai-agent-on-the-production-deploy-gate-safely-9c4ca56a0cc1',
+      featured: true,
+    },
+    {
       id: 'article-1',
       title: 'Hierarchical Multi-Agent Systems: Concepts and Operational Considerations',
       description:
@@ -458,7 +509,7 @@ export const researchData = {
       readTime: '30 min read',
       tags: ['Multi-Agent Systems', 'AI Research', 'Distributed Computing'],
       url: 'https://overcoffee.medium.com/hierarchical-multi-agent-systems-concepts-and-operational-considerations-e06fff0bea8c',
-      featured: true,
+      featured: false,
     },
   ],
 };

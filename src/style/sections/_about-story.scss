@@ -72,6 +72,13 @@
       }
       .story-icon { color: $accent; }
       p { color: $muted; margin-bottom: 1.4rem; }
+      p a {
+        color: $ink;
+        text-decoration: underline;
+        text-decoration-color: $accent;
+        text-underline-offset: 0.3rem;
+        &:hover { color: $accent; }
+      }
     }
 
     .story-quote {

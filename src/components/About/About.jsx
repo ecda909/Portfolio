@@ -54,7 +54,7 @@ const About = () => {
 
             <motion.div className="about__content" variants={item}>
               <Kicker num="01">About</Kicker>
-              <h2>A Site Reliability Engineer obsessed with systems that don’t fall over.</h2>
+              <h2>An SRE leader and founder obsessed with systems that don’t fall over.</h2>
 
               <div className="about__text">
                 {paragraphs.map((p, i) => (

@@ -1,77 +1,336 @@
-# Builds the container on every push to main and pushes it to Google Artifact
-# Registry, via the shared CodeBuild project (ARM64 runners).
+# Required GitHub secrets (Settings -> Secrets and variables):
+#   Secrets: BLANKCUT_API_KEY (the ONLY required secret -- the Blank Cut Agent
+#            Service brokers the build; no AWS/GCP credentials live in this repo)
+#            NEXT_PUBLIC_SUPABASE_ANON_KEY
+#            SENTRY_AUTH_TOKEN (optional -- for source-map upload at build time)
+#   Variables: BLANKCUT_API_URL (optional -- defaults to https://agent.blankcut.com)
+#              NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_APP_URL
+#              NEXT_PUBLIC_SENTRY_DSN (optional -- empty = Sentry disabled)
+#              SENTRY_ORG, SENTRY_PROJECT (optional -- paired with SENTRY_AUTH_TOKEN)
 #
-# Requires the org-level AWS_ACCESS_KEY / AWS_SECRET_KEY secrets. The GCP
-# service-account key is NOT a repo secret — it lives once in AWS Secrets
-# Manager at blankcut/gcp-sa-key and the buildspec pulls it at build time.
+# Build brokering (Phase 8.8): this workflow holds NO cloud credentials. It zips
+# the workspace, asks the Agent Service for a presigned S3 upload URL
+# (/build/init), uploads the source, starts the build (/build/:id/start) and
+# polls (/build/:id) for completion. The Agent Service holds every credential;
+# this repo cannot reach the registry, AWS or the builder at all. Uniform for
+# in-org AND out-of-org repos.
 #
-# ArgoCD Image Updater watches the `latest` tag and writes the resolved digest
-# back into values-app.yaml in blank-cut-cicd, which is what actually rolls the
-# deployment. Nothing here talks to the cluster.
+# WHICH builder runs it is the platform's choice, not this repo's, and it can
+# change without a commit here: the Agent Service resolves the backend per app
+# and the wire shape is identical either way. Today that is Depot (native arm64,
+# persistent cache); it was AWS CodeBuild until its quota was zeroed on
+# 2026-09-04. Nothing below names a builder, which is the point.
+#
+# NEXT_PUBLIC_* vars are forwarded to the build as build-time env so they are
+# baked into the Next.js bundle at `docker build`. Sentry source-map upload runs
+# during `npm run build` and no-ops when SENTRY_AUTH_TOKEN is unset.
 
 name: Build and Push Docker Image
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+    # The platform rewrites CLAUDE.md in this repo on its own schedule -- every
+    # deploy refreshes it, and a fleet-wide sweep updates it in one go. Without
+    # this filter each of those doc-only commits rebuilt the image and rolled
+    # production for code that had not changed: one sweep across the fleet
+    # triggered ten such rebuilds. A push that touches ONLY these files has
+    # nothing to build.
+    paths-ignore:
+      - 'CLAUDE.md'
   workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type for release (only used when creating a release)'
+        required: false
+        default: 'none'
+        type: choice
+        options:
+          - none
+          - patch
+          - minor
+          - major
 
 env:
-  AWS_REGION: us-east-1
+  # APP_NAME is the platform-level identifier shared across every image this
+  # repo builds. It owns app-scoped resources like the GCP SA key in AWS
+  # Secrets Manager (`<APP_NAME>/gcp-sa-key`). For single-service apps it
+  # equals IMAGE_NAME below.
   APP_NAME: edermazariegos-portfolio
+  # IMAGE_NAME is the primary service's image. For multi-service apps,
+  # additional service stanzas appear below and reference their own image
+  # name directly while sharing the APP_NAME-scoped SA key.
+  IMAGE_NAME: edermazariegos-portfolio
+  GCP_REGISTRY: us-east4-docker.pkg.dev/blankcut/dream-team-repository
 
 jobs:
-  build:
+  # ---------------------------------------------------------------------------
+  # build-and-push
+  # Derives a semantic version from git tags, brokers a native ARM64 build
+  # through the Agent Service (no QEMU anywhere), and waits for completion.
+  # ---------------------------------------------------------------------------
+  build-and-push:
+    name: Build and Push ARM64 Image
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    outputs:
+      semver:     ${{ steps.version.outputs.semver }}
+      is_release: ${{ steps.version.outputs.is_release }}
+      short_sha:  ${{ steps.meta.outputs.short_sha }}
+      build_time: ${{ steps.meta.outputs.timestamp }}
+      image_base: ${{ steps.meta.outputs.image_base }}
 
-      - name: Build metadata
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Fetch all history for proper versioning
+
+      - name: Calculate semantic version
+        id: version
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+
+          VERSION=${LATEST_TAG#v}
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          PATCH=$(echo $VERSION | cut -d. -f3 | cut -d- -f1)
+
+          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            SEMVER="${{ github.ref_name }}"
+            SEMVER=${SEMVER#v}
+            IS_RELEASE="true"
+            echo "Building RELEASE version: $SEMVER"
+          else
+            COMMITS_SINCE=$(git rev-list ${LATEST_TAG}..HEAD --count 2>/dev/null || echo "0")
+            SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+
+            BUMP_TYPE="${{ github.event.inputs.version_bump }}"
+            if [[ "$BUMP_TYPE" == "major" ]]; then
+              MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0
+            elif [[ "$BUMP_TYPE" == "minor" ]]; then
+              MINOR=$((MINOR + 1)); PATCH=0
+            elif [[ "$BUMP_TYPE" == "patch" ]]; then
+              PATCH=$((PATCH + 1))
+            fi
+
+            SEMVER="${MAJOR}.${MINOR}.${PATCH}-dev.${COMMITS_SINCE}-${SHORT_SHA}"
+            IS_RELEASE="false"
+            echo "Building DEVELOPMENT version: $SEMVER"
+          fi
+
+          echo "semver=${SEMVER}"         >> $GITHUB_OUTPUT
+          echo "is_release=${IS_RELEASE}" >> $GITHUB_OUTPUT
+
+      - name: Extract metadata
         id: meta
         run: |
-          echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+          SEMVER="${{ steps.version.outputs.semver }}"
+          IS_RELEASE="${{ steps.version.outputs.is_release }}"
+          IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ env.IMAGE_NAME }}"
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          echo "timestamp=${TIMESTAMP}"   >> $GITHUB_OUTPUT
+          echo "short_sha=${SHORT_SHA}"   >> $GITHUB_OUTPUT
+          echo "semver=${SEMVER}"         >> $GITHUB_OUTPUT
+          echo "is_release=${IS_RELEASE}" >> $GITHUB_OUTPUT
+          echo "image_base=${IMAGE_BASE}" >> $GITHUB_OUTPUT
 
-      - name: Trigger CodeBuild
-        id: codebuild
+      - name: Package source for the build broker
         run: |
-          BUILD_ID=$(aws codebuild start-build \
-            --project-name ${{ env.APP_NAME }}-arm64-build \
-            --source-version ${{ github.sha }} \
-            --environment-variables-override \
-              name=VERSION,value=${{ steps.meta.outputs.version }},type=PLAINTEXT \
-              name=SHORT_SHA,value=${{ steps.meta.outputs.short_sha }},type=PLAINTEXT \
-              name=IMAGE_NAME,value=${{ env.APP_NAME }},type=PLAINTEXT \
-              name=BUILD_CONTEXT,value=.,type=PLAINTEXT \
-              name=DOCKERFILE_PATH,value=Dockerfile,type=PLAINTEXT \
-            --query 'build.id' --output text)
+          # Zip the workspace as the build source. Exclude .git -- the builder
+          # needs the tree, not the history.
+          zip -r -q /tmp/blankcut-source.zip . -x '.git/*'
+          echo "Packaged $(du -h /tmp/blankcut-source.zip | cut -f1) source archive"
+
+      - name: Broker ARM64 build via Blank Cut Agent Service
+        id: broker
+        env:
+          BLANKCUT_API_URL: ${{ vars.BLANKCUT_API_URL || 'https://agent.blankcut.com' }}
+          BLANKCUT_API_KEY: ${{ secrets.BLANKCUT_API_KEY }}
+          BLANKCUT_VARS: ${{ toJSON(vars) }}
+          BLANKCUT_SECRETS: ${{ toJSON(secrets) }}
+        run: |
+          set -euo pipefail
+          AUTH="Authorization: Bearer ${BLANKCUT_API_KEY}"
+
+          # --fail-with-body keeps the non-zero exit of --fail but still hands us
+          # the response body. Plain `curl -sf` discards it, which is how a
+          # broker rejection reached this log as a bare "exit code 22" with no
+          # reason attached -- three days of venture-track CI runs were
+          # undiagnosable from Actions because of it.
+          # 1) init -> { build_id, upload_url } (presigned S3 PUT)
+          if ! INIT=$(curl -sS --fail-with-body -X POST "${BLANKCUT_API_URL}/build/init" \
+            -H "$AUTH" -H 'Content-Type: application/json' \
+            -d "{\"app\":\"${{ env.APP_NAME }}\"}"); then
+            echo "::error::POST /build/init failed: ${INIT:-<no response body>}"
+            exit 1
+          fi
+          BUILD_ID=$(echo "$INIT" | jq -r '.build_id')
+          UPLOAD_URL=$(echo "$INIT" | jq -r '.upload_url')
           echo "build_id=${BUILD_ID}" >> $GITHUB_OUTPUT
-          echo "Started CodeBuild: ${BUILD_ID}"
+          echo "Brokered build ${BUILD_ID}"
 
-      - name: Wait for CodeBuild
+          # 2) upload the source zip to the presigned URL
+          if ! UPLOAD_OUT=$(curl -sS --fail-with-body -X PUT "$UPLOAD_URL" \
+            -H 'Content-Type: application/zip' \
+            --data-binary @/tmp/blankcut-source.zip); then
+            echo "::error::source upload failed: ${UPLOAD_OUT:-<no response body>}"
+            exit 1
+          fi
+
+          # 3) start -> the Agent Service dispatches to whichever backend this
+          # app resolves to, from the uploaded source. Non-secret
+          # build-time inputs (NEXT_PUBLIC_*, Sentry) are forwarded via env.
+          # EVERY NEXT_PUBLIC_* repo variable and secret, not a fixed list, plus
+          # the Sentry keys (build-time but not public). Secrets win over
+          # variables where both define a key; an unset one is dropped rather
+          # than sent empty, so it cannot blank out a value the platform holds.
+          #
+          # This is the ONE route build-time public config takes. It travels in
+          # the request rather than in a file because a file next to the source
+          # is subject to .dockerignore, and the standard `.env*` entry there
+          # drops it before the build ever sees it.
+          ENV_JSON=$(jq -n \
+            --argjson vars "$BLANKCUT_VARS" \
+            --argjson secrets "$BLANKCUT_SECRETS" \
+            '($vars + $secrets)
+             | with_entries(select(.key
+                 | startswith("NEXT_PUBLIC_")
+                   or . == "SENTRY_AUTH_TOKEN" or . == "SENTRY_ORG" or . == "SENTRY_PROJECT"))
+             | with_entries(select(.value != null and .value != ""))')
+          START_BODY=$(jq -n \
+            --arg img "edermazariegos-portfolio" \
+            --arg ver "${{ steps.meta.outputs.semver }}" \
+            --arg ctx "." \
+            --arg df "Dockerfile" \
+            --arg sha "${{ github.sha }}" \
+            --arg br "${{ github.ref_name }}" \
+            --arg ss "${{ steps.meta.outputs.short_sha }}" \
+            --arg bt "${{ steps.meta.outputs.timestamp }}" \
+            --argjson env "$ENV_JSON" \
+            '{image_name:$img, version:$ver, build_context:$ctx, dockerfile_path:$df, git_commit:$sha, git_branch:$br, short_sha:$ss, build_time:$bt, env:$env}')
+          if ! START=$(curl -sS --fail-with-body -X POST "${BLANKCUT_API_URL}/build/${BUILD_ID}/start" \
+            -H "$AUTH" -H 'Content-Type: application/json' -d "$START_BODY"); then
+            echo "::error::POST /build/${BUILD_ID}/start failed: ${START:-<no response body>}"
+            exit 1
+          fi
+          echo "Started $(echo "$START" | jq -r '.external_build_id // .codebuild_id') -> $(echo "$START" | jq -r '.image_ref')"
+
+      - name: Wait for brokered build to complete
+        env:
+          BLANKCUT_API_URL: ${{ vars.BLANKCUT_API_URL || 'https://agent.blankcut.com' }}
+          BLANKCUT_API_KEY: ${{ secrets.BLANKCUT_API_KEY }}
         run: |
-          BUILD_ID="${{ steps.codebuild.outputs.build_id }}"
+          set -euo pipefail
+          BUILD_ID="${{ steps.broker.outputs.build_id }}"
+          AUTH="Authorization: Bearer ${BLANKCUT_API_KEY}"
+          echo "Waiting for brokered build ${BUILD_ID}"
           while true; do
-            STATUS=$(aws codebuild batch-get-builds --ids "${BUILD_ID}" \
-              --query 'builds[0].buildStatus' --output text)
-            PHASE=$(aws codebuild batch-get-builds --ids "${BUILD_ID}" \
-              --query 'builds[0].currentPhase' --output text)
-            echo "Status: ${STATUS}, Phase: ${PHASE}"
-            if [ "${STATUS}" = "SUCCEEDED" ]; then break; fi
-            # Any terminal state that isn't SUCCEEDED fails the job — a silent
-            # pass here would leave ArgoCD rolling out a stale image.
-            if [ "${STATUS}" != "IN_PROGRESS" ]; then
-              echo "CodeBuild finished with status: ${STATUS}"
-              aws codebuild batch-get-builds --ids "${BUILD_ID}" \
-                --query 'builds[0].logs.deepLink' --output text
+            if ! S=$(curl -sS --fail-with-body "${BLANKCUT_API_URL}/build/${BUILD_ID}" -H "$AUTH"); then
+              echo "::error::GET /build/${BUILD_ID} failed: ${S:-<no response body>}"
+              exit 1
+            fi
+            STATUS=$(echo "$S" | jq -r '.status')
+            echo "Build status: ${STATUS}"
+            if [[ "$STATUS" == "succeeded" || "$STATUS" == "failed" ]]; then
+              # The platform scans the image between building it and pushing it,
+              # and this is where that result becomes visible to you.
+              #
+              # Reported on BOTH terminal states on purpose. On a blocked push
+              # the scan IS the reason the build failed, so printing it only on
+              # success would hide it exactly when it matters most.
+              #
+              # Every count is a finding WITH A PUBLISHED FIX -- the scan runs
+              # with --ignore-unfixed, because a number you cannot act on is how
+              # a scanner earns being ignored.
+              SCAN=$(echo "$S" | jq -r '.scan.status // empty')
+              if [[ -n "$SCAN" ]]; then
+                COUNTS=$(echo "$S" | jq -r 'if .scan.counts then "\(.scan.counts.critical) critical, \(.scan.counts.high) high, \(.scan.counts.medium) medium" else "counts unavailable" end')
+                SCANNER=$(echo "$S" | jq -r '.scan.scanner // "scanner unknown"')
+                # The reply carries the ten most severe; findingsTotal says how
+                # many there are, and the rest are one command away.
+                FINDINGS=$(echo "$S" | jq -r '((.scan.findings // []) | .[] | "  \(.severity) \(.pkg) \(.installed) -> \(.fixed) (\(.id))"), (((.scan.findingsTotal // 0) - ((.scan.findings // []) | length)) as $more | if $more > 0 then "  ... and \($more) more: run blankcut scan, or open the app'"'"'s Security panel in Meerkat" else empty end)')
+                echo "Image scan: ${SCAN} - ${COUNTS} (${SCANNER})"
+                if [[ -n "$FINDINGS" ]]; then echo "$FINDINGS"; fi
+                # Also written to the run summary, so a developer sees it on the
+                # Actions page without opening a log.
+                {
+                  echo "### Image scan: ${SCAN}"
+                  echo ""
+                  echo "${COUNTS} — with published fixes, via ${SCANNER}"
+                  if [[ -n "$FINDINGS" ]]; then
+                    echo ""
+                    echo '```'
+                    echo "$FINDINGS"
+                    echo '```'
+                  fi
+                } >> "$GITHUB_STEP_SUMMARY"
+                case "$SCAN" in
+                  blocked)
+                    echo "::error title=Image scan blocked the push::The image was built but NOT pushed, so this commit cannot deploy. Upgrade the packages listed in the job summary." ;;
+                  recorded)
+                    echo "::warning title=Image scan found fixable vulnerabilities::${COUNTS}. The image was pushed, but each of these has a published fix available." ;;
+                  error)
+                    echo "::warning title=Image scan did not run::This image was NOT checked against known vulnerabilities. A scan that could not run is not a clean scan." ;;
+                  not_scanned)
+                    echo "::warning title=Image was not scanned::No vulnerability scan ran for this build." ;;
+                esac
+              fi
+            fi
+            if [[ "$STATUS" == "succeeded" ]]; then
+              echo "Brokered build succeeded: $(echo "$S" | jq -r '.image_ref')"
+              break
+            elif [[ "$STATUS" == "failed" ]]; then
+              echo "Build failed: $(echo "$S" | jq -r '.error // "unknown"')"
+              echo "Logs: $(echo "$S" | jq -r '.logs_url // "n/a"')"
               exit 1
             fi
             sleep 15
           done
+
+      - name: Image digest
+        run: |
+          IS_RELEASE="${{ steps.meta.outputs.is_release }}"
+          SEMVER="${{ steps.meta.outputs.semver }}"
+          if [[ "$IS_RELEASE" == "true" ]]; then
+            echo "RELEASE v${SEMVER} pushed successfully!"
+          else
+            echo "Development build pushed successfully!"
+          fi
+          echo ""
+          echo "Image: ${{ steps.meta.outputs.image_base }}"
+          echo ""
+          echo "Tags:"
+          echo "  - ${SEMVER} (semantic version)"
+          echo "  - ${{ steps.meta.outputs.short_sha }} (commit)"
+          echo "  - latest"
+
+      - name: Create deployment summary
+        run: |
+          IS_RELEASE="${{ steps.meta.outputs.is_release }}"
+          SEMVER="${{ steps.meta.outputs.semver }}"
+          IMAGE_BASE="${{ steps.meta.outputs.image_base }}"
+          SHORT_SHA="${{ steps.meta.outputs.short_sha }}"
+
+          if [[ "$IS_RELEASE" == "true" ]]; then
+            echo "## Release Build: v${SEMVER}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## Development Build: ${SEMVER}" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** Success" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Image Details" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Repository** | \`${IMAGE_BASE}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Version** | \`${SEMVER}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Commit** | \`${SHORT_SHA}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Platform** | \`linux/arm64\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Branch/Tag** | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY

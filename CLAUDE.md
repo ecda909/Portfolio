@@ -1,4 +1,4 @@
-<!-- BEGIN BLANKCUT PLATFORM: rev ff9e4cd33988 — managed by `blankcut sync`; do not edit inside this block -->
+<!-- BEGIN BLANKCUT PLATFORM: rev a8ed0081e3c5 — managed by `blankcut sync`; do not edit inside this block -->
 
 # CLAUDE.md — Blank Cut Platform
 
@@ -107,6 +107,8 @@ On a machine with no browser (a server, a container), `blankcut login --no-brows
 
 The key covers every project in your workspace, including ones created after you signed in. Rotate it whenever you like with `blankcut keys refresh`. **Do not commit `~/.blankcut/config.json`.**
 
+**Every command acts for the organization you signed in to.** Nothing asks which organization a project belongs to or how it is billed: a project belongs to the organization that created or connected it, and that organization's plan decides its billing. `blankcut whoami` shows which organization this machine is signed in to. To act for a different one, run `blankcut login` again and choose it there. When a command answers `API key is not authorized for app '<name>'`, run `blankcut whoami` first: the usual cause is a project that belongs to an organization this key is not for, or one that has not been connected with `blankcut onboard` yet.
+
 **If you are an agent working with a person:** you may run `blankcut login`, but you cannot approve it — they must. It prints a URL and a short code: relay both to them verbatim, ask them to approve in their browser, and wait. The command keeps polling for up to 15 minutes and finishes on its own once they approve, so run it with a long timeout (or in the background) rather than letting it be killed. Never try to approve it yourself or to find a key some other way.
 
 **In CI, or with no person present:** do not run `blankcut login`. Set `BLANKCUT_API_KEY` in the environment instead — every remote command reads it, and no config file is needed. `BLANKCUT_ENDPOINT` is optional and defaults to `https://api.blankcut.com`.
@@ -147,6 +149,7 @@ The CLI has two flavors of commands. **Local** commands operate purely on the wo
 | `blankcut sync` | Refresh the Blank Cut block in this repo's CLAUDE.md |
 | `blankcut upgrade` | Update the blankcut CLI to the latest release |
 | `blankcut validate` | Run platform readiness checks against the current repository |
+| `blankcut whoami` | Show which account and organization this CLI acts for |
 <!-- END GENERATED COMMAND INDEX -->
 
 **This index tells you what exists; the binary tells you how to call it.** For flags, defaults, and subcommands, run `blankcut <command> --help` — that output comes from the binary you actually have, so it cannot be out of date. Prefer it over anything written here.

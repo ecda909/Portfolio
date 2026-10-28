@@ -113,9 +113,9 @@ const AboutPage = () => {
                     uptime and 99.999% durability with a team of 20 senior SREs.
                   </p>
                   <p>
-                    I later returned to Booz Allen as a Lead Site Reliability Engineer for the CDAO and Intelligence
-                    Community, modernizing API gateways and automating Kubernetes across secured AWS environments — with
-                    a TS/SCI clearance and a focus on NIST RMF compliance.
+                    In 2024 I returned to Booz Allen as a Lead Site Reliability Engineer, first on a platform for the
+                    Intelligence Community and then for the CDAO, modernizing API gateways and automating Kubernetes
+                    across secured AWS environments — with a TS/SCI clearance and a focus on NIST RMF compliance.
                   </p>
                 </div>
 

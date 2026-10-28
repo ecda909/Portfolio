@@ -27,17 +27,29 @@ const categories = [
   {
     title: 'Cloud & Platforms',
     icon: Cloud,
-    items: ['AWS', 'Google Cloud', 'AWS EKS', 'GCP GKE', 'OpenShift', 'Supabase'],
+    items: ['AWS', 'Google Cloud', 'AWS EKS', 'GCP GKE', 'OpenShift', 'Supabase', 'GCP Artifact Registry'],
   },
   {
     title: 'Containers & Orchestration',
     icon: Boxes,
-    items: ['Kubernetes', 'Docker', 'Helm', 'Rancher', 'Crossplane', 'Konvoy', 'k3s'],
+    items: ['Kubernetes', 'Docker', 'Helm', 'Rancher', 'Crossplane', 'Konvoy', 'k3s', 'BuildKit'],
   },
   {
     title: 'GitOps & CI/CD',
     icon: GitBranch,
-    items: ['ArgoCD', 'Tekton', 'GitLab CI', 'Jenkins', 'Terraform', 'Ansible', 'External Secrets'],
+    items: [
+      'ArgoCD',
+      'ArgoCD Image Updater',
+      'GitHub Actions',
+      'GitLab CI',
+      'AWS CodeBuild',
+      'Tekton',
+      'Jenkins',
+      'Terraform',
+      'Ansible',
+      'External Secrets',
+      'GoReleaser',
+    ],
   },
   {
     title: 'Languages',
@@ -47,7 +59,7 @@ const categories = [
   {
     title: 'Frameworks & APIs',
     icon: Layers,
-    items: ['React', 'Next.js', 'Node.js', 'Fastify', 'FastAPI', 'Gin', 'Prisma'],
+    items: ['React', 'Next.js', 'Node.js', 'Fastify', 'FastAPI', 'Celery', 'Gin', 'Cobra', 'Prisma'],
   },
   {
     title: 'Data & Storage',
@@ -57,22 +69,46 @@ const categories = [
   {
     title: 'Observability & SRE',
     icon: Activity,
-    items: ['Grafana', 'Prometheus', 'ELK Stack', 'SLI/SLO/SLA', 'Litmus Chaos', 'Locust'],
+    items: ['Grafana', 'Prometheus', 'ELK Stack', 'Sentry', 'SLI/SLO/SLA', 'Litmus Chaos', 'Locust'],
   },
   {
     title: 'Security & Compliance',
     icon: ShieldCheck,
-    items: ['Kyverno', 'HashiCorp Vault', 'Consul', 'RBAC', 'NIST RMF', 'Anchore', 'Trivy'],
+    items: [
+      'Kyverno',
+      'HashiCorp Vault',
+      'Consul',
+      'Workload Identity Federation',
+      'AWS IRSA',
+      'AWS KMS',
+      'Sigstore cosign',
+      'RBAC',
+      'NIST RMF',
+      'Anchore',
+      'Trivy',
+    ],
   },
   {
     title: 'AI / ML Platforms',
     icon: BrainCircuit,
-    items: ['Anthropic Claude', 'Model Context Protocol', 'LiteLLM', 'MLflow', 'KServe', 'Claude Agent SDK'],
+    items: [
+      'Anthropic Claude',
+      'Claude Agent SDK',
+      'Claude Managed Agents',
+      'OpenAI',
+      'Google Gemini',
+      'AWS Bedrock',
+      'Model Context Protocol (MCP)',
+      'LiteLLM',
+      'Databricks',
+      'MLflow',
+      'KServe',
+    ],
   },
   {
     title: 'Tooling',
     icon: Wrench,
-    items: ['Git', 'Linux', 'NGINX', 'Traefik', 'Stripe', 'Databricks', 'Sourcegraph'],
+    items: ['Git', 'Linux', 'NGINX', 'Traefik', 'Stripe', 'Resend', 'Postman', 'Homebrew', 'Sourcegraph'],
   },
 ];
 
